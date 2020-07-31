@@ -16,15 +16,20 @@ done
 
 
 # Dotfiles
-cd "$HOME/code/dotfiles"
 DOTFILES=(gemrc gitconfig gitignore tmux.conf vimrc zpreztorc zprofile zshrc)
 for file in $DOTFILES; do
   rm -f "$HOME/.$file"
   ln -s "$HOME/code/dotfiles/$file" "$HOME/.$file"
 done
-ln -s "$HOME/code/dotfiles/kitty" "$HOME/.config/kitty"
+
+CONF_DIRS=(kitty bat)
+for dir in $CONF_DIRS; do
+  ln -s "$HOME/code/dotfiles/$dir" "$HOME/.config/$dir"
+done
+
 
 # Homebrew
+cd "$HOME/code/dotfiles"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 brew bundle
 

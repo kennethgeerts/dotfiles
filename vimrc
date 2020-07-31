@@ -15,6 +15,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mattn/emmet-vim'
 Plug 'morhetz/gruvbox'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-bundler'
@@ -32,15 +33,19 @@ set clipboard=unnamed
 set cursorline
 set encoding=UTF-8
 set expandtab
+set hidden
 set hlsearch
 set ignorecase smartcase
+set incsearch
 set list
 set mouse=a
+set noerrorbells
 set noswapfile
 set number relativenumber
 set shortmess=I
 set t_ut=
 set tabstop=2 shiftwidth=2 expandtab
+set updatetime=300
 
 " don't use the arrow keys!
 nnoremap <Up>    <Nop>
@@ -50,6 +55,18 @@ nnoremap <Right> <Nop>
 
 " This unsets the 'last search pattern' register by hitting return
 nnoremap <CR> :noh<CR><CR>
+
+" coc: Use tab for trigger completion with characters ahead and navigate.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 " airline
 let g:airline#extensions#tabline#enabled=1

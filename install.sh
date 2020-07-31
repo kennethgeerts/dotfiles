@@ -14,7 +14,6 @@ for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
   ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 done
 
-
 # Dotfiles
 DOTFILES=(gemrc gitconfig gitignore tmux.conf vimrc zpreztorc zprofile zshrc)
 for file in $DOTFILES; do
@@ -26,7 +25,6 @@ CONF_DIRS=(kitty bat)
 for dir in $CONF_DIRS; do
   ln -s "$HOME/code/dotfiles/$dir" "$HOME/.config/$dir"
 done
-
 
 # Homebrew
 cd "$HOME/code/dotfiles"

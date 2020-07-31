@@ -25,7 +25,6 @@ brew "vim"
 brew "wifi-password"
 brew "yarn"
 brew "youtube-dl"
-brew "zsh"
 
 mas "1Blocker", id: 1107421413
 mas "Amphetamine", id: 937984704

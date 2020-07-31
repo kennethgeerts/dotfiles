@@ -29,6 +29,7 @@ call plug#end()
 
 set t_ut=
 set background=dark
+set clipboard=unnamed
 set cursorline
 set encoding=UTF-8
 set expandtab

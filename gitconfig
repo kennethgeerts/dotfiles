@@ -1,0 +1,14 @@
+[user]
+	name = Kenneth Geerts
+	email = kenneth@sofuto.be
+[color]
+	ui = auto
+[core]
+	excludesfile = /Users/kenneth/.gitignore
+[mergetool]
+	keepBackup = false
+	prompt = false
+[push]
+	default = simple
+[pull]
+	ff = only

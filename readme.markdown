@@ -1,6 +1,11 @@
-# dotfiles
+# Kenneth's dotfiles
 
-```sh
-git clone git@github.com:kennethgeerts/dotfiles.git $HOME/code/dotfiles
-sh $HOME/code/dotfiles/install.sh
-```
+![Screenshot](https://i.imgur.com/CgUupYP.png)
+
+Includes config files for:
+
+- kitty terminal emulator
+- zsh with prezto
+- homebrew
+- vim
+- ruby

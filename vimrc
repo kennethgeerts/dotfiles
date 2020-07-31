@@ -27,7 +27,6 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 call plug#end()
 
-set t_ut=
 set background=dark
 set clipboard=unnamed
 set cursorline
@@ -36,9 +35,11 @@ set expandtab
 set hlsearch
 set ignorecase smartcase
 set list
+set mouse=a
 set noswapfile
 set number relativenumber
 set shortmess=I
+set t_ut=
 set tabstop=2 shiftwidth=2 expandtab
 
 " don't use the arrow keys!

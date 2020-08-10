@@ -21,6 +21,7 @@ Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-sensible'
@@ -70,7 +71,7 @@ endfunction
 
 " airline
 let g:airline#extensions#tabline#enabled=1
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=0
 
 " Fzf
 nnoremap <leader><leader> :GFiles<CR>

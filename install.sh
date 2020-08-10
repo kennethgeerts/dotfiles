@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-#Hostname
+# Hostname
 HOSTNAME=sofuto
 sudo scutil --set ComputerName $HOSTNAME
 sudo scutil --set HostName $HOSTNAME

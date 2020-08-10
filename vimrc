@@ -48,6 +48,8 @@ set t_ut=
 set tabstop=2 shiftwidth=2 expandtab
 set updatetime=300
 
+let g:mapleader= ' '
+
 " don't use the arrow keys!
 nnoremap <Up>    <Nop>
 nnoremap <Down>  <Nop>
@@ -85,7 +87,7 @@ let g:gruvbox_bold      = 1
 let g:gruvbox_undercurl = 1
 let g:gruvbox_italic    = 1
 let g:gruvbox_underline = 1
-let g:gruvbox_inverse   = 1
+let g:gruvbox_inverse   = 0
 
 augroup gruvbox-overrides
   autocmd!

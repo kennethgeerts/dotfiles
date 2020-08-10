@@ -19,6 +19,7 @@ alias icloud='~/Library/Mobile\ Documents/com~apple~CloudDocs/'
 alias lg='lazygit'
 alias m='./bin/meta'
 alias roru='bundle update && yarn upgrade -L'
+alias v='vim'
 alias x='exa -la --git'
 
 c() { cd ~/code/$1; }

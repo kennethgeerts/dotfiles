@@ -18,7 +18,7 @@ alias dev='hivemind -p 3000 Procfile.development'
 alias icloud='~/Library/Mobile\ Documents/com~apple~CloudDocs/'
 alias lg='lazygit'
 alias m='./bin/meta'
-alias roru='bundle update && yarn upgrade -L'
+alias roru='yarn upgrade -L && gem_update'
 alias v='vim'
 alias x='exa -la --git'
 

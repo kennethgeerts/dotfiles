@@ -56,6 +56,13 @@ nnoremap <Down>  <Nop>
 nnoremap <Left>  <Nop>
 nnoremap <Right> <Nop>
 
+" Easy buffer switching / FZF
+nnoremap <leader><Left>   :bprev<CR>
+nnoremap <leader><Right>  :bnext<CR>
+nnoremap <leader><Down>   :bd<CR>
+nnoremap <leader><Up>     :Buffers<CR>
+nnoremap <leader><leader> :GFiles<CR>
+
 " This unsets the 'last search pattern' register by hitting return
 nnoremap <CR> :noh<CR><CR>
 
@@ -74,10 +81,6 @@ endfunction
 " airline
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
-
-" Fzf
-nnoremap <leader><leader> :GFiles<CR>
-nnoremap <leader><CR>     :Buffers<CR>
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)

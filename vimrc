@@ -78,6 +78,15 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" Trim whitespace on write
+autocmd BufWritePre * :call TrimWhitespace()
+
+function! TrimWhitespace()
+  let l:save = winsaveview()
+  keeppatterns %s/\s\+$//e
+  call winrestview(l:save)
+endfun
+
 " airline
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1

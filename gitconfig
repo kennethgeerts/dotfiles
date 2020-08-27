@@ -1,14 +1,21 @@
 [user]
-	name = Kenneth Geerts
-	email = kenneth@sofuto.be
+  name = Kenneth Geerts
+  email = kenneth@sofuto.be
 [color]
-	ui = auto
+  ui = auto
 [core]
-	excludesfile = /Users/kenneth/.gitignore
+  excludesfile = /Users/kenneth/.gitignore
 [mergetool]
-	keepBackup = false
-	prompt = false
+  keepBackup = false
+  prompt = false
 [push]
-	default = simple
+  default = simple
 [pull]
-	ff = only
+  ff = only
+[diff]
+  tool = kitty
+[difftool]
+  prompt = false
+  trustExitCode = true
+[difftool "kitty"]
+  cmd = kitty +kitten diff $LOCAL $REMOTE

@@ -31,3 +31,5 @@ alias pushenvs='g push dev && g push uat && m dev d && m uat d'
 alias roru='yarn upgrade -L && gem_update'
 
 alias v='vim'
+
+alias weer='curl -4 http://wttr.in/Merendree | less'

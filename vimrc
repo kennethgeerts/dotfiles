@@ -41,7 +41,7 @@ set list
 set mouse=a
 set noerrorbells
 set noswapfile
-set number relativenumber
+set number
 set shortmess=I
 set t_ut=
 set tabstop=2 shiftwidth=2 expandtab
@@ -49,11 +49,19 @@ set updatetime=300
 
 let g:mapleader= ' '
 
-" don't use the arrow keys!
+" Don't use the arrow keys!
 nnoremap <Up>    <Nop>
 nnoremap <Down>  <Nop>
 nnoremap <Left>  <Nop>
 nnoremap <Right> <Nop>
+
+" Move lines up and down
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+inoremap <C-j> <Esc>:m .+1<CR>==gi
+inoremap <C-k> <Esc>:m .-2<CR>==gi
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " Easy buffer switching / FZF
 nnoremap <leader><Left>   :bprev<CR>

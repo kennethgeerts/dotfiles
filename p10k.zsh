@@ -30,7 +30,7 @@
 
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-    # os_icon               # os identifier
+    os_icon               # os identifier
     dir                     # current directory
     vcs                     # git status
     # prompt_char           # prompt symbol
@@ -175,6 +175,8 @@
   typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=7
   # Custom icon.
   # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='⭐'
+  POWERLEVE9K_LINUX_ARCH_ICON='%F{cyan} \uf303 %F{white} arch %F{cyan}linux%f'
+  POWERLEVEL9K_APPLE_ICON='\uF8FF '
 
   ################################[ prompt_char: prompt symbol ]################################
   # Transparent background.
@@ -1067,7 +1069,7 @@
   # If set to false, hide ruby version if it's equal to "system".
   typeset -g POWERLEVEL9K_RBENV_SHOW_SYSTEM=true
   # Custom icon.
-  # typeset -g POWERLEVEL9K_RBENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_RBENV_VISUAL_IDENTIFIER_EXPANSION='💎'
 
   ####################[ java_version: java version (https://www.java.com/) ]####################
   # Java version color.

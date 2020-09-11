@@ -7,6 +7,7 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'aliou/sql-heredoc.vim'
+Plug 'ap/vim-css-color'
 Plug 'bioSyntax/bioSyntax-vim'
 Plug 'gregsexton/MatchTag'
 Plug 'junegunn/fzf.vim'

@@ -175,8 +175,8 @@
   typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=7
   # Custom icon.
   # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='⭐'
-  POWERLEVE9K_LINUX_ARCH_ICON='%F{cyan} \uf303 %F{white} arch %F{cyan}linux%f'
-  POWERLEVEL9K_APPLE_ICON='\uF8FF '
+  POWERLEVEL9K_LINUX_ARCH_ICON='λ'
+  POWERLEVEL9K_APPLE_ICON='\uF8FF'
 
   ################################[ prompt_char: prompt symbol ]################################
   # Transparent background.

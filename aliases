@@ -5,7 +5,7 @@ alias cat='bat'
 
 alias d='kitty +kitten diff'
 
-alias dev='hivemind -p 3000 Procfile.development'
+alias dev='hivemind Procfile.development'
 
 alias gd='git difftool --no-symlinks --dir-diff'
 alias gda='gd HEAD'

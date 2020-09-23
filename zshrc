@@ -2,9 +2,9 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-c() { cd ~/code/$1; }
-_c() { _files -W ~/code; }
-compdef _c c
+j() { cd ~/code/$1; }
+_j() { _files -W ~/code; }
+compdef _j j
 
 export UPNXT_GEM_SOURCE='http://gem.internal.up-nxt.com'
 

@@ -1,6 +1,8 @@
 alias bi='bundle install'
 alias bu='bundle update'
 
+alias c='open -b com.microsoft.VSCode "$@"'
+
 alias cat='bat'
 
 alias d='kitty +kitten diff'

@@ -24,8 +24,10 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 call plug#end()
 
@@ -55,14 +57,6 @@ nnoremap <Up>    <Nop>
 nnoremap <Down>  <Nop>
 nnoremap <Left>  <Nop>
 nnoremap <Right> <Nop>
-
-" Move lines up and down
-nnoremap <C-j> :m .+1<CR>==
-nnoremap <C-k> :m .-2<CR>==
-inoremap <C-j> <Esc>:m .+1<CR>==gi
-inoremap <C-k> <Esc>:m .-2<CR>==gi
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " Easy buffer switching / FZF
 nnoremap <leader><Left>   :bprev<CR>

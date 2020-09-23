@@ -1,7 +1,7 @@
 alias bi='bundle install'
 alias bu='bundle update'
 
-alias c='open -b com.microsoft.VSCode "$@"'
+alias c='open -b com.microsoft.VSCode .'
 
 alias cat='bat'
 
@@ -33,6 +33,8 @@ alias ping='prettyping'
 alias pushenvs='g push dev && g push uat && m dev d && m uat d'
 
 alias roru='yarn upgrade -L && gem_update'
+
+alias server='python -m http.server'
 
 alias v='vim'
 

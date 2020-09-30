@@ -44,7 +44,7 @@ set list
 set mouse=a
 set noerrorbells
 set noswapfile
-set number
+set number relativenumber
 set shortmess=I
 set t_ut=
 set tabstop=2 shiftwidth=2 expandtab
@@ -67,6 +67,13 @@ nnoremap <leader><leader> :GFiles<CR>
 
 " This unsets the 'last search pattern' register by hitting return
 nnoremap <CR> :noh<CR><CR>
+
+" Automatic line number toggle
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
 
 " Trim whitespace on write
 autocmd BufWritePre * :call TrimWhitespace()

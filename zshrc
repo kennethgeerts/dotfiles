@@ -13,7 +13,9 @@ compdef _j j
 export UPNXT_GEM_SOURCE='http://gem.internal.up-nxt.com'
 
 if [[ "$OSTYPE" == darwin* ]]; then
-  export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin:/Applications/kitty.app/Contents/MacOS
+  export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
+  export PATH="$PATH:/Applications/kitty.app/Contents/MacOS"
+  export PATH="/usr/local/opt/openjdk/bin:$PATH"
 fi
 
 source ~/.aliases

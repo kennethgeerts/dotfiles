@@ -5,6 +5,9 @@
   ui = auto
 [core]
   excludesfile = /Users/kenneth/.gitignore
+  pager = delta
+[interactive]
+  diffFilter = delta --color-only
 [mergetool]
   keepBackup = false
   prompt = false
@@ -12,10 +15,10 @@
   default = simple
 [pull]
   ff = only
-[diff]
-  tool = kitty
-[difftool]
-  prompt = false
-  trustExitCode = true
-[difftool "kitty"]
-  cmd = kitty +kitten diff $LOCAL $REMOTE
+[delta]
+  line-numbers = true
+  syntax-theme = gruvbox
+  file-style = bold yellow
+  file-decoration-style = yellow ul ol
+  hunk-header-style = italic yellow
+  hunk-header-decoration-style = none

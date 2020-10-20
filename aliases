@@ -9,9 +9,6 @@ alias d='kitty +kitten diff'
 
 alias dev='hivemind Procfile.development'
 
-alias gd='git difftool --no-symlinks --dir-diff'
-alias gda='gd HEAD'
-
 alias icat='kitty +kitten icat'
 
 alias ls='exa -al --color=always --group-directories-first' # my preferred listing

@@ -1,0 +1,54 @@
+{
+  "breadcrumbs.enabled": false,
+  "editor.cursorBlinking": "solid",
+  "editor.cursorSurroundingLines": 5,
+  "editor.folding": false,
+  "editor.fontFamily": "Operator Mono SSm",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 14,
+  "editor.fontWeight": "200",
+  "editor.glyphMargin": false,
+  "editor.minimap.enabled": false,
+  "editor.occurrencesHighlight": false,
+  "editor.renderControlCharacters": true,
+  "editor.renderFinalNewline": false,
+  "editor.renderIndentGuides": false,
+  "editor.renderLineHighlight": "none",
+  "editor.renderWhitespace": "selection",
+  "editor.tabSize": 2,
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": [
+          "entity.other.attribute-name"
+        ],
+        "settings": {
+          "fontStyle": "italic"
+        }
+      }
+    ]
+  },
+  "emmet.includeLanguages": {
+    "erb": "html"
+  },
+  "explorer.autoReveal": false,
+  "explorer.confirmDragAndDrop": false,
+  "files.insertFinalNewline": true,
+  "files.simpleDialog.enable": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "search.showLineNumbers": true,
+  "telemetry.enableCrashReporter": false,
+  "telemetry.enableTelemetry": false,
+  "terminal.explorerKind": "external",
+  "workbench.activityBar.visible": false,
+  "workbench.colorTheme": "Gruvbox Material Dark",
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "workbench.editor.tabSizing": "shrink",
+  "workbench.enableExperiments": true,
+  "workbench.sideBar.location": "right",
+  "workbench.startupEditor": "none",
+  "workbench.statusBar.visible": true,
+  "workbench.tips.enabled": false
+}
+

@@ -31,6 +31,8 @@ alias roru='yarn upgrade -L && gem_update'
 
 alias server='python -m http.server'
 
+alias todo='v ~/Sofuto/todo.md'
+
 alias v='vim'
 
 alias weer='curl -4 http://wttr.in/Merendree | less'

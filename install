@@ -30,6 +30,7 @@ done
 cd "$HOME/code/dotfiles"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 brew bundle
+bat cache --build
 
 # Ruby
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl)"

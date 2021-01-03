@@ -1,5 +1,7 @@
 {
+  "alignment.surroundSpace": { "colon": [-1, 1] },
   "breadcrumbs.enabled": false,
+  "editor.copyWithSyntaxHighlighting": false,
   "editor.cursorBlinking": "solid",
   "editor.cursorSurroundingLines": 5,
   "editor.folding": false,

@@ -10,12 +10,12 @@ Plug 'aliou/sql-heredoc.vim'
 Plug 'ap/vim-css-color'
 Plug 'bioSyntax/bioSyntax-vim'
 Plug 'gregsexton/MatchTag'
+Plug 'gruvbox-community/gruvbox'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/vim-easy-align'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mattn/emmet-vim'
-Plug 'morhetz/gruvbox'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-bundler'
@@ -92,11 +92,8 @@ let g:airline_powerline_fonts=1
 nmap ga <Plug>(EasyAlign)
 
 " Gruvbox
-let g:gruvbox_bold      = 1
-let g:gruvbox_undercurl = 1
-let g:gruvbox_italic    = 1
-let g:gruvbox_underline = 1
-let g:gruvbox_inverse   = 0
+let g:gruvbox_italic = 1
+let g:gruvbox_invert_selection = 0
 
 augroup gruvbox-overrides
   autocmd!

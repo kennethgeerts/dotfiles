@@ -10,7 +10,9 @@ j() { cd ~/code/$1; }
 _j() { _files -W ~/code; }
 compdef _j j
 
-export UPNXT_GEM_SOURCE='http://gem.internal.up-nxt.com'
+function take() {
+  mkdir -p $@ && cd ${@:$#}
+}
 
 if [[ "$OSTYPE" == darwin* ]]; then
   export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"

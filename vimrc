@@ -52,12 +52,6 @@ set updatetime=300
 
 let g:mapleader= ' '
 
-" Don't use the arrow keys!
-nnoremap <Up>    <Nop>
-nnoremap <Down>  <Nop>
-nnoremap <Left>  <Nop>
-nnoremap <Right> <Nop>
-
 " Easy buffer switching / FZF
 nnoremap <leader><Left>   :bprev<CR>
 nnoremap <leader><Right>  :bnext<CR>

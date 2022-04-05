@@ -17,7 +17,7 @@
   ff = only
 [delta]
   line-numbers = true
-  syntax-theme = gruvbox
+  syntax-theme = gruvbox-dark
   file-style = bold yellow
   file-decoration-style = yellow ul ol
   hunk-header-style = italic yellow

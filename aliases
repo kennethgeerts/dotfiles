@@ -19,22 +19,10 @@ alias l='ls'
 
 alias lg='lazygit'
 
-alias m='./bin/meta'
-
-alias n='nnn -e'
-
 alias ping='prettyping'
 
-alias pushenvs='g push dev && g push uat && m dev d && m uat d'
-
-alias roru='yarn upgrade -L && gem_update'
-
 alias server='python -m http.server'
-
-alias todo='v ~/Sofuto/todo.md'
 
 alias v='vim'
 
 alias weer='curl -4 http://wttr.in/Merendree | less'
-
-alias restart-pipeline='sudo service sidekiq restart && passenger-config restart-app'

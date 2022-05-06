@@ -29,16 +29,16 @@ brew "wget"
 brew "wifi-password"
 brew "yarn"
 
-mas "1Blocker", id: 1107421413
+# mas "1Blocker", id: 1107421413
 mas "Amphetamine", id: 937984704
 mas "Keynote", id: 409183694
-mas "NordVPN IKE", id: 1116599239
+# mas "NordVPN IKE", id: 1116599239
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Pastebot", id: 1179623856
 mas "Pixelmator Pro", id: 1289583905
-mas "Tot", id: 1491071483
-mas "WhatsApp", id: 1147396723
+# mas "Tot", id: 1491071483
+# mas "WhatsApp", id: 1147396723
 
 # Kitty
 # Postgres.app

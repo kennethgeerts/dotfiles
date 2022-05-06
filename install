@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # Hostname
-HOSTNAME=sofuto
+HOSTNAME=iSofuto
 sudo scutil --set ComputerName $HOSTNAME
 sudo scutil --set HostName $HOSTNAME
 sudo scutil --set LocalHostName $HOSTNAME
@@ -28,7 +28,7 @@ done
 
 # Homebrew
 cd "$HOME/code/dotfiles"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew bundle
 bat cache --build
 

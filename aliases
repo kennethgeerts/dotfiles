@@ -23,6 +23,8 @@ alias ping='prettyping'
 
 alias server='python -m http.server'
 
+alias todo='vim /Users/kenneth/Library/Mobile\ Documents/com~apple~CloudDocs/TODO.md'
+
 alias v='vim'
 
 alias weer='curl -4 http://wttr.in/Merendree | less'

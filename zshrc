@@ -15,7 +15,7 @@ function take() {
 }
 
 if [[ "$OSTYPE" == darwin* ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+  eval "$(brew shellenv)"
   eval "$(rbenv init -)"
 
   export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"

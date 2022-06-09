@@ -14,14 +14,6 @@ function take() {
   mkdir -p $@ && cd ${@:$#}
 }
 
-if [[ "$OSTYPE" == darwin* ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-  eval "$(rbenv init -)"
-
-  export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
-  export PATH="$PATH:/Applications/kitty.app/Contents/MacOS"
-fi
-
 source ~/.aliases
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

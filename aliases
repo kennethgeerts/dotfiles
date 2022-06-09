@@ -1,15 +1,6 @@
-alias bi='bundle install'
-alias bu='bundle update'
-
 alias c='open -b com.microsoft.VSCode .'
-
 alias cat='bat'
-
 alias d='kitty +kitten diff'
-
-alias dev='hivemind Procfile.development'
-
-alias icat='kitty +kitten icat'
 
 alias ls='exa -al --color=always --group-directories-first' # my preferred listing
 alias la='exa -a --color=always --group-directories-first'  # all files and dirs
@@ -18,13 +9,6 @@ alias lt='exa -aT --color=always --group-directories-first' # tree listing
 alias l='ls'
 
 alias lg='lazygit'
-
 alias ping='prettyping'
-
-alias server='python -m http.server'
-
 alias todo='vim /Users/kenneth/Library/Mobile\ Documents/com~apple~CloudDocs/TODO.md'
-
-alias v='vim'
-
 alias weer='curl -4 http://wttr.in/Merendree | less'

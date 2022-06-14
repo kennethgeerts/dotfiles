@@ -22,3 +22,5 @@
   file-decoration-style = yellow ul ol
   hunk-header-style = italic yellow
   hunk-header-decoration-style = none
+[submodule]
+	recurse = true

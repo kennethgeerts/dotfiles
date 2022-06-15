@@ -1,15 +1,15 @@
+brew "awscli"
 brew "bat"
 brew "coreutils"
 brew "exa"
 brew "ffmpeg"
 brew "fzf"
-brew "git"
 brew "git-delta"
+brew "git"
 brew "heroku/brew/heroku"
 brew "hexyl"
-brew "hivemind"
+brew "htop"
 brew "httpie"
-brew "hub"
 brew "jq"
 brew "lazygit"
 brew "libxml2"
@@ -21,6 +21,7 @@ brew "prettyping"
 brew "ranger"
 brew "rbenv"
 brew "redis", restart_service: true
+brew "ruby-build"
 brew "the_silver_searcher"
 brew "tldr"
 brew "unrar"
@@ -28,19 +29,28 @@ brew "vim"
 brew "wget"
 brew "wifi-password"
 brew "yarn"
+brew "youtube-dl"
 
-# mas "1Blocker", id: 1107421413
+mas "1Blocker", id: 1107421413
 mas "Amphetamine", id: 937984704
+mas "Authenticator App", id: 1538761576
 mas "Keynote", id: 409183694
-# mas "NordVPN IKE", id: 1116599239
+mas "Menu Bar Controller for Sonos", id: 1357379892
+mas "NordVPN IKE", id: 1116599239
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Pastebot", id: 1179623856
 mas "Pixelmator Pro", id: 1289583905
-# mas "Tot", id: 1491071483
-# mas "WhatsApp", id: 1147396723
+mas "Telegram", id: 747648890
+mas "Vinegar - Tube Cleaner", id: 1591303229
+mas "WhatsApp", id: 1147396723
 
-# Kitty
-# Postgres.app
-# Skype
-# Visual Studio Code
+cask "firefox"
+cask "gitup"
+cask "google-chrome"
+cask "kitty"
+cask "microsoft-teams"
+cask "postgres-unofficial"
+cask "skype"
+cask "teamviewer"
+cask "visual-studio-code"

@@ -1,26 +1,27 @@
 [user]
-  name = Kenneth Geerts
-  email = kenneth@sofuto.be
+	name = Kenneth Geerts
+	email = kenneth@sofuto.be
 [color]
-  ui = auto
+	ui = auto
 [core]
-  excludesfile = /Users/kenneth/.gitignore
-  pager = delta
+	excludesfile = /Users/kenneth/.gitignore
+	pager = delta
 [interactive]
-  diffFilter = delta --color-only
+	diffFilter = delta --color-only
 [mergetool]
-  keepBackup = false
-  prompt = false
+	keepBackup = false
+	prompt = false
 [push]
-  default = simple
+	default = simple
+	autoSetupRemote = true
 [pull]
-  ff = only
-[delta]
-  line-numbers = true
-  syntax-theme = gruvbox-dark
-  file-style = bold yellow
-  file-decoration-style = yellow ul ol
-  hunk-header-style = italic yellow
-  hunk-header-decoration-style = none
+	ff = only
 [submodule]
 	recurse = true
+[delta]
+	line-numbers = true
+	syntax-theme = gruvbox-dark
+	file-style = bold yellow
+	file-decoration-style = yellow ul ol
+	hunk-header-style = italic yellow
+	hunk-header-decoration-style = none

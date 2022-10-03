@@ -47,6 +47,7 @@ mas "WhatsApp", id: 1147396723
 cask "firefox"
 cask "gitup"
 cask "google-chrome"
+cask "homebrew/cask/docker"
 cask "kitty"
 cask "microsoft-teams"
 cask "postgres-unofficial"

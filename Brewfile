@@ -36,7 +36,6 @@ mas "Amphetamine", id: 937984704
 mas "Authenticator App", id: 1538761576
 mas "Keynote", id: 409183694
 mas "Menu Bar Controller for Sonos", id: 1357379892
-mas "NordVPN IKE", id: 1116599239
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Pastebot", id: 1179623856
@@ -54,3 +53,4 @@ cask "postgres-unofficial"
 cask "skype"
 cask "teamviewer"
 cask "visual-studio-code"
+cask "zoom"

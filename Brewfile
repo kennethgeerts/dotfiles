@@ -1,3 +1,5 @@
+tap "heroku/brew"
+
 brew "awscli"
 brew "bat"
 brew "coreutils"
@@ -24,14 +26,13 @@ brew "redis", restart_service: true
 brew "ruby-build"
 brew "the_silver_searcher"
 brew "tldr"
-brew "unrar"
+brew "unar"
 brew "vim"
 brew "wget"
 brew "wifi-password"
 brew "yarn"
 brew "youtube-dl"
 
-mas "1Blocker", id: 1107421413
 mas "Amphetamine", id: 937984704
 mas "Authenticator App", id: 1538761576
 mas "Keynote", id: 409183694
@@ -41,7 +42,6 @@ mas "Pages", id: 409201541
 mas "Pastebot", id: 1179623856
 mas "Pixelmator Pro", id: 1289583905
 mas "Telegram", id: 747648890
-mas "Vinegar - Tube Cleaner", id: 1591303229
 mas "WhatsApp", id: 1147396723
 
 cask "firefox"

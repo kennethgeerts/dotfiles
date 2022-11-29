@@ -1,6 +1,7 @@
 tap "heroku/brew"
 
 brew "awscli"
+brew "aws-vault"
 brew "bat"
 brew "coreutils"
 brew "exa"

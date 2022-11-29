@@ -12,6 +12,7 @@
 if [[ -z "$BROWSER" && "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
 fi
+export AWS_VAULT_PL_BROWSER=com.google.chrome
 
 #
 # Editors

@@ -48,6 +48,7 @@
 
   # Left prompt segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+    custom_awsvault
     dir                       # current directory
     rbenv                     # ruby environment
     vcs                       # git status
@@ -60,6 +61,14 @@
     context                   # user@host
     time                      # current time
   )
+
+  awsvault_prompt() {
+    if [ ! -z "${AWS_VAULT-}" ]; then
+      echo -n "${AWS_VAULT-}"
+    fi
+  }
+  typeset -g POWERLEVEL9K_CUSTOM_AWSVAULT="awsvault_prompt"
+  typeset -g POWERLEVEL9K_CUSTOM_AWSVAULT_FOREGROUND="yellow"
 
   # Basic style options that define the overall prompt look.
   typeset -g POWERLEVEL9K_BACKGROUND=                            # transparent background

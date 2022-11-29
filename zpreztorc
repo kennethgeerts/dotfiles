@@ -46,7 +46,8 @@ zstyle ':prezto:load' pmodule \
   'homebrew' \
   'tmux' \
   'ruby' \
-  'rails'
+  'rails' \
+  'zsh-aws-vault'
 
 #
 # Autosuggestions

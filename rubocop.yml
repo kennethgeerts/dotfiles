@@ -1,0 +1,22 @@
+require: rubocop-rails
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'config.ru'
+    - 'Rakefile'
+    - 'vendor/**/*'
+    - 'test/**/*'
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'app/views/**/*'
+    - 'config/**/*'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Enabled: false

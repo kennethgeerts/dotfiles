@@ -12,11 +12,17 @@ AllCops:
     - 'app/views/**/*'
     - 'config/**/*'
 
-Style/FrozenStringLiteralComment:
+Bundler/OrderedGems:
   Enabled: false
+
+Metrics/MethodLength:
+  AllowedPatterns: [_params$]
 
 Style/Documentation:
   Enabled: false
 
-Bundler/OrderedGems:
+Style/EmptyElse:
+  AllowComments: true
+
+Style/FrozenStringLiteralComment:
   Enabled: false

@@ -9,7 +9,7 @@ async def get_runtime_data():
     return await inverter.read_runtime_data()
 
 data = asyncio.run(get_runtime_data())
-ppv = data['ppv']
+ppv = data['ppv1']
 load = data['house_consumption']
 soc = data['battery_soc']
 day = data['e_day']

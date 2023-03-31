@@ -3,6 +3,7 @@
 import asyncio
 import goodwe
 import os
+import json
 
 async def get_runtime_data():
     ip_address = '192.168.0.14'
@@ -13,13 +14,29 @@ ssid = os.popen("/Sy*/L*/Priv*/Apple8*/V*/C*/R*/airport -I | awk '/ SSID:/ {prin
 
 if ssid == 'SofutoNET':
     data = asyncio.run(get_runtime_data())
+    # print(json.dumps(data, indent=4, sort_keys=True, default=str))
+
     ppv = data['ppv1']
     load = data['house_consumption']
     soc = data['battery_soc']
     day = data['e_day']
     total = data['e_total']
 
-    print(":sun.max:%.0fW :bolt:%sW :bolt.fill.batteryblock:%.0f%% | size = 11" % (ppv, load, soc))
+    # 0: "No battery"
+    # 1: "Standby"
+    # 2: "Discharge"
+    # 3: "Charge"
+    # 4: "To be charged"
+    # 5: "To be discharged"
+    battery_mode = data['battery_mode']
+    if battery_mode == 2:
+        battery_icon = ':dock.arrow.up.rectangle:'
+    elif battery_mode == 3:
+        battery_icon = ':dock.arrow.down.rectangle:'
+    else:
+        battery_icon = ':bolt.fill.batteryblock:'
+
+    print(":sun.max:%.0fW :bolt:%sW %s%.0f%% | size = 11" % (ppv, load, battery_icon, soc))
     print("---")
     print("Day: %.2fkWh" % day)
     print("Total: %.2fkWh" % total)

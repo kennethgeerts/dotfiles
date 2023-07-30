@@ -1,4 +1,4 @@
-alias c='code .'
+alias c='code-insiders .'
 alias cat='bat'
 alias d='bin/dev'
 alias difff='kitty +kitten diff'

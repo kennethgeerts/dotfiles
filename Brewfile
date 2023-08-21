@@ -49,6 +49,7 @@ mas "WhatsApp", id: 1147396723
 cask "firefox"
 cask "gitup"
 cask "google-chrome"
+cask "iina"
 cask "kitty"
 cask "microsoft-teams"
 cask "orbstack"

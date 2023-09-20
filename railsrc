@@ -1,3 +1,4 @@
 --database=postgresql
 --asset-pipeline=propshaft
+--javascript=bun
 --skip-jbuilder

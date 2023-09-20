@@ -53,7 +53,7 @@ typeset -gU cdpath fpath mailpath path
 path=(
   $HOME/{,s}bin(N)
   /opt/{homebrew,local}/{,s}bin(N)
-  '/Applications/Visual Studio Code.app/Contents/Resources/app/bin'
+  '/Applications/Visual Studio Code - Insiders.app/Contents/Resources/app/bin'
   /Applications/Postgres.app/Contents/Versions/latest/bin
   /usr/local/{,s}bin(N)
   $path

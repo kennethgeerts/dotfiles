@@ -1,4 +1,6 @@
 tap "heroku/brew"
+tap "buo/cask-upgrade"
+tap "homebrew/cask-fonts"
 
 brew "awscli"
 brew "aws-vault"
@@ -36,7 +38,7 @@ brew "yarn"
 brew "youtube-dl"
 
 mas "Amphetamine", id: 937984704
-mas "Authenticator App", id: 1538761576
+mas "Authenticator", id: 1538761576
 mas "Keynote", id: 409183694
 mas "Menu Bar Controller for Sonos", id: 1357379892
 mas "Numbers", id: 409203825
@@ -44,6 +46,7 @@ mas "Pages", id: 409201541
 mas "Pastebot", id: 1179623856
 mas "Pixelmator Pro", id: 1289583905
 mas "Telegram", id: 747648890
+mas "Vinegar", id: 1591303229
 mas "WhatsApp", id: 1147396723
 
 cask "firefox"
@@ -52,10 +55,14 @@ cask "google-chrome"
 cask "iina"
 cask "kitty"
 cask "microsoft-teams"
+cask "mouse-fix"
 cask "orbstack"
 cask "postgres-unofficial"
 cask "skype"
+cash "swiftbar"
 cask "teamviewer"
-cask "visual-studio-code-insiders"
+cask "transmission"
 cask "viscosity"
+cask "visual-studio-code-insiders"
 cask "zoom"
+cask "zulip"

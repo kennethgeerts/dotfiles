@@ -21,7 +21,24 @@ function take() {
   mkdir -p $@ && cd ${@:$#}
 }
 
-source ~/.aliases
+alias c='code .'
+alias cat='bat'
+alias d='bin/dev'
+alias difff='kitty +kitten diff'
+alias ls='exa -al --color=always --group-directories-first' # my preferred listing
+alias la='exa -a --color=always --group-directories-first'  # all files and dirs
+alias ll='exa -l --color=always --group-directories-first'  # long format
+alias lt='exa -aT --color=always --group-directories-first' # tree listing
+alias l='ls'
+alias lg='lazygit'
+alias ping='prettyping'
+
+# Java
+export PATH="/usr/local/opt/openjdk@8/bin:$PATH"
+export JAVA_HOME="/usr/local/opt/openjdk@8"
+
+# OrbStack
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

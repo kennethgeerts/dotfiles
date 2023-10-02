@@ -34,8 +34,8 @@ alias lg='lazygit'
 alias ping='prettyping'
 
 # Java
-export PATH="/usr/local/opt/openjdk@8/bin:$PATH"
-export JAVA_HOME="/usr/local/opt/openjdk@8"
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
+export JAVA_HOME="/usr/local/opt/openjdk"
 
 # OrbStack
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :

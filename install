@@ -29,6 +29,9 @@ for dir in $CONF_DIRS; do
   ln -s "$HOME/code/dotfiles/$dir" "$HOME/.config/$dir"
 done
 
+mkdir "$HOME/bin"
+ln -s "$HOME/code/dotfiles/bin/vimv" "$HOME/bin/vimv"
+
 # Homebrew
 cd "$HOME/code/dotfiles"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"

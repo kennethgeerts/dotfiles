@@ -33,11 +33,11 @@ alias l='ls'
 alias lg='lazygit'
 alias ping='prettyping'
 alias jsr='JAVA_HOME="/usr/local/opt/openjdk@8" LANG= LC_ALL= bin/rails'
+alias jsbe='JAVA_HOME="/usr/local/opt/openjdk@8" LANG= LC_ALL= bundle exec'
 
 # Java
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export JAVA_HOME="/usr/local/opt/openjdk"
-
 
 # OrbStack
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :

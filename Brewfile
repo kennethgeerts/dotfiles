@@ -32,6 +32,7 @@ brew "ranger"
 brew "rbenv"
 brew "redis", restart_service: true
 brew "ruby-build"
+brew "shared-mime-info"
 brew "the_silver_searcher"
 brew "tldr"
 brew "unar"

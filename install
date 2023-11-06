@@ -1,13 +1,12 @@
 #!/usr/bin/env zsh
 
 # Hostname
-HOSTNAME=iSofuto
+HOSTNAME=sofuto
 sudo scutil --set ComputerName $HOSTNAME
 sudo scutil --set HostName $HOSTNAME
 sudo scutil --set LocalHostName $HOSTNAME
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $HOSTNAME
 
-defaults write com.apple.Finder AppleShowAllFiles true
 defaults write -g InitialKeyRepeat -int 10
 defaults write -g KeyRepeat -int 1
 

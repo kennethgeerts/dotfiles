@@ -1,6 +1,7 @@
 tap "heroku/brew"
 tap "buo/cask-upgrade"
 tap "homebrew/cask-fonts"
+tap "homebrew/cask-versions"
 
 brew "awscli"
 brew "aws-vault"

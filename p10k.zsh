@@ -49,6 +49,7 @@
   # Left prompt segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     custom_awsvault
+    context                   # user@host
     dir                       # current directory
     rbenv                     # ruby environment
     vcs                       # git status
@@ -58,7 +59,6 @@
   # Right prompt segments.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
     command_execution_time    # previous command duration
-    context                   # user@host
     time                      # current time
   )
 

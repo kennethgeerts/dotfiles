@@ -33,7 +33,7 @@ alias l="ls"
 alias lg="lazygit"
 alias ping="prettyping"
 alias top="htop"
-alias work="vim $HOME/Desktop/work.md"
+alias work="vim $HOME/Library/Mobile\ Documents/com~apple~CloudDocs/Sofuto/work.md"
 
 alias jsr='JAVA_HOME="/usr/local/opt/openjdk@8" LANG= LC_ALL= bin/rails'
 alias jsbe='JAVA_HOME="/usr/local/opt/openjdk@8" LANG= LC_ALL= bundle exec'

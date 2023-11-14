@@ -21,17 +21,20 @@ function take() {
   mkdir -p $@ && cd ${@:$#}
 }
 
-alias c='code .'
-alias cat='bat'
-alias d='bin/dev'
-alias difff='kitty +kitten diff'
-alias ls='eza -al --color=always --group-directories-first' # my preferred listing
-alias la='eza -a --color=always --group-directories-first'  # all files and dirs
-alias ll='eza -l --color=always --group-directories-first'  # long format
-alias lt='eza -aT --color=always --group-directories-first' # tree listing
-alias l='ls'
-alias lg='lazygit'
-alias ping='prettyping'
+alias c="code ."
+alias cat="bat"
+alias d="bin/dev"
+alias difff="kitty +kitten diff"
+alias ls="eza -al --color=always --group-directories-first" # my preferred listing
+alias la="eza -a --color=always --group-directories-first"  # all files and dirs
+alias ll="eza -l --color=always --group-directories-first"  # long format
+alias lt="eza -aT --color=always --group-directories-first" # tree listing
+alias l="ls"
+alias lg="lazygit"
+alias ping="prettyping"
+alias top="htop"
+alias work="vim $HOME/Desktop/work.md"
+
 alias jsr='JAVA_HOME="/usr/local/opt/openjdk@8" LANG= LC_ALL= bin/rails'
 alias jsbe='JAVA_HOME="/usr/local/opt/openjdk@8" LANG= LC_ALL= bundle exec'
 

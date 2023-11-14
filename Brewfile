@@ -53,7 +53,6 @@ mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Pastebot", id: 1179623856
 mas "Pixelmator Pro", id: 1289583905
-mas "Telegram", id: 747648890
 mas "Vinegar", id: 1591303229
 mas "WhatsApp", id: 310633997
 

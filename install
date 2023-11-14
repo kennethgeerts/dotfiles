@@ -10,6 +10,8 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.serve
 defaults write -g InitialKeyRepeat -int 10
 defaults write -g KeyRepeat -int 1
 
+xcode-select --install
+
 # Prezto
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 setopt EXTENDED_GLOB
@@ -27,6 +29,7 @@ for file in $DOTFILES; do
   ln -s "$HOME/code/dotfiles/$file" "$HOME/.$file"
 done
 
+mkdir "$HOME/.config"
 CONF_DIRS=(kitty bat)
 for dir in $CONF_DIRS; do
   ln -s "$HOME/code/dotfiles/$dir" "$HOME/.config/$dir"

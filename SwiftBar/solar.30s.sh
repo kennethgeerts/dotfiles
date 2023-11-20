@@ -36,7 +36,7 @@ if ssid == 'SofutoNET':
     else:
         battery_icon = ':bolt.fill.batteryblock:'
 
-    print("%s%.0f%%" % (battery_icon, soc))
+    print("%.0f%% %s" % (soc, battery_icon))
     print("---")
     print(":sun.max:%.0fW – :bolt:%sW" % (ppv, load))
     print(":sun.max:%.2fkWh today – :sun.max:%.2fkWh total" % (day, total))

@@ -35,12 +35,12 @@ alias ping="prettyping"
 alias top="htop"
 alias work="vim $HOME/Library/Mobile\ Documents/com~apple~CloudDocs/Sofuto/work.md"
 
-alias jsr='JAVA_HOME="/usr/local/opt/openjdk@8" LANG= LC_ALL= bin/rails'
-alias jsbe='JAVA_HOME="/usr/local/opt/openjdk@8" LANG= LC_ALL= bundle exec'
+alias jsr='JAVA_HOME="$(brew --prefix openjdk@8)" LANG= LC_ALL= bin/rails'
+alias jsbe='JAVA_HOME="$(brew --prefix openjdk@8)" LANG= LC_ALL= bundle exec'
 
 # Java
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
-export JAVA_HOME="/usr/local/opt/openjdk"
+export JAVA_HOME="$(brew --prefix openjdk)"
+export PATH="$(brew --prefix openjdk)/bin:$PATH"
 
 # OrbStack
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :

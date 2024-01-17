@@ -33,14 +33,19 @@ alias l="ls"
 alias lg="lazygit"
 alias ping="prettyping"
 alias top="htop"
+alias wm="yabai --start-service"
+alias wms="yabai --stop-service"
 alias work="vim $HOME/Library/Mobile\ Documents/com~apple~CloudDocs/Sofuto/work.md"
 
+# JRuby
 alias jsr='JAVA_HOME="$(brew --prefix openjdk@8)" LANG= LC_ALL= bin/rails'
 alias jsbe='JAVA_HOME="$(brew --prefix openjdk@8)" LANG= LC_ALL= bundle exec'
 
 # Java
-export JAVA_HOME="$(brew --prefix openjdk)"
-export PATH="$(brew --prefix openjdk)/bin:$PATH"
+if (( $+commands[brew] )); then
+  export JAVA_HOME="$(brew --prefix openjdk)"
+  export PATH="$(brew --prefix openjdk)/bin:$PATH"
+fi
 
 # OrbStack
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :

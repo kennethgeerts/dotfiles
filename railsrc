@@ -1,3 +1,4 @@
 --asset-pipeline=propshaft
 --skip-jbuilder
---css=bulma
+--css=tailwind
+--skip-test

@@ -17,6 +17,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/vim-easy-align'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mattn/emmet-vim'
+Plug 'ryanoasis/vim-devicons'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-bundler'
@@ -80,8 +81,7 @@ function! TrimWhitespace()
 endfun
 
 " airline
-let g:airline#extensions#tabline#enabled=1
-let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled = 1
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)

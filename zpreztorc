@@ -47,7 +47,8 @@ zstyle ':prezto:load' pmodule \
   'tmux' \
   'ruby' \
   'rails' \
-  'zsh-aws-vault'
+  'zsh-aws-vault' \
+  'python'
 
 #
 # Autosuggestions

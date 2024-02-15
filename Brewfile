@@ -32,6 +32,7 @@ brew "openjdk@8"
 brew "p7zip"
 brew "prettyping"
 brew "pv"
+brew "pyenv"
 brew "ranger"
 brew "rbenv"
 brew "redis", restart_service: true

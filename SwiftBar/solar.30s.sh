@@ -10,9 +10,9 @@ async def get_runtime_data():
     inverter = await goodwe.connect(ip_address)
     return await inverter.read_runtime_data()
 
-ssid = os.popen("/Sy*/L*/Priv*/Apple8*/V*/C*/R*/airport -I | awk '/ SSID:/ {print $2}'").read().strip()
+ssid = os.popen("networksetup -getairportnetwork en0").read().strip()
 
-if ssid == 'SofutoNET':
+if ssid.endswith('SofutoNET'):
     data = asyncio.run(get_runtime_data())
     # print(json.dumps(data, indent=4, sort_keys=True, default=str))
 

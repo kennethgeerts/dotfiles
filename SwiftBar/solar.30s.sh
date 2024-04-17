@@ -1,4 +1,17 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+#
+# Solar
+#
+# Copyright 2024, Kenneth Geerts <kenneth@sofuto.be>
+#
+# <xbar.title>Solar</xbar.title>
+# <xbar.version>v1</xbar.version>
+# <xbar.author>Kenneth Geerts</xbar.author>
+# <xbar.author.github>kennethgeerts</xbar.author.github>
+# <xbar.desc>Solar info</xbar.desc>
+# <xbar.dependencies>goodwe</xbar.dependencies>
+# <xbar.abouturl>https://github.com/kennethgeerts/dotfiles/</xbar.abouturl>
+# <swiftbar.runInBash>false</swiftbar.runInBash>
 
 import asyncio
 import goodwe

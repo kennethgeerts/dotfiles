@@ -1,7 +1,5 @@
 tap "heroku/brew"
 tap "buo/cask-upgrade"
-tap "homebrew/cask-fonts"
-tap "homebrew/cask-versions"
 
 brew "awscli"
 brew "aws-vault"
@@ -26,6 +24,7 @@ brew "libyaml"
 brew "mas"
 brew "neofetch"
 brew "node"
+brew "nvim"
 brew "openjdk"
 brew "p7zip"
 brew "prettyping"
@@ -45,6 +44,7 @@ brew "youtube-dl"
 
 mas "Amphetamine", id: 937984704
 mas "Authenticator", id: 1538761576
+mas "Hue Menu Bar for Philips Hue", id: 1500678169
 mas "Keynote", id: 409183694
 mas "Menu Bar Controller for Sonos", id: 1357379892
 mas "Numbers", id: 409203825

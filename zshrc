@@ -37,10 +37,6 @@ alias wm="yabai --start-service"
 alias wms="yabai --stop-service"
 alias work="nvim $HOME/Library/Mobile\ Documents/com~apple~CloudDocs/Sofuto/work.md"
 
-# JRuby
-alias jsr='JAVA_HOME="$(brew --prefix openjdk@8)" LANG= LC_ALL= bin/rails'
-alias jsbe='JAVA_HOME="$(brew --prefix openjdk@8)" LANG= LC_ALL= bundle exec'
-
 
 # fzf
 

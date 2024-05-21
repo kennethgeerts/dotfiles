@@ -23,7 +23,7 @@ done
 git clone --recursive git@github.com:blimmer/zsh-aws-vault.git "${ZDOTDIR:-$HOME}/.zprezto/contrib/zsh-aws-vault"
 
 # Dotfiles
-DOTFILES=(gemrc gitconfig gitignore p10k.zsh railsrc rubocop.yml tmux.conf vimrc zpreztorc zprofile zshrc)
+DOTFILES=(gemrc gitconfig gitignore p10k.zsh railsrc tmux.conf zpreztorc zprofile zshrc)
 for file in $DOTFILES; do
   rm -f "$HOME/.$file"
   ln -s "$HOME/code/dotfiles/$file" "$HOME/.$file"
@@ -46,7 +46,6 @@ bat cache --build
 
 # Ruby
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl)"
-local RUBY_VERSION="3.2.2"
+local RUBY_VERSION="3.3.1"
 rbenv install $RUBY_VERSION &> /dev/null
 rbenv global $RUBY_VERSION &> /dev/null
-gem install gem_updater

@@ -23,7 +23,7 @@ done
 git clone --recursive git@github.com:blimmer/zsh-aws-vault.git "${ZDOTDIR:-$HOME}/.zprezto/contrib/zsh-aws-vault"
 
 # Dotfiles
-DOTFILES=(gemrc gitconfig gitignore p10k.zsh railsrc zpreztorc zprofile zshrc)
+DOTFILES=(catppuccin_frappe.omp.json gemrc gitconfig gitignore p10k.zsh railsrc zpreztorc zprofile zshrc)
 for file in $DOTFILES; do
   rm -f "$HOME/.$file"
   ln -s "$HOME/code/dotfiles/$file" "$HOME/.$file"

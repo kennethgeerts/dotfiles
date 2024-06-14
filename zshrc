@@ -45,6 +45,8 @@ if (( $+commands[brew] )); then
   export PATH="$(brew --prefix openjdk)/bin:$PATH"
 fi
 
+# Mise
+eval "$(mise activate zsh --shims)"
 # OrbStack
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 

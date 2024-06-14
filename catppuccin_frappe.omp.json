@@ -21,15 +21,18 @@
         {
           "foreground": "p:blue",
           "style": "plain",
-          "template": "{{ .UserName }}@{{ .HostName }} ",
+          "template": "{{ if .SSHSession }}{{ .UserName }}@{{ .HostName }} {{ end }}",
           "type": "session"
         },
         {
           "foreground": "p:pink",
           "style": "plain",
-          "template": "{{ .Path }} ",
-          "home_icon": "~",
-          "type": "path"
+          "properties": {
+            "style": "full"
+          },
+          "type": "path",
+          "template": "{{ .Path }} "
+
         },
         {
           "foreground": "p:lavender",

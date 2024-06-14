@@ -45,6 +45,6 @@ brew bundle
 bat cache --build
 
 # Ruby
-local RUBY_VERSION="3.3.1"
+local RUBY_VERSION="3.3.3"
 rbenv install $RUBY_VERSION &> /dev/null
 rbenv global $RUBY_VERSION &> /dev/null

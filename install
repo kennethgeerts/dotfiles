@@ -36,15 +36,13 @@ for dir in $CONF_DIRS; do
 done
 
 mkdir "$HOME/bin"
-ln -s "$HOME/code/dotfiles/bin/vimv" "$HOME/bin/vimv"
+BINS=(debase solar.sh vimv)
+for bin in $BINS; do
+  ln -s "$HOME/code/dotfiles/bin/$bin" "$HOME/bin/$bin"
+done
 
 # Homebrew
 cd "$HOME/code/dotfiles"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew bundle
 bat cache --build
-
-# Ruby
-local RUBY_VERSION="3.3.3"
-rbenv install $RUBY_VERSION &> /dev/null
-rbenv global $RUBY_VERSION &> /dev/null

@@ -14,7 +14,7 @@ const container = css`
 `
 
 const text = css`
-  font-family: "SF Pro";
+  font-family: "FiraCode Nerd Font";
   color: #fff;
   margin-bottom: 1rem;
 `
@@ -24,37 +24,41 @@ function battery(output) {
 
   let icon;
   if (data["battery_soc"] === 100)
-    icon = "􀛨"
+    icon = "\uf240"
   else if (data["battery_soc"] > 75)
-    icon = "􀺸"
+    icon = "\uf241"
   else if (data["battery_soc"] > 50)
-    icon = "􀺶"
+    icon = "\uf242"
   else if (data["battery_soc"] > 25)
-    icon = "􀛩"
+    icon = "\uf243"
   else
-    icon = "􀛪"
+    icon = "\uf244"
 
   return `${icon} ${data["battery_soc"]}%`;
 }
 
 function ppv(output) {
   const data = JSON.parse(output)
-  return `􀆭 ${data["ppv1"]}W`;
+  return `\uf522 ${data["ppv1"]}W`;
 }
 
 function load(output) {
   const data = JSON.parse(output)
-  return `􀋥 ${data["house_consumption"]}W`;
+  return `\udb85\udc0c${data["house_consumption"]}W`;
 }
 
-export const render = ({ output, error }) => {
-  return error ? (
-    <div></div>
-  ) : (
-    <div className={container}>
-      <div className={text}>{battery(output)}</div>
-      <div className={text}>{ppv(output)}</div>
-      <div className={text}>{load(output)}</div>
-    </div>
-  );
+export const render = ({ output }) => {
+  if (output) {
+    return (
+      <div className={container}>
+        <div className={text}>{battery(output)}</div>
+        <div className={text}>{ppv(output)}</div>
+        <div className={text}>{load(output)}</div>
+      </div>
+    );
+   } else {
+    return (
+      <div></div>
+    );
+   }
 }

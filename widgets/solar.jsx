@@ -6,7 +6,7 @@ export const refreshFrequency = 15000
 
 const container = css`
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: center;
   width: 100vw;
   height: 100vh;
@@ -16,7 +16,7 @@ const container = css`
 const text = css`
   font-family: "FiraCode Nerd Font";
   color: #fff;
-  margin-bottom: 1rem;
+  margin-top : 0.5rem;
 `
 
 function battery(output) {

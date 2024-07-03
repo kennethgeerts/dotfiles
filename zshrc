@@ -52,5 +52,5 @@ source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
 # Oh My Posh
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  eval "$(oh-my-posh init zsh --config ~/.catppuccin_frappe.omp.json)"
+  eval "$(oh-my-posh init zsh --config ~/.prompt.omp.json)"
 fi

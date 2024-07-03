@@ -53,7 +53,7 @@
             "revert_icon": "\uf0e2 ",
             "tag_icon": "\uf412 "
           },
-          "template": "{{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) (gt .StashCount 0) }}*{{ end }} ",
+          "template": "{{ .HEAD }}{{ if gt .StashCount 0 }}°{{ end }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} ",
           "style": "plain",
           "type": "git"
         }

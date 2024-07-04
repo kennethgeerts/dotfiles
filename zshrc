@@ -14,10 +14,10 @@ function take() {
   mkdir -p $@ && cd ${@:$#}
 }
 
-alias n="nvim ."
-alias c="code ."
+alias n="nvim"
+alias c="code"
 alias cat="bat"
-alias d="bin/dev"
+alias cd="z"
 alias difff="kitty +kitten diff"
 alias ls="eza -al --color=always --group-directories-first" # my preferred listing
 alias la="eza -a --color=always --group-directories-first"  # all files and dirs
@@ -25,8 +25,9 @@ alias ll="eza -l --color=always --group-directories-first"  # long format
 alias lt="eza -aT --color=always --group-directories-first" # tree listing
 alias l="ls"
 alias lg="lazygit"
+alias log="tail -f log/development.log"
 alias ping="prettyping"
-alias top="htop"
+alias top="btop"
 alias work="nvim $HOME/Library/Mobile\ Documents/com~apple~CloudDocs/Sofuto/work.md"
 
 # fzf
@@ -47,6 +48,7 @@ fi
 
 # Mise
 eval "$(mise activate zsh --shims)"
+
 # OrbStack
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
@@ -54,3 +56,6 @@ source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   eval "$(oh-my-posh init zsh --config ~/.prompt.omp.json)"
 fi
+
+# For secret env vars etc.
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local

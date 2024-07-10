@@ -27,6 +27,7 @@ alias l="ls"
 alias lg="lazygit"
 alias log="tail -f log/development.log"
 alias ping="prettyping"
+alias rip="abcde -N -o mp3 && drutil tray eject"
 alias top="btop"
 alias work="nvim $HOME/Library/Mobile\ Documents/com~apple~CloudDocs/Sofuto/work.md"
 

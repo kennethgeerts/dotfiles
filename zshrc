@@ -14,8 +14,12 @@ function take() {
   mkdir -p $@ && cd ${@:$#}
 }
 
-alias n="nvim"
-alias c="code"
+function rip() {
+  echo OUTPUTFORMAT=\'${1:-CD}'/${TRACKNUM}.${TRACKFILE}'\' >! ~/.abcde.conf
+  abcde -N -n -x -o mp3
+}
+
+alias c='code $PWD'
 alias cat="bat"
 alias cd="z"
 alias difff="kitty +kitten diff"
@@ -26,8 +30,9 @@ alias lt="eza -aT --color=always --group-directories-first" # tree listing
 alias l="ls"
 alias lg="lazygit"
 alias log="tail -f log/development.log"
+alias n="nvim"
 alias ping="prettyping"
-alias rip="abcde -N -o mp3 && drutil tray eject"
+alias rorb='b https://$(basename $PWD).test'
 alias top="btop"
 alias work="nvim $HOME/Library/Mobile\ Documents/com~apple~CloudDocs/Sofuto/work.md"
 

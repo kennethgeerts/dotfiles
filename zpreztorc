@@ -48,7 +48,8 @@ zstyle ':prezto:load' pmodule \
   'ruby' \
   'rails' \
   'zsh-aws-vault' \
-  'python'
+  'python' \
+  'ssh'
 
 #
 # Autosuggestions

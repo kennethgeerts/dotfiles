@@ -2,13 +2,14 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-h() { cd ~/$1; }
-_h() { _files -W ~; }
-compdef _h h
+VISUAL=nvim
+EDITOR=nvim
 
-j() { cd ~/code/$1; }
-_j() { _files -W ~/code; }
-compdef _j j
+path=(
+  '/Applications/Visual Studio Code - Insiders.app/Contents/Resources/app/bin'
+  /Applications/Postgres.app/Contents/Versions/latest/bin
+  $path
+)
 
 function take() {
   mkdir -p $@ && cd ${@:$#}
@@ -21,12 +22,9 @@ function rip() {
 
 alias c='code $PWD'
 alias cat="bat"
-alias cd="z"
 alias difff="kitty +kitten diff"
-alias ls="eza -al --color=always --group-directories-first" # my preferred listing
-alias la="eza -a --color=always --group-directories-first"  # all files and dirs
-alias ll="eza -l --color=always --group-directories-first"  # long format
-alias lt="eza -aT --color=always --group-directories-first" # tree listing
+alias ls="eza -al --color=always --group-directories-first --icons=auto"
+alias lt="eza -aT --color=always --group-directories-first --icons=auto" # tree listing
 alias l="ls"
 alias lg="lazygit"
 alias log="tail -f log/development.log"
@@ -44,7 +42,7 @@ export FZF_DEFAULT_OPTS=" \
 --color=marker:#f2d5cf,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e78284"
 
 # zoxide
-eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh --cmd j)"
 
 # Java
 if (( $+commands[brew] )); then

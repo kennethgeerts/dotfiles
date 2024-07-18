@@ -44,4 +44,4 @@
 	# 10% green 90% base
 	plus-style = "syntax #3c444e"
 	# Should match the name of the bat theme
-	syntax-theme = "Catppuccin-frappe"
+	syntax-theme = "Catppuccin Frappe"

@@ -20,7 +20,14 @@ function rip() {
   abcde -N -n -x -o mp3
 }
 
-alias bu='brew update && brew upgrade && brew cleanup'
+funclion up() {
+  sudo softwareupdate -i -a
+  brew update
+  brew upgrade
+  brew cleanup
+  zprezto-update
+}
+
 alias c='code $PWD'
 alias cat="bat"
 alias difff="kitty +kitten diff"

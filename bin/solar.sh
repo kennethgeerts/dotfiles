@@ -10,16 +10,13 @@ async def get_runtime_data():
     inverter = await goodwe.connect(ip_address)
     return await inverter.read_runtime_data()
 
-ssid = os.popen("networksetup -getairportnetwork en0").read().strip()
+data = asyncio.run(get_runtime_data())
+print(json.dumps(data, default=str))
 
-if ssid.endswith('SofutoNET'):
-    data = asyncio.run(get_runtime_data())
-    print(json.dumps(data, default=str))
-
-    # data['battery_mode']
-    #   0: "No battery"
-    #   1: "Standby"
-    #   2: "Discharge"
-    #   3: "Charge"
-    #   4: "To be charged"
-    #   5: "To be discharged"
+# data['battery_mode']
+#   0: "No battery"
+#   1: "Standby"
+#   2: "Discharge"
+#   3: "Charge"
+#   4: "To be charged"
+#   5: "To be discharged"

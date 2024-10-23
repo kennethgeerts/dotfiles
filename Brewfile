@@ -58,7 +58,6 @@ mas "Menu Bar Controller for Sonos", id: 1357379892
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Pixelmator Pro", id: 1289583905
-mas "Vinegar", id: 1591303229
 mas "WhatsApp", id: 310633997
 
 cask "basictex"

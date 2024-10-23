@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+sudo softwareupdate -i -a
+
+brew update
+brew upgrade
+brew cleanup
+
+nvim --headless "+Lazy! sync" +qa

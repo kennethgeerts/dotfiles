@@ -30,7 +30,7 @@ for file in $DOTFILES; do
 done
 
 mkdir "$HOME/.config"
-CONF_DIRS=(kitty bat)
+CONF_DIRS=(kitty bat nvim)
 for dir in $CONF_DIRS; do
   ln -s "$HOME/code/dotfiles/$dir" "$HOME/.config/$dir"
 done

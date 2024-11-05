@@ -1,46 +1,45 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "palette": {
-    "os": "#acb0be",
     "blue": "#8caaee",
-    "pink": "#f4b8e4",
     "lavender": "#babbf1",
+    "os": "#acb0be",
+    "pink": "#f4b8e4",
     "ruby": "#e78284"
   },
   "blocks": [
     {
+      "type": "prompt",
       "alignment": "left",
       "segments": [
         {
-          "foreground": "p:os",
           "style": "plain",
           "template": "{{ .Icon }} ",
+          "foreground": "p:os",
           "type": "os"
         },
         {
-          "foreground": "p:blue",
           "style": "plain",
           "template": "{{ if .SSHSession }}{{ .UserName }}@{{ .HostName }} {{ end }}",
+          "foreground": "p:blue",
           "type": "session"
         },
         {
-          "foreground": "p:pink",
-          "style": "plain",
           "properties": {
             "style": "full"
           },
-          "type": "path",
-          "template": "{{ .Path }} "
-
-        },
-        {
-          "type": "ruby",
           "style": "plain",
-          "foreground": "p:ruby",
-          "template": "\ue791 {{ .Full }} "
+          "template": "{{ .Path }} ",
+          "foreground": "p:pink",
+          "type": "path"
         },
         {
-          "foreground": "p:lavender",
+          "style": "plain",
+          "template": "\ue791 {{ .Full }} ",
+          "foreground": "p:ruby",
+          "type": "ruby"
+        },
+        {
           "properties": {
             "branch_icon": "\ue725 ",
             "cherry_pick_icon": "\ue29b ",
@@ -53,14 +52,13 @@
             "revert_icon": "\uf0e2 ",
             "tag_icon": "\uf412 "
           },
-          "template": "{{ .HEAD }}{{ if gt .StashCount 0 }}°{{ end }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} ",
           "style": "plain",
+          "template": "{{ .HEAD }}{{ if gt .StashCount 0 }}°{{ end }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} ",
+          "foreground": "p:lavender",
           "type": "git"
         }
-      ],
-      "type": "prompt"
+      ]
     }
   ],
-  "final_space": false,
-  "version": 2
+  "version": 3
 }

@@ -1,0 +1,32 @@
+{
+  "position": "top",
+  "modules-left": ["hyprland/window"],
+  "modules-center": ["hyprland/workspaces"],
+  "modules-right": ["bluetooth", "pulseaudio", "custom/weather", "clock"],
+  "clock": {
+    "format": "{:%a %b %d %H:%M}",
+  },
+  "bluetooth": {
+    "format": "",
+    "format-connected": " {device_alias}",
+    "format-disconnected": "",
+    "on-click": "blueman-manager"
+  },
+  "pulseaudio": {
+      "format": "{icon} {volume}%",
+      "format-muted": "",
+      "format-icons": {
+          "default": ["", "", " "]
+      },
+      "on-click": "pavucontrol"
+  },
+  "hyprland/window": {
+    "format": "👉 {}",
+  },
+  "custom/weather": {
+    "format": "{}",
+    "interval": 10,
+    "exec": "~/.config/waybar/weather.sh",
+    "tooltip": false
+  }
+}

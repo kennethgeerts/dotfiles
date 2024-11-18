@@ -1,7 +1,8 @@
 return {
-  "nvim-lualine/lualine.nvim",
+  "stevearc/oil.nvim",
+  opts = {},
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
-    require("lualine").setup()
-  end
+    require("oil").setup()
+  end,
 }

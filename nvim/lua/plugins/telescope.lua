@@ -22,9 +22,6 @@ return {
       vim.keymap.set("n", "<leader>r", builtin.oldfiles, {})
       vim.keymap.set("n", "<leader>rg", builtin.live_grep, {})
       vim.keymap.set("n", "<leader>b", builtin.buffers, {})
-
-      require("telescope").load_extension("file_browser")
-      vim.keymap.set("n", "<leader>b", ":Telescope file_browser<CR>")
     end,
   },
 }

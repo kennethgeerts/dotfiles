@@ -6,7 +6,7 @@ import json
 import os
 
 async def get_runtime_data():
-    ip_address = '192.168.0.14'
+    ip_address = '192.168.0.151'
     inverter = await goodwe.connect(ip_address)
     return await inverter.read_runtime_data()
 

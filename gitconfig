@@ -14,8 +14,10 @@
 [push]
 	default = simple
 	autoSetupRemote = true
+	followTags = true
 [pull]
 	ff = only
+	rebase = true
 [submodule]
 	recurse = true
 [delta]
@@ -45,3 +47,18 @@
 	plus-style = "syntax #3c444e"
 	# Should match the name of the bat theme
 	syntax-theme = "Catppuccin Frappe"
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
+[commit]
+	verbose = true

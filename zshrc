@@ -6,7 +6,6 @@ VISUAL=nvim
 EDITOR=nvim
 
 path=(
-  '/Applications/Visual Studio Code - Insiders.app/Contents/Resources/app/bin'
   /Applications/Postgres.app/Contents/Versions/latest/bin
   $path
 )
@@ -20,7 +19,7 @@ function rip() {
   abcde -N -n -x -o mp3
 }
 
-alias c='code $PWD'
+alias c='cursor $PWD'
 alias cat="bat"
 alias difff="kitty +kitten diff"
 alias ds="kamal deploy -d staging"
@@ -32,9 +31,7 @@ alias lg="lazygit"
 alias log="tail -f log/development.log"
 alias n="nvim"
 alias ping="prettyping"
-alias rorb='b https://$(basename $PWD).test'
 alias top="btop"
-alias work="nvim $HOME/Library/Mobile\ Documents/com~apple~CloudDocs/Sofuto/work.md"
 
 # fzf
 source <(fzf --zsh)

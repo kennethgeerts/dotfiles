@@ -14,9 +14,18 @@ function take() {
   mkdir -p $@ && cd ${@:$#}
 }
 
+function flatten() {
+  # Move all regular files in subdirectories to the current directory
+  find . -mindepth 2 -type f -exec mv -nv {} . \;
+  # Remove all empty directories (bottom-up)
+  find . -depth -type d -empty -exec rmdir {} \;
+}
+
+
 function rip() {
   echo OUTPUTFORMAT=\'${1:-CD}'/${TRACKNUM}.${TRACKFILE}'\' >! ~/.abcde.conf
   abcde -N -n -x -o mp3
+  drutil eject
 }
 
 alias c='cursor $PWD'

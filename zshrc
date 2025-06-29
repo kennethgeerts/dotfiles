@@ -21,6 +21,34 @@ function flatten() {
   find . -depth -type d -empty -exec rmdir {} \;
 }
 
+function todo() {
+  local file="$HOME/Dropbox/todo.md"
+  nvim "$file"
+}
+
+function wl() {
+  local offset="${1:-0}"
+  local logdir="$HOME/Dropbox/worklog"
+
+  # Calculate target date using GNU date or BSD date (macOS)
+  if date -v +1d >/dev/null 2>&1; then
+    # macOS/BSD style
+    local target_date=$(date -v "${offset}d" +%F)
+  else
+    # GNU coreutils (Linux)
+    local target_date=$(date -d "${offset} day" +%F)
+  fi
+
+  local logfile="$logdir/$target_date.md"
+
+  mkdir -p "$logdir"
+
+  if [[ ! -f "$logfile" ]]; then
+    echo -e "# $target_date\n\n" > "$logfile"
+  fi
+
+  nvim + "$logfile"
+}
 
 function rip() {
   echo OUTPUTFORMAT=\'${1:-CD}'/${TRACKNUM}.${TRACKFILE}'\' >! ~/.abcde.conf

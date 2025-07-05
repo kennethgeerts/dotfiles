@@ -72,6 +72,7 @@ alias log="tail -f log/development.log"
 alias n="nvim"
 alias ping="prettyping"
 alias top="btop"
+alias yayf="yay -Slq | fzf --multi --preview 'yay -Sii {1}' --preview-window=down:75% | xargs -ro yay -S"
 
 # fzf
 source <(fzf --zsh)
@@ -99,6 +100,15 @@ source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   eval "$(oh-my-posh init zsh --config ~/.prompt.omp.json)"
 fi
+
+# pnpm
+PNPM_COMPLETION=/usr/share/zsh/plugins/pnpm-shell-completion/pnpm-shell-completion.zsh
+[[ -f $PNPM_COMPLETION ]] && source $PNPM_COMPLETION
+
+# nnn
+BLK="03" CHR="03" DIR="04" EXE="02" REG="07" HARDLINK="05" SYMLINK="05" MISSING="08" ORPHAN="01" FIFO="06" SOCK="03" UNKNOWN="01"
+export NNN_COLORS="#04020301;4231"
+export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$UNKNOWN"
 
 # For secret env vars etc.
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local

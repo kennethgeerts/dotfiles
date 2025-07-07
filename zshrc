@@ -7,6 +7,7 @@ EDITOR=nvim
 
 path=(
   /Applications/Postgres.app/Contents/Versions/latest/bin
+  $HOME/.local/share/omarchy/bin
   $path
 )
 

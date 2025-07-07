@@ -103,6 +103,12 @@ if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
 fi
 
 # pnpm
+export PNPM_HOME="$HOME/.pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
 PNPM_COMPLETION=/usr/share/zsh/plugins/pnpm-shell-completion/pnpm-shell-completion.zsh
 [[ -f $PNPM_COMPLETION ]] && source $PNPM_COMPLETION
 

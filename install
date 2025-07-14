@@ -36,7 +36,7 @@ for dir in $CONF_DIRS; do
 done
 
 mkdir "$HOME/bin"
-BINS=(debase solar.sh update vimv)
+BINS=(solar.sh mac-update vimv)
 for bin in $BINS; do
   ln -s "$HOME/code/dotfiles/bin/$bin" "$HOME/bin/$bin"
 done

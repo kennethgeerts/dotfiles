@@ -1,21 +1,11 @@
-1password
-1password-cli
+# Rely on amarchy for base packages
+
 aws-cli-v2-bin
-bat
 brother-hll2350dw
 cursor-bin
-eza
-firefox-gnome-theme
-fzf
 git-delta
-jq
-lazydocker
-mise
-neovim
 nordvpn-bin
 oh-my-posh
 plex-media-server
 ripgrep
 ttf-victor-mono-nerd
-yay
-zoxide

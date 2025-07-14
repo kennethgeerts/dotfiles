@@ -65,6 +65,8 @@ alias cat="bat"
 alias difff="kitty +kitten diff"
 alias ds="kamal deploy -d staging"
 alias dp="kamal deploy -d production"
+alias find="fd"
+alias grep="rg"
 alias ls="eza -al --color=always --group-directories-first --icons=auto"
 alias lt="eza -aT --color=always --group-directories-first --icons=auto" # tree listing
 alias l="ls"

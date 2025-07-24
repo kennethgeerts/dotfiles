@@ -11,10 +11,6 @@ path=(
   $path
 )
 
-function take() {
-  mkdir -p $@ && cd ${@:$#}
-}
-
 function flatten() {
   # Move all regular files in subdirectories to the current directory
   find . -mindepth 2 -type f -exec mv -nv {} . \;

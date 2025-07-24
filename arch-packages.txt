@@ -1,11 +1,21 @@
-# Rely on amarchy for base packages
+# Rely on Omarchy for base packages
 
 aws-cli-v2-bin
 brother-hll2350dw
+cava
 cursor-bin
 git-delta
+httpie
+lowfi
+nnn
 nordvpn-bin
 oh-my-posh
 plex-media-server
+pnpm
+pnpm-shell-completion
+prettyping
 ripgrep
+rsync
+tailscale
 ttf-victor-mono-nerd
+zsh

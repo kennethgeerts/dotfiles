@@ -8,7 +8,6 @@ git-delta
 httpie
 lowfi
 nnn
-nordvpn-bin
 oh-my-posh
 plex-media-server
 pnpm

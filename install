@@ -1,48 +1,69 @@
 #!/usr/bin/env zsh
 
-# Hostname
+set -e
+
+DOTFILES_DIR="$HOME/.dotfiles"
+mkdir -p "$HOME/.config" "$HOME/.local/bin"
+
+echo "🔧 Setting up macOS system preferences..."
+
 HOSTNAME=sofuto
 sudo scutil --set ComputerName $HOSTNAME
 sudo scutil --set HostName $HOSTNAME
 sudo scutil --set LocalHostName $HOSTNAME
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $HOSTNAME
 
+echo "⌨️  Configuring keyboard settings..."
 defaults write -g InitialKeyRepeat -int 10
 defaults write -g KeyRepeat -int 1
 
+echo "📱 Installing Xcode command line tools..."
 xcode-select --install
 
-# Prezto
+echo "📦 Cloning dotfiles repository..."
+git clone https://github.com/kennethgeerts/dotfiles.git "$DOTFILES_DIR"
+
+cd "$DOTFILES_DIR"
+echo "🍺 Installing Homebrew..."
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+echo "⏳ Installing packages (this may take a while)..."
+brew bundle --verbose
+
+echo "🐚 Setting up Prezto..."
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 setopt EXTENDED_GLOB
 for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
   ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 done
 
-# AWS Vault plugin
-git clone --recursive git@github.com:blimmer/zsh-aws-vault.git "${ZDOTDIR:-$HOME}/.zprezto/contrib/zsh-aws-vault"
-
-# Dotfiles
-DOTFILES=(prompt.omp.json gemrc gitconfig gitignore railsrc zpreztorc zshrc)
-for file in $DOTFILES; do
+echo "🔗 Creating configuration file symlinks..."
+for file in prompt.omp.json gemrc gitconfig gitignore railsrc zpreztorc zshrc; do
   rm -f "$HOME/.$file"
-  ln -s "$HOME/code/dotfiles/$file" "$HOME/.$file"
+  ln -s "$DOTFILES_DIR/$file" "$HOME/.$file"
 done
 
-mkdir "$HOME/.config"
-CONF_DIRS=(kitty bat nvim)
-for dir in $CONF_DIRS; do
-  ln -s "$HOME/code/dotfiles/$dir" "$HOME/.config/$dir"
+echo "📁 Creating configuration directory symlinks..."
+for dir in kitty bat nvim; do
+  ln -s "$DOTFILES_DIR/$dir" "$HOME/.config/$dir"
 done
 
-mkdir "$HOME/bin"
-BINS=(solar.sh mac-update vimv)
-for bin in $BINS; do
-  ln -s "$HOME/code/dotfiles/bin/$bin" "$HOME/bin/$bin"
+echo "🛠️  Linking custom scripts..."
+for bin in solar.sh mac-update vimv; do
+  ln -s "$DOTFILES_DIR/bin/$bin" "$HOME/.local/bin/$bin"
 done
 
-# Homebrew
-cd "$HOME/code/dotfiles"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew bundle
+source ~/.zshrc
+
+echo "🎨 Building bat cache..."
 bat cache --build
+
+echo "📝 Setting up nvim..."
+nvim --headless "+Lazy! sync" +qa
+
+echo "💎 Installing Ruby..."
+gem install mise
+mise use -g ruby
+
+echo ""
+echo "🎉 Installation complete!"

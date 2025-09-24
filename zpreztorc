@@ -21,7 +21,6 @@ zstyle ':prezto:load' pmodule \
   'archive' \
   'homebrew' \
   'rails' \
-  'zsh-aws-vault' \
   'python' \
   'ssh'
 

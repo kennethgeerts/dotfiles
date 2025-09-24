@@ -1,11 +1,7 @@
-# Kenneth's dotfiles
+# Sofuto's dotfiles
 
-![Screenshot](https://i.imgur.com/CgUupYP.png)
+## Install
 
-Includes config files for:
-
-- kitty terminal emulator
-- zsh with prezto
-- homebrew
-- vim
-- ruby
+```zsh
+curl -fsSL https://raw.githubusercontent.com/kennethgeerts/dotfiles/HEAD/install | zsh
+```

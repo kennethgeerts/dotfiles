@@ -41,7 +41,6 @@ brew "zoxide"
 mas "Amphetamine", id: 937984704
 mas "Hue Menu Bar for Philips Hue", id: 1500678169
 mas "Keynote", id: 409183694
-mas "Menu Bar Controller for Sonos", id: 1357379892
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Pixelmator Pro", id: 1289583905
@@ -53,7 +52,6 @@ cask "basictex"
 cask "chatgpt"
 cask "cursor"
 cask "dropbox"
-cask "firefox"
 cask "font-victor-mono-nerd-font"
 cask "google-chrome"
 cask "iina"

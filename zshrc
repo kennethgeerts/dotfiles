@@ -7,9 +7,14 @@ EDITOR=nvim
 
 path=(
   /Applications/Postgres.app/Contents/Versions/latest/bin
+  $HOME/.local/bin
   $HOME/.local/share/omarchy/bin
   $path
 )
+
+function ts() {
+  date +"%Y%m%d%H%M%S"
+}
 
 function flatten() {
   # Move all regular files in subdirectories to the current directory

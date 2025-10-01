@@ -5,9 +5,19 @@ set -e
 DOTFILES_DIR="$HOME/.dotfiles"
 mkdir -p "$HOME/.config" "$HOME/.local/bin"
 
-echo "🔧 Setting up macOS system preferences..."
+echo "📱 Installing Xcode command line tools..."
+xcode-select --install
 
-HOSTNAME=sofuto
+echo "🖥️  Setting up system hostname..."
+read -r "HOSTNAME?Enter hostname: " || HOSTNAME="sofuto"
+if [[ -z "$HOSTNAME" ]]; then
+  HOSTNAME="sofuto"
+fi
+
+echo "🔐 Please enter your password:"
+sudo -v
+
+echo "🔧 Setting up macOS system preferences..."
 sudo scutil --set ComputerName $HOSTNAME
 sudo scutil --set HostName $HOSTNAME
 sudo scutil --set LocalHostName $HOSTNAME
@@ -17,15 +27,13 @@ echo "⌨️  Configuring keyboard settings..."
 defaults write -g InitialKeyRepeat -int 10
 defaults write -g KeyRepeat -int 1
 
-echo "📱 Installing Xcode command line tools..."
-xcode-select --install
-
 echo "📦 Cloning dotfiles repository..."
 git clone https://github.com/kennethgeerts/dotfiles.git "$DOTFILES_DIR"
 
 cd "$DOTFILES_DIR"
 echo "🍺 Installing Homebrew..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 echo "⏳ Installing packages (this may take a while)..."
 brew bundle --verbose
@@ -53,8 +61,6 @@ for bin in solar.sh mac-update vimv; do
   ln -s "$DOTFILES_DIR/bin/$bin" "$HOME/.local/bin/$bin"
 done
 
-source ~/.zshrc
-
 echo "🎨 Building bat cache..."
 bat cache --build
 
@@ -62,8 +68,9 @@ echo "📝 Setting up nvim..."
 nvim --headless "+Lazy! sync" +qa
 
 echo "💎 Installing Ruby..."
-gem install mise
 mise use -g ruby
+
+source ~/.zshrc
 
 echo ""
 echo "🎉 Installation complete!"

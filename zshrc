@@ -62,6 +62,7 @@ function rip() {
 }
 
 alias c='cursor $PWD'
+alias ca='cursor-agent'
 alias cat="bat"
 alias difff="kitty +kitten diff"
 alias ds="kamal deploy -d staging"

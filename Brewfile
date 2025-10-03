@@ -36,6 +36,7 @@ brew "shared-mime-info"
 brew "tldr"
 brew "unar"
 brew "wget"
+brew "yt-dlp"
 brew "zoxide"
 
 mas "Amphetamine", id: 937984704

@@ -61,9 +61,6 @@ for bin in solar.sh mac-update vimv; do
   ln -s "$DOTFILES_DIR/bin/$bin" "$HOME/.local/bin/$bin"
 done
 
-echo "🎨 Building bat cache..."
-bat cache --build
-
 echo "📝 Setting up nvim..."
 nvim --headless "+Lazy! sync" +qa
 

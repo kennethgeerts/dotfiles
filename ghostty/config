@@ -1,10 +1,17 @@
-background-blur = true
 background-opacity = 0.95
+background-blur = true
+
 font-family = VictorMono Nerd Font Mono
 font-size = 16
+
 keybind = global:cmd+escape=toggle_quick_terminal
-macos-titlebar-style = tabs
+
 macos-window-buttons = hidden
+macos-titlebar-style = tabs
+
 theme = Catppuccin Frappe
+
+window-height = 26
+window-width = 112
 window-padding-x = 16
 window-title-font-family = VictorMono Nerd Font Mono

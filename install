@@ -52,7 +52,7 @@ for file in prompt.omp.json gemrc gitconfig gitignore railsrc zpreztorc zshrc; d
 done
 
 echo "📁 Creating configuration directory symlinks..."
-for dir in kitty bat nvim; do
+for dir in kitty ghostty bat nvim; do
   ln -s "$DOTFILES_DIR/$dir" "$HOME/.config/$dir"
 done
 

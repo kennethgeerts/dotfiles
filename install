@@ -66,6 +66,7 @@ nvim --headless "+Lazy! sync" +qa
 
 echo "💎 Installing Ruby..."
 mise use -g ruby
+mise settings add idiomatic_version_file_enable_tools ruby
 
 source ~/.zshrc
 

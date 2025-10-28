@@ -66,6 +66,8 @@ done
 echo "📝 Setting up nvim..."
 git clone https://github.com/LazyVim/starter "$CONFIG_DIR/nvim"
 rm -rf "$CONFIG_DIR/nvim/.git"
+rm -rf "$CONFIG_DIR/nvim/lua/plugins"
+ln -s "$DOTFILES_DIR/config/nvim/lua/plugins" "$CONFIG_DIR/nvim/lua/plugins"
 nvim --headless "+Lazy! sync" +qa
 
 echo "💎 Installing Ruby..."

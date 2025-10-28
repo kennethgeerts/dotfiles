@@ -37,7 +37,6 @@ brew "wget"
 brew "yt-dlp"
 brew "zoxide"
 
-mas "Amphetamine", id: 937984704
 mas "Hue Menu Bar for Philips Hue", id: 1500678169
 mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
@@ -47,12 +46,11 @@ mas "WhatsApp", id: 310633997
 
 cask "1password"
 cask "1password-cli"
-cask "basictex"
 cask "chatgpt"
 cask "cursor"
 cask "cursor-cli"
 cask "dropbox"
-cask "font-victor-mono-nerd-font"
+cask "font-victor-mono"
 cask "ghostty"
 cask "google-chrome"
 cask "iina"

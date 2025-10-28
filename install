@@ -3,7 +3,9 @@
 set -e
 
 DOTFILES_DIR="$HOME/.dotfiles"
-mkdir -p "$HOME/.config" "$HOME/.local/bin"
+CONFIG_DIR="$HOME/.config"
+LOCAL_BIN_DIR="$HOME/.local/bin"
+mkdir -p "$CONFIG_DIR" "$LOCAL_BIN_DIR"
 
 echo "📱 Installing Xcode command line tools..."
 xcode-select --install
@@ -48,20 +50,22 @@ done
 echo "🔗 Creating configuration file symlinks..."
 for file in prompt.omp.json gemrc gitconfig gitignore railsrc zpreztorc zshrc; do
   rm -f "$HOME/.$file"
-  ln -s "$DOTFILES_DIR/$file" "$HOME/.$file"
+  ln -s "$DOTFILES_DIR/home/$file" "$HOME/.$file"
 done
 
 echo "📁 Creating configuration directory symlinks..."
-for dir in kitty ghostty bat nvim; do
-  ln -s "$DOTFILES_DIR/$dir" "$HOME/.config/$dir"
+for dir in kitty ghostty bat; do
+  ln -s "$DOTFILES_DIR/config/$dir" "$CONFIG_DIR/$dir"
 done
 
 echo "🛠️  Linking custom scripts..."
 for bin in solar.sh mac-update vimv; do
-  ln -s "$DOTFILES_DIR/bin/$bin" "$HOME/.local/bin/$bin"
+  ln -s "$DOTFILES_DIR/bin/$bin" "$LOCAL_BIN_DIR/$bin"
 done
 
 echo "📝 Setting up nvim..."
+git clone https://github.com/LazyVim/starter "$CONFIG_DIR/nvim"
+rm -rf "$CONFIG_DIR/nvim/.git"
 nvim --headless "+Lazy! sync" +qa
 
 echo "💎 Installing Ruby..."

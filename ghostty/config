@@ -1,7 +1,7 @@
 background-opacity = 0.95
 background-blur = true
 
-font-family = VictorMono Nerd Font Mono
+font-family = Victor Mono
 font-size = 16
 
 keybind = global:cmd+escape=toggle_quick_terminal
@@ -15,4 +15,4 @@ window-height = 26
 window-width = 112
 window-padding-x = 16
 window-padding-y = 8
-window-title-font-family = VictorMono Nerd Font Mono
+window-title-font-family = Victor Mono

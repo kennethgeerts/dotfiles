@@ -11,6 +11,10 @@ macos-titlebar-style = tabs
 
 theme = Catppuccin Frappe
 
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+
 window-height = 26
 window-width = 112
 window-padding-x = 16

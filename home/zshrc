@@ -1,6 +1,56 @@
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
+### --- ZSH Configuration ---
+
+# Add plugin paths
+fpath=(
+  $HOME/.zsh/zsh-completions/src
+  $fpath
+)
+
+# Load completion system with caching
+autoload -Uz compinit
+compinit -C
+
+# Reasonable shell options
+setopt correct          # Auto-correct minor typos
+setopt extendedglob     # Enhanced globbing
+setopt histignoredups   # Ignore duplicate history entries
+setopt sharehistory     # Share command history across sessions
+setopt incappendhistory # Immediately append to history file
+setopt autopushd        # Push old dir onto stack when changing dirs
+setopt pushdignoredups
+setopt pushdsilent
+setopt interactivecomments
+
+# Completion styles
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' rehash true
+
+### --- Plugins ---
+
+# 1️⃣ History substring search (↑ / ↓ for prefix matches)
+source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# 2️⃣ Autosuggestions
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+bindkey '^ ' autosuggest-accept  # Ctrl+Space accepts suggestion
+
+# 3️⃣ You Should Use (alias reminder)
+source ~/.zsh/zsh-you-should-use/you-should-use.plugin.zsh
+
+# 4️⃣ Syntax highlighting (load *after* everything else)
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# 5️⃣ Additional completions
+autoload -U compinit && compinit -C
+
+# 6️⃣ FZF fuzzy history search (Ctrl+R)
+source ~/.zsh/zsh-fzf-history-search/zsh-fzf-history-search.plugin.zsh
+export ZSH_FZF_HISTORY_SEARCH_FZF_ARGS="--height 40% --reverse --border"
+
+### --- Environment Variables & Paths ---
 
 VISUAL=nvim
 EDITOR=nvim
@@ -8,18 +58,21 @@ EDITOR=nvim
 path=(
   /Applications/Postgres.app/Contents/Versions/latest/bin
   $HOME/.local/bin
-  $HOME/.local/share/omarchy/bin
   $path
 )
+
+### --- Utility Functions ---
+
+ip() {
+  curl -s -4 https://ifconfig.me
+}
 
 function ts() {
   date +"%Y%m%d%H%M%S"
 }
 
 function flatten() {
-  # Move all regular files in subdirectories to the current directory
   find . -mindepth 2 -type f -exec mv -nv {} . \;
-  # Remove all empty directories (bottom-up)
   find . -depth -type d -empty -exec rmdir {} \;
 }
 
@@ -37,12 +90,9 @@ function wl() {
     return
   fi
 
-  # Calculate target date using GNU date or BSD date (macOS)
   if date -v +1d >/dev/null 2>&1; then
-    # macOS/BSD style
     local target_date=$(date -v "${arg}d" +%F)
   else
-    # GNU coreutils (Linux)
     local target_date=$(date -d "${arg} day" +%F)
   fi
 
@@ -61,24 +111,33 @@ function rip() {
   drutil eject
 }
 
-alias c='cursor $PWD'
-alias ca='cursor-agent'
+### --- Aliases ---
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias c="cursor $PWD"
+alias ca="cursor-agent"
 alias cat="bat"
 alias difff="kitty +kitten diff"
 alias ds="kamal deploy -d staging"
 alias dp="kamal deploy -d production"
 alias find="fd"
 alias grep="rg"
-alias ip="echo $(curl -s -4 https://ifconfig.me)"
-alias ls="eza -al --color=always --group-directories-first --icons=auto"
-alias lt="eza -aT --color=always --group-directories-first --icons=auto" # tree listing
-alias l="ls"
+alias g="git"
+alias ls='eza -lh --group-directories-first --icons=auto'
+alias lsa='ls -a'
+alias lt='eza --tree --level=2 --long --icons --git'
+alias lta='lt -a'
 alias lg="lazygit"
 alias log="tail -f log/development.log"
 alias n="nvim"
 alias ping="prettyping"
+alias r="rails"
 alias top="btop"
 alias yayf="yay -Slq | fzf --multi --preview 'yay -Sii {1}' --preview-window=down:75% | xargs -ro yay -S"
+
+### --- Tools ---
 
 # fzf
 source <(fzf --zsh)
@@ -122,5 +181,5 @@ BLK="03" CHR="03" DIR="04" EXE="02" REG="07" HARDLINK="05" SYMLINK="05" MISSING=
 export NNN_COLORS="#04020301;4231"
 export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$UNKNOWN"
 
-# For secret env vars etc.
+### --- Local overrides ---
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local

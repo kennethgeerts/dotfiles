@@ -31,6 +31,7 @@ curl -fsSL https://raw.githubusercontent.com/kennethgeerts/dotfiles/HEAD/install
   "files.trimTrailingWhitespace": true,
   "security.promptForLocalFileProtocolHandling": false,
   "typescript.updateImportsOnFileMove.enabled": "always",
+  "workbench.iconTheme": "catppuccin-frappe",
   "workbench.colorTheme": "Catppuccin Frappé",
   "workbench.layoutControl.enabled": false,
   "workbench.navigationControl.enabled": false,

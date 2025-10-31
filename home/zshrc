@@ -63,8 +63,12 @@ path=(
 
 ### --- Utility Functions ---
 
-ip() {
+function ip() {
   curl -s -4 https://ifconfig.me
+}
+
+function c() {
+  cursor $PWD
 }
 
 function ts() {
@@ -116,7 +120,6 @@ function rip() {
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-alias c="cursor $PWD"
 alias ca="cursor-agent"
 alias cat="bat"
 alias difff="kitty +kitten diff"

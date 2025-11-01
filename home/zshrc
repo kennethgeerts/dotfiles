@@ -1,14 +1,4 @@
-### --- ZSH Configuration ---
-
-# Add plugin paths
-fpath=(
-  $HOME/.zsh/zsh-completions/src
-  $fpath
-)
-
-# Load completion system with caching
-autoload -Uz compinit
-compinit -C
+### --- ZSH Core Configuration ---
 
 # Reasonable shell options
 setopt correct          # Auto-correct minor typos
@@ -21,6 +11,16 @@ setopt pushdignoredups
 setopt pushdsilent
 setopt interactivecomments
 
+# Add plugin paths
+fpath=(
+  $HOME/.zsh/zsh-completions/src
+  $fpath
+)
+
+# Load completion system with caching
+autoload -Uz compinit
+compinit -C
+
 # Completion styles
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -28,26 +28,19 @@ zstyle ':completion:*' rehash true
 
 ### --- Plugins ---
 
-# 1️⃣ History substring search (↑ / ↓ for prefix matches)
-source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+for plugin in \
+  "$HOME/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh" \
+  "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" \
+  "$HOME/.zsh/zsh-you-should-use/you-should-use.plugin.zsh" \
+  "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" \
+  "$HOME/.zsh/zsh-fzf-history-search/zsh-fzf-history-search.plugin.zsh"
+do
+  [[ -f $plugin ]] && source "$plugin"
+done
+
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
-
-# 2️⃣ Autosuggestions
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^ ' autosuggest-accept  # Ctrl+Space accepts suggestion
-
-# 3️⃣ You Should Use (alias reminder)
-source ~/.zsh/zsh-you-should-use/you-should-use.plugin.zsh
-
-# 4️⃣ Syntax highlighting (load *after* everything else)
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# 5️⃣ Additional completions
-autoload -U compinit && compinit -C
-
-# 6️⃣ FZF fuzzy history search (Ctrl+R)
-source ~/.zsh/zsh-fzf-history-search/zsh-fzf-history-search.plugin.zsh
 export ZSH_FZF_HISTORY_SEARCH_FZF_ARGS="--height 40% --reverse --border"
 
 ### --- Environment Variables & Paths ---
@@ -151,12 +144,6 @@ export FZF_DEFAULT_OPTS=" \
 
 # zoxide
 eval "$(zoxide init zsh --cmd j)"
-
-# Java
-if (( $+commands[brew] )); then
-  export JAVA_HOME="$(brew --prefix openjdk)"
-  export PATH="$(brew --prefix openjdk)/bin:$PATH"
-fi
 
 # Mise
 eval "$(mise activate zsh --shims)"

@@ -73,6 +73,20 @@ function flatten() {
   find . -depth -type d -empty -exec rmdir {} \;
 }
 
+function dev() {
+  if [[ -x bin/dev ]]; then
+    echo "💎 Running \`bin/dev\`."
+    bin/dev
+    return
+  fi
+  if [[ -f package.json ]]; then
+    echo "🧩 Running \`pnpm dev\`."
+    pnpm dev
+    return
+  fi
+  echo "⚠️ No development environment found."
+}
+
 function todo() {
   local file="$HOME/Dropbox/todo.md"
   nvim "$file"

@@ -2,39 +2,44 @@
 
 set -e
 
-DOTFILES_DIR="$HOME/.dotfiles"
-CONFIG_DIR="$HOME/.config"
-LOCAL_BIN_DIR="$HOME/.local/bin"
-mkdir -p "$CONFIG_DIR" "$LOCAL_BIN_DIR"
-
-echo "📱 Installing Xcode command line tools..."
-xcode-select --install
-
-echo "🖥️  Setting up system hostname..."
-read -r "HOSTNAME?Enter hostname: " || HOSTNAME="sofuto"
-if [[ -z "$HOSTNAME" ]]; then
-  HOSTNAME="sofuto"
-fi
-
 echo "🔐 Please enter your password:"
 sudo -v
 
-echo "🔧 Setting up macOS system preferences..."
-sudo scutil --set ComputerName $HOSTNAME
-sudo scutil --set HostName $HOSTNAME
-sudo scutil --set LocalHostName $HOSTNAME
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $HOSTNAME
+echo "🖥️  Setting up system hostname..."
+HOSTNAME="sofuto"
+sudo scutil --set ComputerName "$HOSTNAME"
+sudo scutil --set HostName "$HOSTNAME"
+sudo scutil --set LocalHostName "$HOSTNAME"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$HOSTNAME"
 
 echo "⌨️  Configuring keyboard settings..."
 defaults write -g InitialKeyRepeat -int 10
 defaults write -g KeyRepeat -int 1
 
-echo "📦 Cloning dotfiles repository..."
-git clone https://github.com/kennethgeerts/dotfiles.git "$DOTFILES_DIR"
+echo "📱 Installing Xcode command line tools..."
+if ! xcode-select -p &>/dev/null; then
+  xcode-select --install
+  echo "⏳ Waiting for Xcode command line tools installation to complete..."
+  while ! xcode-select -p &>/dev/null; do
+    sleep 5
+  done
+  echo "✅ Xcode command line tools installation complete!"
+else
+  echo "✅ Xcode command line tools already installed"
+fi
 
-cd "$DOTFILES_DIR"
+echo "📦 Cloning dotfiles repository..."
+if [[ ! -d "$HOME/.dotfiles" ]]; then
+  git clone https://github.com/kennethgeerts/dotfiles.git "$HOME/.dotfiles"
+else
+  echo "✅ Dotfiles repository already exists, skipping clone"
+fi
+
+cd "$HOME/.dotfiles"
 echo "🍺 Installing Homebrew..."
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if ! command -v brew &>/dev/null; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 echo "⏳ Installing packages (this may take a while)..."
@@ -42,34 +47,48 @@ brew bundle --verbose
 
 echo "🐚 Setting up zsh..."
 mkdir -p ~/.zsh
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.zsh/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-completions.git ~/.zsh/zsh-completions
-git clone https://github.com/zsh-users/zsh-history-substring-search.git ~/.zsh/zsh-history-substring-search
-git clone https://github.com/joshskidmore/zsh-fzf-history-search.git ~/.zsh/zsh-fzf-history-search
-git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ~/.zsh/zsh-you-should-use
+[[ ! -d ~/.zsh/zsh-syntax-highlighting ]] && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
+[[ ! -d ~/.zsh/zsh-autosuggestions ]] && git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.zsh/zsh-autosuggestions
+[[ ! -d ~/.zsh/zsh-completions ]] && git clone https://github.com/zsh-users/zsh-completions.git ~/.zsh/zsh-completions
+[[ ! -d ~/.zsh/zsh-history-substring-search ]] && git clone https://github.com/zsh-users/zsh-history-substring-search.git ~/.zsh/zsh-history-substring-search
+[[ ! -d ~/.zsh/zsh-fzf-history-search ]] && git clone https://github.com/joshskidmore/zsh-fzf-history-search.git ~/.zsh/zsh-fzf-history-search
+[[ ! -d ~/.zsh/zsh-you-should-use ]] && git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ~/.zsh/zsh-you-should-use
 
 echo "🔗 Creating configuration file symlinks..."
-for file in prompt.omp.json gemrc gitconfig gitignore railsrc zshrc; do
-  rm -f "$HOME/.$file"
-  ln -s "$DOTFILES_DIR/home/$file" "$HOME/.$file"
+for file in "$HOME/.dotfiles/home"/*(ND); do
+  if [[ -f "$file" ]]; then
+    filename=$(basename "$file")
+    rm -f "$HOME/$filename"
+    ln -s "$file" "$HOME/$filename"
+  fi
 done
 
 echo "📁 Creating configuration directory symlinks..."
-for dir in kitty ghostty bat; do
-  ln -s "$DOTFILES_DIR/config/$dir" "$CONFIG_DIR/$dir"
+mkdir -p "$HOME/.config"
+for dir in "$HOME/.dotfiles/config"/*(ND); do
+  if [[ -d "$dir" ]]; then
+    dirname=$(basename "$dir")
+    rm -f "$HOME/.config/$dirname"
+    ln -s "$dir" "$HOME/.config/$dirname"
+  fi
 done
 
 echo "🛠️  Linking custom scripts..."
-for bin in solar.sh mac-update vimv; do
-  ln -s "$DOTFILES_DIR/bin/$bin" "$LOCAL_BIN_DIR/$bin"
+mkdir -p "$HOME/.local/bin"
+for bin in "$HOME/.dotfiles/bin"/*(ND); do
+  if [[ -f "$bin" ]]; then
+    binname=$(basename "$bin")
+    rm -f "$HOME/.local/bin/$binname"
+    ln -s "$bin" "$HOME/.local/bin/$binname"
+  fi
 done
 
 echo "📝 Setting up nvim..."
-git clone https://github.com/LazyVim/starter "$CONFIG_DIR/nvim"
-rm -rf "$CONFIG_DIR/nvim/.git"
-rm -rf "$CONFIG_DIR/nvim/lua/plugins"
-ln -s "$DOTFILES_DIR/config/nvim/lua/plugins" "$CONFIG_DIR/nvim/lua/plugins"
+rm -rf "$HOME/.config/nvim"
+git clone https://github.com/LazyVim/starter "$HOME/.config/nvim"
+rm -rf "$HOME/.config/nvim/.git"
+rm -rf "$HOME/.config/nvim/lua/plugins"
+ln -s "$HOME/.dotfiles/nvim/lua/plugins" "$HOME/.config/nvim/lua/plugins"
 nvim --headless "+Lazy! sync" +qa
 
 echo "💎 Setting up Mise..."
@@ -78,7 +97,8 @@ mise use -g node
 mise settings add idiomatic_version_file_enable_tools ruby
 mise settings add idiomatic_version_file_enable_tools node
 
-source ~/.zshrc
+echo "🔄 Reloading shell configuration..."
+source ~/.zshrc || true
 
 echo ""
 echo "🎉 Installation complete!"

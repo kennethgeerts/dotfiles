@@ -1,58 +1,45 @@
 ### --- ZSH Core Configuration ---
 
-# Reasonable shell options
-setopt correct          # Auto-correct minor typos
-setopt extendedglob     # Enhanced globbing
-setopt histignoredups   # Ignore duplicate history entries
-setopt sharehistory     # Share command history across sessions
-setopt incappendhistory # Immediately append to history file
-setopt autopushd        # Push old dir onto stack when changing dirs
-setopt pushdignoredups
-setopt pushdsilent
-setopt interactivecomments
+mkdir -p ~/.zsh
+[[ ! -d $HOME/.zsh/zsh-history-substring-search ]] && git clone https://github.com/zsh-users/zsh-history-substring-search.git $HOME/.zsh/
+[[ ! -d $HOME/.zsh/zsh-autosuggestions ]] && git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.zsh/
+[[ ! -d $HOME/.zsh/zsh-you-should-use ]] && git clone https://github.com/MichaelAquilina/zsh-you-should-use.git $HOME/.zsh/
+[[ ! -d $HOME/.zsh/zsh-syntax-highlighting ]] && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.zsh/
+[[ ! -d $HOME/.zsh/zsh-fzf-history-search ]] && git clone https://github.com/joshskidmore/zsh-fzf-history-search.git $HOME/.zsh/
+[[ ! -d $HOME/.zsh/zsh-completions ]] && git clone https://github.com/zsh-users/zsh-completions.git $HOME/.zsh/
 
-# Add plugin paths
-fpath=(
-  $HOME/.zsh/zsh-completions/src
-  $fpath
-)
+setopt correct             # Auto-correct minor typos
+setopt extendedglob        # Enhanced globbing
+setopt histignoredups      # Ignore duplicate history entries
+setopt sharehistory        # Share command history across sessions
+setopt incappendhistory    # Immediately append to history file
+setopt autopushd           # Push old dir onto stack when changing dirs
+setopt pushdignoredups     # Ignore duplicates when pushing to the directory stack
+setopt pushdsilent         # Don't print the directory stack after pushd or popd
+setopt interactivecomments # Allow comments in interactive mode
 
-# Load completion system with caching
+fpath=($HOME/.zsh/zsh-completions/src $fpath)
 autoload -Uz compinit
 compinit -C
-
-# Completion styles
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' rehash true
 
-### --- Plugins ---
-
-for plugin in \
-  "$HOME/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh" \
-  "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" \
-  "$HOME/.zsh/zsh-you-should-use/you-should-use.plugin.zsh" \
-  "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" \
-  "$HOME/.zsh/zsh-fzf-history-search/zsh-fzf-history-search.plugin.zsh"
-do
-  [[ -f $plugin ]] && source "$plugin"
-done
+source $HOME/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.zsh/zsh-you-should-use/you-should-use.plugin.zsh
+source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.zsh/zsh-fzf-history-search/zsh-fzf-history-search.plugin.zsh
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey '^ ' autosuggest-accept  # Ctrl+Space accepts suggestion
 export ZSH_FZF_HISTORY_SEARCH_FZF_ARGS="--height 40% --reverse --border"
 
-### --- Environment Variables & Paths ---
-
 VISUAL=nvim
 EDITOR=nvim
 
-path=(
-  /Applications/Postgres.app/Contents/Versions/latest/bin
-  $HOME/.local/bin
-  $path
-)
+path=($HOME/.local/bin $path)
 
 ### --- Utility Functions ---
 
@@ -142,7 +129,7 @@ alias lg="lazygit"
 alias log="tail -f log/development.log"
 alias n="nvim"
 alias ping="prettyping"
-alias r="rails"
+alias r="bin/rails"
 alias top="btop"
 
 ### --- Tools ---

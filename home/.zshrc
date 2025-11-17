@@ -141,10 +141,13 @@ export FZF_DEFAULT_OPTS=" \
 --color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
 --color=marker:#f2d5cf,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e78284"
 
+# ls / fd
+export LS_COLORS="$(vivid generate catppuccin-frappe)"
+
 # zoxide
 eval "$(zoxide init zsh --cmd j)"
 
-# Mise
+# mise
 eval "$(mise activate zsh --shims)"
 
 # OrbStack

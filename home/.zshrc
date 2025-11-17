@@ -1,6 +1,6 @@
 ### --- ZSH Core Configuration ---
 
-mkdir -p ~/.zsh
+mkdir -p ~/.zsh ~/.zsh/cache
 [[ ! -d $HOME/.zsh/zsh-history-substring-search ]] && git clone https://github.com/zsh-users/zsh-history-substring-search.git $HOME/.zsh/
 [[ ! -d $HOME/.zsh/zsh-autosuggestions ]] && git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.zsh/
 [[ ! -d $HOME/.zsh/zsh-you-should-use ]] && git clone https://github.com/MichaelAquilina/zsh-you-should-use.git $HOME/.zsh/
@@ -8,22 +8,52 @@ mkdir -p ~/.zsh
 [[ ! -d $HOME/.zsh/zsh-fzf-history-search ]] && git clone https://github.com/joshskidmore/zsh-fzf-history-search.git $HOME/.zsh/
 [[ ! -d $HOME/.zsh/zsh-completions ]] && git clone https://github.com/zsh-users/zsh-completions.git $HOME/.zsh/
 
-setopt correct             # Auto-correct minor typos
-setopt extendedglob        # Enhanced globbing
-setopt histignoredups      # Ignore duplicate history entries
-setopt sharehistory        # Share command history across sessions
-setopt incappendhistory    # Immediately append to history file
-setopt autopushd           # Push old dir onto stack when changing dirs
-setopt pushdignoredups     # Ignore duplicates when pushing to the directory stack
-setopt pushdsilent         # Don't print the directory stack after pushd or popd
-setopt interactivecomments # Allow comments in interactive mode
+setopt autocd
+setopt correct
+setopt extendedglob
+setopt histignoredups
+setopt histexpiredupsfirst
+setopt histsavenodups
+setopt histverify
+setopt sharehistory
+setopt incappendhistory
+setopt autopushd
+setopt pushdignoredups
+setopt pushdsilent
+setopt interactivecomments
+setopt completeinword
+setopt alwayslastprompt
+setopt globdots
+setopt markdirs
+setopt listpacked
+setopt listrowsfirst
 
 fpath=($HOME/.zsh/zsh-completions/src $fpath)
 autoload -Uz compinit
 compinit -C
-zstyle ':completion:*' menu select
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+zstyle ':completion:*' menu yes select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' rehash true
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' format '%B%F{blue}%d%f%b'
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*' use-cache yes
+zstyle ':completion:*' cache-path ~/.zsh/cache
+zstyle ':completion:*:descriptions' format '%B%F{yellow}%d%f%b'
+zstyle ':completion:*:messages' format '%B%F{red}%d%f%b'
+zstyle ':completion:*:warnings' format '%B%F{red}no matches for: %d%f%b'
+zstyle ':completion:*:corrections' format '%B%F{green}%d (errors: %e)%f%b'
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
+zstyle ':completion:*:functions' ignored-patterns '_*'
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
+zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
+zstyle ':completion:*' squeeze-slashes true
+zstyle ':completion:*' special-dirs true
 
 source $HOME/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -33,13 +63,41 @@ source $HOME/.zsh/zsh-fzf-history-search/zsh-fzf-history-search.plugin.zsh
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
-bindkey '^ ' autosuggest-accept  # Ctrl+Space accepts suggestion
-export ZSH_FZF_HISTORY_SEARCH_FZF_ARGS="--height 40% --reverse --border"
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+
+bindkey '^[[Z' reverse-menu-complete
+bindkey '^I' complete-word
+
+bindkey '^U' backward-kill-line
+bindkey '^W' backward-kill-word
+bindkey '^[^?' backward-kill-word
+bindkey '^H' backward-delete-char
+bindkey '^?' backward-delete-char
+
+bindkey '^[b' backward-word
+bindkey '^[f' forward-word
+bindkey '^[[1;5D' backward-word
+bindkey '^[[1;5C' forward-word
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+bindkey '^A' beginning-of-line
+bindkey '^E' end-of-line
+
+bindkey '^[[3~' delete-char
+bindkey '^[3;5~' delete-char
 
 VISUAL=nvim
 EDITOR=nvim
 
 path=($HOME/.local/bin $path)
+
+### --- Dirs ---
+
+for dir in ~/code/*(/N); do
+  alias -- "--${dir:t}"="cd $dir"
+done
+alias -- '--dotfiles'='cd ~/.dotfiles'
 
 ### --- Utility Functions ---
 

@@ -194,13 +194,15 @@ alias top="btop"
 
 # fzf
 source <(fzf --zsh)
-export FZF_DEFAULT_OPTS=" \
---color=bg+:#414559,bg:#303446,spinner:#f2d5cf,hl:#e78284 \
---color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
---color=marker:#f2d5cf,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e78284"
+export FZF_DEFAULT_OPTS="
+  --color=fg:#4c4f69,bg:#eff1f5,hl:#d20f39
+  --color=fg+:#4c4f69,bg+:#dce0e8,hl+:#d20f39
+  --color=info:#8839ef,prompt:#1e66f5,pointer:#fe640b
+  --color=marker:#40a02b,spinner:#04a5e5,header:#7287fd
+"
 
 # ls / fd
-export LS_COLORS="$(vivid generate catppuccin-frappe)"
+export LS_COLORS="$(vivid generate catppuccin-latte)"
 
 # zoxide
 eval "$(zoxide init zsh --cmd j)"
@@ -225,11 +227,6 @@ esac
 
 PNPM_COMPLETION=/usr/share/zsh/plugins/pnpm-shell-completion/pnpm-shell-completion.zsh
 [[ -f $PNPM_COMPLETION ]] && source $PNPM_COMPLETION
-
-# nnn
-BLK="03" CHR="03" DIR="04" EXE="02" REG="07" HARDLINK="05" SYMLINK="05" MISSING="08" ORPHAN="01" FIFO="06" SOCK="03" UNKNOWN="01"
-export NNN_COLORS="#04020301;4231"
-export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$UNKNOWN"
 
 ### --- Local overrides ---
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local

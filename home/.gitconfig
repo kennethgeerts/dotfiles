@@ -46,7 +46,7 @@
 	# 10% green 90% base
 	plus-style = "syntax #3c444e"
 	# Should match the name of the bat theme
-	syntax-theme = "Catppuccin Frappe"
+	syntax-theme = "Catppuccin Latte"
 [diff]
 	algorithm = histogram
 	colorMoved = plain

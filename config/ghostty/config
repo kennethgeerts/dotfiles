@@ -9,7 +9,7 @@ keybind = global:cmd+escape=toggle_quick_terminal
 macos-window-buttons = hidden
 macos-titlebar-style = tabs
 
-theme = Catppuccin Frappe
+theme = Catppuccin Latte
 
 cursor-style = block
 cursor-style-blink = false

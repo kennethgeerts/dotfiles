@@ -1,11 +1,32 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "palette": {
-    "blue": "#8caaee",
-    "lavender": "#babbf1",
-    "os": "#acb0be",
-    "pink": "#f4b8e4",
-    "ruby": "#e78284"
+    "rosewater": "#dc8a78",
+    "flamingo": "#dd7878",
+    "pink": "#ea76cb",
+    "mauve": "#8839ef",
+    "red": "#d20f39",
+    "maroon": "#e64553",
+    "peach": "#fe640b",
+    "yellow": "#df8e1d",
+    "green": "#40a02b",
+    "teal": "#179299",
+    "sky": "#04a5e5",
+    "sapphire": "#209fb5",
+    "blue": "#1e66f5",
+    "lavender": "#7287fd",
+    "text": "#4c4f69",
+    "subtext1": "#5c5f77",
+    "subtext0": "#6c6f85",
+    "overlay2": "#7c7f93",
+    "overlay1": "#8c8fa1",
+    "overlay0": "#9ca0b0",
+    "surface2": "#acb0be",
+    "surface1": "#bcc0cc",
+    "surface0": "#ccd0da",
+    "base": "#eff1f5",
+    "mantle": "#e6e9ef",
+    "crust": "#dce0e8"
   },
   "blocks": [
     {
@@ -15,13 +36,13 @@
         {
           "style": "plain",
           "template": "{{ .Icon }} ",
-          "foreground": "p:os",
+          "foreground": "p:overlay2",
           "type": "os"
         },
         {
           "style": "plain",
           "template": "{{ if .SSHSession }}{{ .UserName }}@{{ .HostName }} {{ end }}",
-          "foreground": "p:blue",
+          "foreground": "p:sapphire",
           "type": "session"
         },
         {
@@ -30,13 +51,13 @@
           },
           "style": "plain",
           "template": "{{ .Path }} ",
-          "foreground": "p:pink",
+          "foreground": "p:teal",
           "type": "path"
         },
         {
           "style": "plain",
           "template": "\ue791 {{ .Full }} ",
-          "foreground": "p:ruby",
+          "foreground": "p:maroon",
           "type": "ruby"
         },
         {

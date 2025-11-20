@@ -213,10 +213,8 @@ eval "$(mise activate zsh --shims)"
 # OrbStack
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
-# Oh My Posh
-if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  eval "$(oh-my-posh init zsh --config ~/.prompt.omp.json)"
-fi
+# Starship
+eval "$(starship init zsh)"
 
 # pnpm
 export PNPM_HOME="$HOME/.pnpm"

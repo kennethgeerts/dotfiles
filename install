@@ -54,7 +54,7 @@ for file in "$HOME/.dotfiles/home"/*(ND); do
   fi
 done
 
-echo "📁 Creating configuration directory symlinks..."
+echo "📁 Creating configuration symlinks..."
 mkdir -p "$HOME/.config"
 for dir in "$HOME/.dotfiles/config"/*(ND); do
   if [[ -d "$dir" ]]; then

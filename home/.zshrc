@@ -87,8 +87,8 @@ bindkey '^E' end-of-line
 bindkey '^[[3~' delete-char
 bindkey '^[3;5~' delete-char
 
-VISUAL=nvim
-EDITOR=nvim
+export VISUAL=nvim
+export EDITOR=nvim
 
 path=($HOME/.local/bin $path)
 
@@ -189,6 +189,7 @@ alias n="nvim"
 alias ping="prettyping"
 alias r="bin/rails"
 alias top="btop"
+alias y="yazi"
 
 ### --- Tools ---
 

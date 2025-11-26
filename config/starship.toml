@@ -133,7 +133,7 @@ symbol = ""
 [hostname]
 disabled = false
 format = "[ $hostname]($style)[$ssh_symbol](bg:overlay0 fg:maroon)"
-ssh_only = false
+ssh_only = true
 ssh_symbol = " 󰖈"
 style = "bg:overlay0 fg:red"
 
@@ -326,7 +326,7 @@ show_always = true
 style_root = "fg:red bg:surface2"
 style_user = "fg:green bg:surface2"
 [username.aliases]
-kenneth = ""
+kenneth = ""
 root = "󰱯"
 
 [zig]

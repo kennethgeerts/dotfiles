@@ -20,3 +20,5 @@ window-width = 112
 window-padding-x = 16
 window-padding-y = 8
 window-title-font-family = Victor Mono
+
+auto-update-channel = tip

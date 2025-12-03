@@ -224,6 +224,13 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
+# Postgres.app
+POSTGRES_BIN="/Applications/Postgres.app/Contents/Versions/latest/bin"
+[[ -d "$POSTGRES_BIN" ]] && case ":$PATH:" in
+  *":$POSTGRES_BIN:"*) ;;
+  *) export PATH="$POSTGRES_BIN:$PATH" ;;
+esac
+
 PNPM_COMPLETION=/usr/share/zsh/plugins/pnpm-shell-completion/pnpm-shell-completion.zsh
 [[ -f $PNPM_COMPLETION ]] && source $PNPM_COMPLETION
 

@@ -10,6 +10,7 @@ curl -fsSL https://raw.githubusercontent.com/kennethgeerts/dotfiles/HEAD/install
 
 ```json
 {
+  "biome.suggestInstallingGlobally": false,
   "breadcrumbs.enabled": false,
   "css.validate": false,
   "cursor.composer.cmdPFilePicker2": true,
@@ -17,10 +18,10 @@ curl -fsSL https://raw.githubusercontent.com/kennethgeerts/dotfiles/HEAD/install
   "editor.accessibilitySupport": "off",
   "editor.formatOnSave": true,
   "editor.cursorBlinking": "solid",
-  "editor.fontFamily": "Victor Mono",
+  "editor.fontFamily": "Operator Mono SSm Lig",
   "editor.fontLigatures": true,
-  "editor.fontSize": 14,
-  "editor.formatOnSaveMode": "modificationsIfAvailable",
+  "editor.fontSize": 13,
+  "editor.formatOnSaveMode": "file",
   "editor.insertSpaces": true,
   "editor.stickyScroll.enabled": false,
   "editor.tabSize": 2,
@@ -31,11 +32,11 @@ curl -fsSL https://raw.githubusercontent.com/kennethgeerts/dotfiles/HEAD/install
   "files.trimTrailingWhitespace": true,
   "security.promptForLocalFileProtocolHandling": false,
   "typescript.updateImportsOnFileMove.enabled": "always",
+  "window.confirmSaveUntitledWorkspace": false,
   "workbench.iconTheme": "catppuccin-latte",
   "workbench.colorTheme": "Catppuccin Latte",
   "workbench.layoutControl.enabled": false,
   "workbench.navigationControl.enabled": false,
-  "biome.suggestInstallingGlobally": false
 }
 ```
 

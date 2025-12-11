@@ -1,8 +1,16 @@
 background-opacity = 0.95
 background-blur = true
 
-font-family = Victor Mono
-font-size = 16
+font-family = Operator Mono SSm Lig
+font-style = Book
+font-style-bold = Medium
+font-style-italic = Book Italic
+font-style-bold-italic = Medium Italic
+adjust-cell-height = 4
+adjust-cursor-height = 7
+adjust-box-thickness = 1
+font-thicken = true
+font-size = 13
 
 keybind = global:cmd+escape=toggle_quick_terminal
 
@@ -15,10 +23,10 @@ cursor-style = block
 cursor-style-blink = false
 shell-integration-features = no-cursor
 
-window-height = 26
+window-height = 34
 window-width = 112
 window-padding-x = 16
 window-padding-y = 8
-window-title-font-family = Victor Mono
+window-title-font-family = Operator Mono SSm Lig
 
 auto-update-channel = tip

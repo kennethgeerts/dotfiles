@@ -53,7 +53,7 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
 zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
 zstyle ':completion:*' squeeze-slashes true
-zstyle ':completion:*' special-dirs true
+zstyle ':completion:*' special-dirs false
 
 source $HOME/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -252,6 +252,9 @@ POSTGRES_BIN="/Applications/Postgres.app/Contents/Versions/latest/bin"
   *":$POSTGRES_BIN:"*) ;;
   *) export PATH="$POSTGRES_BIN:$PATH" ;;
 esac
+
+# Kiro
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
 PNPM_COMPLETION=/usr/share/zsh/plugins/pnpm-shell-completion/pnpm-shell-completion.zsh
 [[ -f $PNPM_COMPLETION ]] && source $PNPM_COMPLETION

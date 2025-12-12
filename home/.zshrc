@@ -237,7 +237,11 @@ eval "$(mise activate zsh)"
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
 # Starship
-eval "$(starship init zsh)"
+if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
+  eval "$(starship init zsh)"
+else
+  PROMPT='%F{blue}%~%f %F{green}❯%f '
+fi
 
 # pnpm
 export PNPM_HOME="$HOME/.pnpm"

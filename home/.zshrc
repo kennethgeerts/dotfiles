@@ -231,7 +231,7 @@ export LS_COLORS="$(vivid generate catppuccin-latte)"
 eval "$(zoxide init zsh --cmd j)"
 
 # mise
-eval "$(mise activate zsh --shims)"
+eval "$(mise activate zsh)"
 
 # OrbStack
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :

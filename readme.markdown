@@ -6,21 +6,22 @@
 curl -fsSL https://raw.githubusercontent.com/kennethgeerts/dotfiles/HEAD/install | zsh
 ```
 
-## VSCode / Cursor settings
+## Cursor settings
 
 ```json
 {
-  "biome.suggestInstallingGlobally": false,
   "breadcrumbs.enabled": false,
   "css.validate": false,
   "cursor.composer.cmdPFilePicker2": true,
+  "cursor.composer.queueMessageDefaultBehavior": "stop-and-send",
   "cursor.composer.shouldChimeAfterChatFinishes": true,
+  "cursor.composer.usageSummaryDisplay": "always",
   "editor.accessibilitySupport": "off",
-  "editor.formatOnSave": true,
   "editor.cursorBlinking": "solid",
-  "editor.fontFamily": "Operator Mono SSm Lig",
-  "editor.fontLigatures": true,
+  "editor.fontFamily": "MonoLisa",
+  "editor.fontLigatures": "'ss02','ss11', 'liga', 'calt', 'ss07', 'ss08'",
   "editor.fontSize": 13,
+  "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "file",
   "editor.insertSpaces": true,
   "editor.stickyScroll.enabled": false,
@@ -30,13 +31,15 @@ curl -fsSL https://raw.githubusercontent.com/kennethgeerts/dotfiles/HEAD/install
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
   "security.promptForLocalFileProtocolHandling": false,
   "typescript.updateImportsOnFileMove.enabled": "always",
+  "update.releaseTrack": "prerelease",
+  "window.autoDetectColorScheme": true,
   "window.confirmSaveUntitledWorkspace": false,
-  "workbench.iconTheme": "catppuccin-latte",
-  "workbench.colorTheme": "Catppuccin Latte",
   "workbench.layoutControl.enabled": false,
   "workbench.navigationControl.enabled": false,
+  "workbench.preferredLightColorTheme": "Cursor Light"
 }
 ```
 

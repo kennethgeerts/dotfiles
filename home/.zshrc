@@ -223,7 +223,7 @@ export FZF_DEFAULT_OPTS="
 export LS_COLORS="$(vivid generate catppuccin-latte)"
 
 # zoxide
-eval "$(zoxide init zsh --cmd z)"
+eval "$(zoxide init zsh)"
 
 # mise
 eval "$(mise activate zsh)"

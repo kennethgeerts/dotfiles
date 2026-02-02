@@ -92,12 +92,7 @@ export EDITOR=nvim
 
 path=($HOME/.local/bin $path)
 
-### --- Dirs ---
 
-for dir in ~/code/*(/N); do
-  alias -- "--${dir:t}"="cd $dir"
-done
-alias -- '--dotfiles'='cd ~/.dotfiles'
 
 ### --- Utility Functions ---
 
@@ -228,7 +223,7 @@ export FZF_DEFAULT_OPTS="
 export LS_COLORS="$(vivid generate catppuccin-latte)"
 
 # zoxide
-eval "$(zoxide init zsh --cmd j)"
+eval "$(zoxide init zsh --cmd z)"
 
 # mise
 eval "$(mise activate zsh)"

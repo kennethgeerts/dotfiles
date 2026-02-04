@@ -6,7 +6,7 @@ font-style = Medium
 font-style-bold = ExtraBold
 font-style-italic = Medium Italic
 font-style-bold-italic = ExtraBold Italic
-font-size = 13
+font-size = 11
 font-feature = calt, liga, ss02, ss07, ss08, ss11
 
 keybind = global:cmd+escape=toggle_quick_terminal

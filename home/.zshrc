@@ -11,6 +11,11 @@ mkdir -p ~/.zsh ~/.zsh/cache
 setopt autocd
 setopt correct
 setopt extendedglob
+
+HISTFILE="${HISTFILE:-$HOME/.zsh_history}"
+HISTSIZE=50000
+SAVEHIST=50000
+
 setopt histignoredups
 setopt histexpiredupsfirst
 setopt histsavenodups

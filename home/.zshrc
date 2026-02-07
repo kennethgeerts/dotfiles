@@ -218,8 +218,8 @@ alias y="yazi"
 # fzf
 source <(fzf --zsh)
 export FZF_DEFAULT_OPTS="
-  --color=fg:#4c4f69,bg:#eff1f5,hl:#d20f39
-  --color=fg+:#4c4f69,bg+:#dce0e8,hl+:#d20f39
+  --color=fg:#4c4f69,bg:-1,hl:#d20f39
+  --color=fg+:#1e1e2e,bg+:-1,hl+:#d20f39
   --color=info:#8839ef,prompt:#1e66f5,pointer:#fe640b
   --color=marker:#40a02b,spinner:#04a5e5,header:#7287fd
 "

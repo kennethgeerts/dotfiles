@@ -1,14 +1,6 @@
-background = #e7d9ff
-background-opacity = 0.925
+background = #e6e9ef
+background-opacity = 0.9
 background-blur = true
-
-font-family = MonoLisa
-font-style = Medium
-font-style-bold = ExtraBold
-font-style-italic = Medium Italic
-font-style-bold-italic = ExtraBold Italic
-font-size = 13
-font-feature = calt, liga, ss02, ss07, ss08, ss11
 
 keybind = global:cmd+escape=toggle_quick_terminal
 
@@ -26,6 +18,3 @@ window-height = 34
 window-width = 112
 window-padding-x = 16
 window-padding-y = 8
-window-title-font-family = MonoLisa
-
-auto-update-channel = tip

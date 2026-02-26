@@ -33,6 +33,8 @@ setopt markdirs
 setopt listpacked
 setopt listrowsfirst
 
+fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath)
+
 fpath=($HOME/.zsh/zsh-completions/src $fpath)
 autoload -Uz compinit
 compinit -C
@@ -236,12 +238,9 @@ eval "$(mise activate zsh)"
 # OrbStack
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
-# Starship
-if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
-  eval "$(starship init zsh)"
-else
-  PROMPT='%F{blue}%~%f %F{green}❯%f '
-fi
+# Pure Prompt
+autoload -U promptinit; promptinit
+prompt pure
 
 # pnpm
 export PNPM_HOME="$HOME/.pnpm"
@@ -256,9 +255,6 @@ POSTGRES_BIN="/Applications/Postgres.app/Contents/Versions/latest/bin"
   *":$POSTGRES_BIN:"*) ;;
   *) export PATH="$POSTGRES_BIN:$PATH" ;;
 esac
-
-# Kiro
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
 PNPM_COMPLETION=/usr/share/zsh/plugins/pnpm-shell-completion/pnpm-shell-completion.zsh
 [[ -f $PNPM_COMPLETION ]] && source $PNPM_COMPLETION

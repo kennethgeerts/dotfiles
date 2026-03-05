@@ -33,7 +33,10 @@ setopt markdirs
 setopt listpacked
 setopt listrowsfirst
 
-fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath)
+# Homebrew zsh completions (macOS / Linux with Homebrew)
+if command -v brew &>/dev/null && [[ -d "$(brew --prefix)/share/zsh/site-functions" ]]; then
+  fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath)
+fi
 
 fpath=($HOME/.zsh/zsh-completions/src $fpath)
 autoload -Uz compinit

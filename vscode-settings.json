@@ -1,0 +1,22 @@
+{
+  "breadcrumbs.enabled": false,
+  "editor.cursorBlinking": "solid",
+  "editor.fontFamily": "JetBrains Mono",
+  "editor.fontSize": 13,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "editor.insertSpaces": true,
+  "editor.stickyScroll.enabled": false,
+  "editor.tabSize": 2,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "security.promptForLocalFileProtocolHandling": false,
+  "window.autoDetectColorScheme": true,
+  "window.confirmSaveUntitledWorkspace": false,
+  "workbench.editor.labelFormat": "medium",
+  "workbench.layoutControl.enabled": false,
+  "workbench.navigationControl.enabled": false
+}

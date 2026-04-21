@@ -7,6 +7,7 @@ mkdir -p ~/.zsh ~/.zsh/cache
 [[ ! -d $HOME/.zsh/zsh-syntax-highlighting ]] && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.zsh/zsh-syntax-highlighting
 [[ ! -d $HOME/.zsh/zsh-fzf-history-search ]] && git clone https://github.com/joshskidmore/zsh-fzf-history-search.git $HOME/.zsh/zsh-fzf-history-search
 [[ ! -d $HOME/.zsh/zsh-completions ]] && git clone https://github.com/zsh-users/zsh-completions.git $HOME/.zsh/zsh-completions
+[[ ! -d $HOME/.zsh/fzf-git ]] && git clone https://github.com/junegunn/fzf-git.sh.git $HOME/.zsh/fzf-git
 
 setopt autocd
 setopt correct
@@ -181,6 +182,14 @@ function mkt() {
   cd "$temp_dir"
 }
 
+function gco() {
+  _fzf_git_each_ref --no-multi | xargs git checkout
+}
+
+function gswt() {
+  cd "$(_fzf_git_worktrees --no-multi)"
+}
+
 
 ### --- Aliases ---
 
@@ -222,6 +231,7 @@ alias y="yazi"
 
 # fzf
 source <(fzf --zsh)
+source $HOME/.zsh/fzf-git/fzf-git.sh
 export FZF_DEFAULT_OPTS="
   --color=fg:#4c4f69,bg:-1,hl:#d20f39
   --color=fg+:#1e1e2e,bg+:-1,hl+:#d20f39

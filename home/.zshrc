@@ -212,8 +212,6 @@ alias ca="codex app"
 alias cat="bat"
 alias ds="kamal deploy -d staging"
 alias dp="kamal deploy -d production"
-alias find="fd"
-alias grep="rg"
 alias g="git"
 alias ls='eza -lh --group-directories-first --icons=auto'
 alias lsa='ls -a'

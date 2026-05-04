@@ -80,13 +80,13 @@ git clone https://github.com/LazyVim/starter "$HOME/.config/nvim"
 rm -rf "$HOME/.config/nvim/.git"
 rm -rf "$HOME/.config/nvim/lua/plugins"
 ln -s "$HOME/.dotfiles/nvim/lua/plugins" "$HOME/.config/nvim/lua/plugins"
-nvim --headless "+Lazy! sync" +qa
+nvim --headless "+Lazy! sync" +qa || true
 
 echo "💎 Setting up Mise..."
-mise use -g ruby
-mise use -g node
-mise settings add idiomatic_version_file_enable_tools ruby
-mise settings add idiomatic_version_file_enable_tools node
+mise use -g ruby || true
+mise use -g node || true
+mise settings add idiomatic_version_file_enable_tools ruby || true
+mise settings add idiomatic_version_file_enable_tools node || true
 
 echo "🔄 Reloading shell configuration..."
 source ~/.zshrc || true

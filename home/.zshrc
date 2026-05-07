@@ -274,6 +274,7 @@ PNPM_COMPLETION=/usr/share/zsh/plugins/pnpm-shell-completion/pnpm-shell-completi
 export DO_NOT_TRACK=1
 export HOMEBREW_NO_ANALYTICS=1
 export VERCEL_TELEMETRY_DISABLED=1
+export WRANGLER_SEND_METRICS=false
 
 ### --- Local overrides ---
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local

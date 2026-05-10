@@ -17,8 +17,6 @@ Additional packages:
 - aws-cli-v2-bin
 - brother-hll2350dw
 - cava
-- cursor-bin
-- cursor-cli
 - git-delta
 - httpie
 - lowfi
@@ -32,6 +30,7 @@ Additional packages:
 - rsync
 - tailscale
 - ttf-victor-mono
+- zed
 - zsh
 
 ### hyprland.conf

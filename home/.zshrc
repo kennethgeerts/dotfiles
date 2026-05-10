@@ -112,7 +112,7 @@ function ip() {
 }
 
 function c() {
-  cursor $PWD
+  zed $PWD
 }
 
 function ts() {

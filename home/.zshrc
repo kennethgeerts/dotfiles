@@ -112,7 +112,14 @@ function ip() {
 }
 
 function c() {
-  zed $PWD
+  local zed_cmd=${commands[zed]:-${commands[zeditor]:-${commands[zedit]}}}
+
+  if [[ -z "$zed_cmd" ]]; then
+    echo "Neither zed, zeditor, nor zedit was found in PATH."
+    return 1
+  fi
+
+  "$zed_cmd" "$PWD"
 }
 
 function ts() {

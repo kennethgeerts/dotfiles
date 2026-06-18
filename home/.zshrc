@@ -197,6 +197,10 @@ function gswt() {
   cd "$(_fzf_git_worktrees --no-multi)"
 }
 
+function ghi() {
+  gh issue view "$@" --web
+}
+
 
 ### --- Aliases ---
 

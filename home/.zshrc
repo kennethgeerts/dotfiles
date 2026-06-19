@@ -111,13 +111,19 @@ function ip() {
   curl -s -4 https://ifconfig.me
 }
 
-function c() {
+function _zed_cmd() {
   local zed_cmd=${commands[zed]:-${commands[zeditor]:-${commands[zedit]}}}
 
   if [[ -z "$zed_cmd" ]]; then
     echo "Neither zed, zeditor, nor zedit was found in PATH."
     return 1
   fi
+
+  echo "$zed_cmd"
+}
+
+function c() {
+  local zed_cmd=$(_zed_cmd) || return
 
   "$zed_cmd" "$PWD"
 }
@@ -147,7 +153,9 @@ function dev() {
 
 function todo() {
   local file="$HOME/Dropbox/todo.md"
-  nvim "$file"
+  local zed_cmd=$(_zed_cmd) || return
+
+  "$zed_cmd" "$file"
 }
 
 function wl() {

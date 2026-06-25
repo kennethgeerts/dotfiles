@@ -197,12 +197,154 @@ function mkt() {
   cd "$temp_dir"
 }
 
-function gco() {
-  _fzf_git_each_ref --no-multi | xargs git checkout
+function _git_repo_required() {
+  git rev-parse --git-dir >/dev/null 2>&1 || {
+    echo "Not inside a git repository."
+    return 1
+  }
 }
 
-function gswt() {
-  cd "$(_fzf_git_worktrees --no-multi)"
+function _co_switch_remote() {
+  local remote_ref="$1"
+  local local_branch="${remote_ref#*/}"
+
+  if git show-ref --verify --quiet "refs/heads/$local_branch"; then
+    git switch "$local_branch"
+  else
+    git switch --track "$remote_ref"
+  fi
+}
+
+function _format_git_picker_rows() {
+  awk -F '\t' '
+    {
+      kind[NR] = $1
+      ref[NR] = $2
+      meta[NR] = $3
+      if (length($1) > kind_width) kind_width = length($1)
+      if (length($2) > ref_width) ref_width = length($2)
+    }
+    END {
+      for (i = 1; i <= NR; i++) {
+        color = "\033[37m"
+        if (kind[i] == "branch" || kind[i] == "clean") color = "\033[32m"
+        if (kind[i] == "remote" || kind[i] == "dirty") color = "\033[33m"
+        if (kind[i] == "tag") color = "\033[36m"
+        if (kind[i] == "missing") color = "\033[31m"
+
+        display = sprintf("%s%-*s\033[0m  %-*s  \033[90m%s\033[0m", color, kind_width, kind[i], ref_width, ref[i], meta[i])
+        printf "%s\t%s\t%s\t%s\n", kind[i], ref[i], meta[i], display
+      }
+    }
+  '
+}
+
+# Checkout a branch, remote branch, or tag (branches first, then remotes, then tags)
+function co() {
+  local query="$1"
+  local selection kind ref
+
+  _git_repo_required || return
+
+  if [[ -n "$query" ]]; then
+    if git show-ref --verify --quiet "refs/heads/$query"; then
+      git switch "$query"
+      return
+    fi
+
+    local -a remote_refs remote_matches
+    remote_refs=(${(f)"$(git for-each-ref refs/remotes --format='%(refname:short)' | grep / | grep -v '/HEAD$')"})
+    remote_matches=()
+    for ref in $remote_refs; do
+      [[ "$ref" == "$query" || "${ref#*/}" == "$query" ]] && remote_matches+=("$ref")
+    done
+    if (( ${#remote_matches[@]} == 1 )); then
+      _co_switch_remote "$remote_matches[1]"
+      return
+    fi
+
+    if git show-ref --verify --quiet "refs/tags/$query"; then
+      git switch --detach "$query"
+      return
+    fi
+  fi
+
+  selection=$(
+    {
+      git for-each-ref refs/heads --sort=-committerdate \
+        --format=$'branch\t%(refname:short)\t%(committerdate:relative)'
+      git for-each-ref refs/remotes --sort=-committerdate \
+        --format=$'remote\t%(refname:short)\t%(committerdate:relative)' | grep $'\t.*/' | grep -v $'\t.*/HEAD\t'
+      git for-each-ref refs/tags --sort=-creatordate \
+        --format=$'tag\t%(refname:short)\t%(creatordate:relative)'
+    } |
+    _format_git_picker_rows |
+    fzf --ansi --no-multi --delimiter=$'\t' --with-nth=4 --tiebreak=begin \
+      --height=60% --layout=reverse --border --border-label=' checkout ' \
+      --header='enter: checkout' \
+      --query="$query" \
+      --preview-window='down,45%,border-top' \
+      --preview='git log --oneline --graph --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" {2} --'
+  )
+
+  [[ -z "$selection" ]] && return
+
+  kind="${selection%%$'\t'*}"
+  ref="${selection#*$'\t'}"
+  ref="${ref%%$'\t'*}"
+
+  case "$kind" in
+    branch) git switch "$ref" ;;
+    remote) _co_switch_remote "$ref" ;;
+    tag) git switch --detach "$ref" ;;
+  esac
+}
+
+# Switch worktrees (those on a branch first); ^X remove, ^F force-remove, ^P prune
+function wt() {
+  local query="$1"
+  local list dir
+
+  _git_repo_required || return
+
+  if [[ -n "$query" ]]; then
+    local -a matches
+    matches=(${(f)"$(git worktree list --porcelain | awk -v q="$query" '
+      $1 == "worktree" { path = substr($0, 10) }
+      $1 == "branch" { branch = $2; sub("^refs/heads/", "", branch) }
+      /^$/ {
+        base = path; sub(".*/", "", base)
+        if (path == q || branch == q || base == q) print path
+        path = ""; branch = ""
+      }
+      END {
+        base = path; sub(".*/", "", base)
+        if (path && (path == q || branch == q || base == q)) print path
+      }
+    ')"})
+    if (( ${#matches[@]} == 1 )); then
+      cd "$matches[1]"
+      return
+    fi
+  fi
+
+  list="git worktree list | awk '/\\[/{print;next}{b=b\$0 ORS}END{printf \"%s\",b}' | while IFS= read -r line; do dir=\${line%% *}; branch=\$(printf '%s\n' \"\$line\" | sed -n 's/.*\\[\\([^]]*\\)\\].*/\\1/p'); [[ -z \"\$branch\" ]] && branch=\$(printf '%s\n' \"\$line\" | sed -n 's/.*(\\([^)]*\\)).*/\\1/p'); [[ -z \"\$branch\" ]] && branch='-'; if [[ -d \"\$dir\" ]]; then [[ -n \"\$(git -C \"\$dir\" status --porcelain 2>/dev/null)\" ]] && state=dirty || state=clean; else state=missing; fi; printf '%s\t%s\t%s\n' \"\$dir\" \"\$branch\" \"\$state\"; done | awk -F '\t' '{ dir[NR]=\$1; branch[NR]=\$2; state[NR]=\$3; if (length(\$1)>dir_width) dir_width=length(\$1); if (length(\$2)>branch_width) branch_width=length(\$2); } END { for (i=1; i<=NR; i++) { color=\"\033[32m\"; if (state[i]==\"dirty\") color=\"\033[33m\"; if (state[i]==\"missing\") color=\"\033[31m\"; display=sprintf(\"%-*s  %-*s  %s%s\033[0m\", dir_width, dir[i], branch_width, branch[i], color, state[i]); printf \"%s\t%s\t%s\t%s\n\", dir[i], branch[i], state[i], display; } }'"  # branch worktrees first
+  dir=$(
+    eval "$list" |
+    fzf --ansi --no-multi --delimiter=$'\t' --with-nth=4 --accept-nth=1 \
+      --height=60% --layout=reverse --border --border-label=' worktrees ' \
+      --header='enter: cd · ^X: remove · ^F: force-remove · ^P: prune' \
+      --query="$query" \
+      --bind="ctrl-x:execute(printf '\n  Removing worktree:\n    %s\n\n' {1}; git worktree remove {1} 2>&1 || { printf '\n  not clean — press ^F to force-remove\n'; sleep 1.5; })+reload($list)" \
+      --bind="ctrl-f:execute-silent(perl -e 'use POSIX; fork && exit; setsid; exec @ARGV' git worktree remove --force {1} >/dev/null 2>&1)+exclude" \
+      --bind="ctrl-p:execute-silent(git worktree prune)+reload($list)" \
+      --preview-window='down,45%,border-top' \
+      --preview='if [ -d {1} ]; then
+          git -C {1} -c color.status=always status --short --branch; echo
+          git -C {1} log --oneline --graph --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" -20
+        else echo "(worktree directory is gone — prunable; press ^P to prune)"; fi'
+  )
+  [[ -n $dir ]] && cd "$dir"
 }
 
 function ghi() {

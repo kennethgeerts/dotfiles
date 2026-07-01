@@ -59,8 +59,19 @@ mkdir -p "$HOME/.config"
 for dir in "$HOME/.dotfiles/config"/*(ND); do
   if [[ -d "$dir" ]]; then
     dirname=$(basename "$dir")
-    rm -f "$HOME/.config/$dirname"
-    ln -s "$dir" "$HOME/.config/$dirname"
+    target="$HOME/.config/$dirname"
+    if [[ -d "$target" && ! -L "$target" ]]; then
+      for file in "$dir"/*(ND); do
+        if [[ -f "$file" ]]; then
+          filename=$(basename "$file")
+          rm -f "$target/$filename"
+          ln -s "$file" "$target/$filename"
+        fi
+      done
+    else
+      rm -f "$target"
+      ln -s "$dir" "$target"
+    fi
   fi
 done
 

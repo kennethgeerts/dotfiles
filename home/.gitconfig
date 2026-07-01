@@ -5,9 +5,7 @@
 	ui = auto
 [core]
 	excludesfile = /Users/kenneth/.gitignore
-	pager = delta
-[interactive]
-	diffFilter = delta --color-only
+	pager = hunk pager
 [mergetool]
 	keepBackup = false
 	prompt = false

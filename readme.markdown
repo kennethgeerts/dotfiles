@@ -17,7 +17,7 @@ Additional packages:
 - aws-cli-v2-bin
 - brother-hll2350dw
 - cava
-- git-delta
+- hunk
 - httpie
 - lowfi
 - nnn

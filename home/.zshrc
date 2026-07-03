@@ -304,6 +304,76 @@ function ghi() {
   gh issue view "$@" --web
 }
 
+function _ww_read_agent() {
+  local -a agents=(codex claude) labels
+  local index=1 key rest i
+
+  {
+    print -n -- $'\033[?25l'
+
+    while true; do
+      labels=()
+      for (( i = 1; i <= $#agents; i++ )); do
+        if (( i == index )); then
+          labels+=$'\033[7m '"$agents[$i]"$' \033[0m'
+        else
+          labels+=$'\033[2m '"$agents[$i]"$' \033[0m'
+        fi
+      done
+
+      print -n -- $'\r'"${(j:  :)labels}"$'\033[K'
+      IFS= read -rs -k 1 key || return 1
+
+      case "$key" in
+        $'\n'|$'\r')
+          print -- $'\r\033[K\033[2magent: '"$agents[$index]"$'\033[0m'
+          REPLY="$agents[$index]"
+          return
+          ;;
+        $'\003')
+          return 130
+          ;;
+        $'\t')
+          (( index = index % $#agents + 1 ))
+          ;;
+        $'\e')
+          IFS= read -rs -k 2 -t 0.1 rest
+          case "$rest" in
+            '')
+              return 1
+              ;;
+            '[C'|'[B')
+              (( index = index % $#agents + 1 ))
+              ;;
+            '[D'|'[A')
+              (( index = (index + $#agents - 2) % $#agents + 1 ))
+              ;;
+          esac
+          ;;
+      esac
+    done
+  } always {
+    print -n -- $'\r\033[K\033[?25h'
+  }
+}
+
+function ww() {
+  local feature agent
+
+  feature="$1"
+  if [[ -z "$feature" ]]; then
+    echo "Usage: ww <feature>"
+    return 1
+  fi
+
+  _ww_read_agent || return
+  agent="$REPLY"
+
+  [[ -z "$agent" ]] && return 1
+
+  wt switch -c "$feature" -x "$agent"
+}
+
 
 ### --- Aliases ---
 

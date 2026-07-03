@@ -1,22 +1,28 @@
+theme = Catppuccin Latte
+
 background = #e6e9ef
 background-opacity = 0.9
 background-blur = true
 
-keybind = global:cmd+escape=toggle_quick_terminal
-
-macos-icon = custom
-macos-window-buttons = hidden
-macos-titlebar-style = tabs
-
-theme = Catppuccin Latte
+font-size = 15
 
 cursor-style = block
 cursor-style-blink = false
-shell-integration-features = no-cursor
 
 window-height = 34
 window-width = 112
 window-padding-x = 16
 window-padding-y = 8
+window-padding-balance = true
 
-shell-integration-features = ssh-terminfo
+macos-icon = custom
+macos-option-as-alt = true
+macos-window-buttons = hidden
+macos-titlebar-style = tabs
+
+quick-terminal-position = top
+quick-terminal-size = 45%
+quick-terminal-animation-duration = 0.12
+
+shell-integration-features = no-cursor,ssh-terminfo
+keybind = global:cmd+escape=toggle_quick_terminal

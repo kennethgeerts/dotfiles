@@ -45,43 +45,29 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 echo "⏳ Installing packages (this may take a while)..."
 brew bundle --verbose
 
-echo "🔗 Creating configuration file symlinks..."
-for file in "$HOME/.dotfiles/home"/*(ND); do
-  if [[ -f "$file" ]]; then
-    filename=$(basename "$file")
-    rm -f "$HOME/$filename"
-    ln -s "$file" "$HOME/$filename"
+echo "🔗 Creating symlinks..."
+mkdir -p "$HOME/.config" "$HOME/.local/bin" "$HOME/.zsh/cache"
+
+link_into() {
+  ln -sfn "$1" "$2/$(basename "$1")"
+}
+
+for file in "$HOME/.dotfiles/home"/*(ND.); do link_into "$file" "$HOME"; done
+for bin in "$HOME/.dotfiles/bin"/*(ND.); do link_into "$bin" "$HOME/.local/bin"; done
+
+for dir in "$HOME/.dotfiles/config"/*(ND/); do
+  target="$HOME/.config/$(basename "$dir")"
+  if [[ -d "$target" && ! -L "$target" ]]; then
+    for file in "$dir"/*(ND.); do link_into "$file" "$target"; done
+  else
+    ln -sfn "$dir" "$target"
   fi
 done
 
-echo "📁 Creating configuration symlinks..."
-mkdir -p "$HOME/.config"
-for dir in "$HOME/.dotfiles/config"/*(ND); do
-  if [[ -d "$dir" ]]; then
-    dirname=$(basename "$dir")
-    target="$HOME/.config/$dirname"
-    if [[ -d "$target" && ! -L "$target" ]]; then
-      for file in "$dir"/*(ND); do
-        if [[ -f "$file" ]]; then
-          filename=$(basename "$file")
-          rm -f "$target/$filename"
-          ln -s "$file" "$target/$filename"
-        fi
-      done
-    else
-      rm -f "$target"
-      ln -s "$dir" "$target"
-    fi
-  fi
-done
-
-echo "🛠️  Linking custom scripts..."
-mkdir -p "$HOME/.local/bin"
-for bin in "$HOME/.dotfiles/bin"/*(ND); do
-  if [[ -f "$bin" ]]; then
-    binname=$(basename "$bin")
-    rm -f "$HOME/.local/bin/$binname"
-    ln -s "$bin" "$HOME/.local/bin/$binname"
+echo "🧹 Pruning dead symlinks..."
+for link in "$HOME"/.*(N@) "$HOME/.config"/**/*(ND@) "$HOME/.local/bin"/*(N@); do
+  if [[ "$(readlink "$link")" == "$HOME/.dotfiles/"* && ! -e "$link" ]]; then
+    rm "$link"
   fi
 done
 
@@ -98,9 +84,6 @@ mise use -g ruby || true
 mise use -g node || true
 mise settings add idiomatic_version_file_enable_tools ruby || true
 mise settings add idiomatic_version_file_enable_tools node || true
-
-echo "🔄 Reloading shell configuration..."
-source ~/.zshrc || true
 
 echo ""
 echo "🎉 Installation complete!"

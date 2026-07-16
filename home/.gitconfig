@@ -1,42 +1,59 @@
 [user]
 	name = Kenneth Geerts
 	email = kenneth@sofuto.be
-[color]
-	ui = auto
+
 [core]
-	excludesfile = /Users/kenneth/.gitignore
+	excludesfile = ~/.gitignore
 	pager = hunk pager
-[mergetool]
-	keepBackup = false
-	prompt = false
+
+[init]
+	defaultBranch = master
+
+[column]
+	ui = auto
+
+[branch]
+	sort = -committerdate
+
+[tag]
+	sort = version:refname
+
+[fetch]
+	all = true
+	prune = true
+	pruneTags = true
+
+[pull]
+	rebase = true
+
 [push]
-	default = simple
 	autoSetupRemote = true
 	followTags = true
-[pull]
-	ff = only
-	rebase = true
-[submodule]
-	recurse = true
+
+[commit]
+	verbose = true
+
 [diff]
 	algorithm = histogram
 	colorMoved = plain
 	mnemonicPrefix = true
-	renames = true
-[column]
-	ui = auto
-[branch]
-	sort = -committerdate
-[fetch]
-	prune = true
-	pruneTags = true
-	all = true
-[commit]
-	verbose = true
-[init]
-	defaultBranch = master
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+
+[merge]
+	conflictStyle = zdiff3
+
+[mergetool]
+	keepBackup = false
+	prompt = false
+
+[rebase]
+	autoStash = true
+	updateRefs = true
+
+[rerere]
+	enabled = true
+
+[submodule]
+	recurse = true
+
+[alias]
+	lines = diff HEAD --shortstat

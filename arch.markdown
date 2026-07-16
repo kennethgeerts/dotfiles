@@ -1,13 +1,15 @@
 # Arch
 
-These dotfiles are for macOS. Notes for a fresh Arch Linux install with niri.
+These dotfiles are for macOS. Notes for a fresh Arch Linux install with
+niri + [Noctalia shell](https://github.com/noctalia-dev/noctalia-shell).
 
 ## Desktop
 
 ```zsh
 sudo pacman -S --needed \
-  niri xwayland-satellite fuzzel mako swaylock \
+  niri xwayland-satellite quickshell \
   ghostty signal-desktop ttf-jetbrains-mono zed
+yay -S --needed noctalia-shell
 ```
 
 Merge the input settings from [config/niri/config.kdl](config/niri/config.kdl)

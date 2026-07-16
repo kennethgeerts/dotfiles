@@ -1,0 +1,13 @@
+// Input settings for niri — merge into ~/.config/niri/config.kdl.
+input {
+    keyboard {
+        repeat-delay 200
+        repeat-rate 80
+    }
+    touchpad {
+        natural-scroll
+    }
+    mouse {
+        natural-scroll
+    }
+}

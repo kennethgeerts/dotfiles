@@ -6,39 +6,6 @@
 curl -fsSL https://raw.githubusercontent.com/kennethgeerts/dotfiles/HEAD/install | zsh
 ```
 
-## Omarchy
+## Linux
 
-These dotfiles are for MacOS. For linux, just install Omarchy.
-
-### Packages
-
-Additional packages:
-
-- aws-cli-v2-bin
-- brother-hll2350dw
-- cava
-- hunk
-- httpie
-- lowfi
-- nnn
-- oh-my-posh
-- plex-media-server
-- pnpm
-- pnpm-shell-completion
-- prettyping
-- ripgrep
-- rsync
-- tailscale
-- ttf-victor-mono
-- zed
-- zsh
-
-### hyprland.conf
-
-```
-input {
-  repeat_rate = 80
-  repeat_delay = 200
-  natural_scroll = true
-}
-```
+These dotfiles are for macOS. For Linux, see [arch.markdown](arch.markdown).

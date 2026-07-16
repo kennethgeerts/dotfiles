@@ -28,7 +28,6 @@ brew "imagemagick"
 brew "jq"
 brew "lazydocker"
 brew "lazygit"
-brew "libxml2"
 brew "libyaml"
 brew "mas"
 brew "mise"
@@ -55,15 +54,20 @@ brew "yazi"
 brew "yt-dlp"
 brew "zoxide"
 brew "zsh"
+brew "zsh-autosuggestions"
+brew "zsh-completions"
+brew "zsh-history-substring-search"
+brew "zsh-syntax-highlighting"
 
 mas "1Password for Safari", id: 1569813296
 mas "Azure VPN Client", id: 1553936137
+mas "Connective Plugin", id: 1428740565
 mas "Hue Menu Bar for Philips Hue", id: 1500678169
 mas "iMovie", id: 408981434
-mas "Keynote", id: 409183694
+mas "Keynote", id: 361285480
 mas "NextDNS", id: 1464122853
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
+mas "Numbers", id: 361304891
+mas "Pages", id: 361309726
 mas "Pixelmator Pro", id: 1289583905
 mas "WhatsApp", id: 310633997
 
@@ -80,6 +84,7 @@ cask "ghostty"
 cask "github"
 cask "google-chrome"
 cask "iina"
+cask "keepingyouawake"
 cask "localsend"
 cask "mac-mouse-fix"
 cask "mullvad-vpn"
@@ -87,4 +92,5 @@ cask "openusage"
 cask "orbstack"
 cask "postgres-app"
 cask "signal"
+cask "wispr-flow"
 cask "zed"

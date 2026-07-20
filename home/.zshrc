@@ -307,8 +307,8 @@ source <(fzf --zsh)
 if [[ "$OSTYPE" == darwin* ]]; then
   defaults read -g AppleInterfaceStyle &>/dev/null && APPEARANCE=dark || APPEARANCE=light
 else
-  # freedesktop setting; dark if gsettings is missing or the key is unset
-  [[ "$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null)" == *prefer-light* ]] && APPEARANCE=light || APPEARANCE=dark
+  # freedesktop setting; light if gsettings is missing or the key is unset
+  [[ "$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null)" == *prefer-dark* ]] && APPEARANCE=dark || APPEARANCE=light
 fi
 
 if [[ "$APPEARANCE" == light ]]; then

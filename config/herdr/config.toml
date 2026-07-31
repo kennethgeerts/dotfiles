@@ -1,0 +1,44 @@
+onboarding = false
+
+[theme]
+name = "catppuccin-latte"
+auto_switch = false
+
+[theme.custom]
+accent = "#7287fd"
+surface_dim = "#acb0be"
+overlay0 = "#8c8fa1"
+overlay1 = "#7c7f93"
+subtext0 = "#5c5f77"
+
+[ui]
+sidebar_width = 42
+sidebar_min_width = 28
+sidebar_max_width = 50
+sidebar_collapsed_mode = "hidden"
+pane_borders = true
+pane_gaps = true
+show_agent_labels_on_pane_borders = true
+hide_tab_bar_when_single_tab = true
+agent_panel_sort = "spaces"
+
+[ui.sidebar.agents]
+rows = [
+  ["state_icon", { token = "workspace", fg = "#4c4f69", bold = true, dim = false }],
+  [{ token = "agent", fg = "#7287fd", dim = false }, { token = "tab", fg = "#8839ef", dim = false }],
+]
+row_gap = 1
+
+[ui.sidebar.spaces]
+rows = [
+  ["state_icon", { token = "workspace", fg = "#4c4f69", bold = true, dim = false }],
+  [{ token = "branch", fg = "#8839ef", dim = false }, "git_status"],
+]
+row_gap = 1
+
+[ui.toast]
+delivery = "herdr"
+delay_seconds = 2
+
+[ui.sound]
+enabled = true

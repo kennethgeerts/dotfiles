@@ -19,7 +19,6 @@ sidebar_collapsed_mode = "hidden"
 pane_borders = true
 pane_gaps = true
 show_agent_labels_on_pane_borders = true
-hide_tab_bar_when_single_tab = true
 agent_panel_sort = "spaces"
 
 [ui.sidebar.agents]

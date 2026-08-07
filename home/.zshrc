@@ -24,10 +24,15 @@ setopt markdirs
 setopt listpacked
 setopt listrowsfirst
 
-# Homebrew zsh completions & plugins (macOS / Linux with Homebrew)
-if command -v brew &>/dev/null; then
+# Homebrew on macOS; native distro packages on Linux
+typeset -a zsh_plugin_dirs
+if [[ "$OSTYPE" == darwin* ]] && command -v brew &>/dev/null; then
   BREW_PREFIX="$(brew --prefix)"
   fpath=("$BREW_PREFIX/share/zsh/site-functions" "$BREW_PREFIX/share/zsh-completions" $fpath)
+  zsh_plugin_dirs=("$BREW_PREFIX/share")
+else
+  [[ -d /usr/share/zsh/site-functions ]] && fpath=(/usr/share/zsh/site-functions $fpath)
+  zsh_plugin_dirs=(/usr/share/zsh/plugins /usr/share)
 fi
 
 autoload -Uz compinit
@@ -56,12 +61,25 @@ zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-dir
 zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*' special-dirs false
 
-# Plugins from Homebrew (macOS) or pacman (Arch)
+# Plugins from Homebrew (macOS) or distro packages (Linux)
+typeset -a missing_zsh_plugins
 for plugin in zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search; do
-  for dir in "$BREW_PREFIX/share" /usr/share/zsh/plugins; do
-    [[ -f "$dir/$plugin/$plugin.zsh" ]] && source "$dir/$plugin/$plugin.zsh" && break
+  plugin_found=false
+  for dir in $zsh_plugin_dirs; do
+    if [[ -f "$dir/$plugin/$plugin.zsh" ]]; then
+      source "$dir/$plugin/$plugin.zsh"
+      plugin_found=true
+      break
+    fi
   done
+  $plugin_found || missing_zsh_plugins+=("$plugin")
 done
+
+if (( $#missing_zsh_plugins )); then
+  print -u2 -- "Warning: missing zsh plugins: ${(j:, :)missing_zsh_plugins}"
+fi
+
+unset plugin plugin_found dir missing_zsh_plugins zsh_plugin_dirs
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down

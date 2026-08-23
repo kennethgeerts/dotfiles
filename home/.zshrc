@@ -149,37 +149,6 @@ function dev() {
   echo "⚠️ No development environment found."
 }
 
-function todo() {
-  local file="$HOME/Dropbox/todo.md"
-  local zed_cmd=$(_zed_cmd) || return
-
-  "$zed_cmd" "$file"
-}
-
-function wl() {
-  local logdir="$HOME/Dropbox/worklog"
-  local arg="${1:-0}"
-
-  if [[ "$arg" == "list" || "$arg" == "l" ]]; then
-    glow $logdir
-    return
-  fi
-
-  if date -v +1d >/dev/null 2>&1; then
-    local target_date=$(date -v "${arg}d" +%F)
-  else
-    local target_date=$(date -d "${arg} day" +%F)
-  fi
-
-  local logfile="$logdir/$target_date.md"
-
-  if [[ ! -f "$logfile" ]]; then
-    echo -e "# $target_date\n\n" > "$logfile"
-  fi
-
-  $EDITOR + "$logfile"
-}
-
 function rip() {
   echo OUTPUTFORMAT=\'${1:-CD}'/${TRACKNUM}.${TRACKFILE}'\' >! ~/.abcde.conf
   abcde -N -n -x -o mp3

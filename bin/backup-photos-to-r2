@@ -1,0 +1,112 @@
+#!/bin/zsh
+
+# Back up the original files from an Apple Photos library to Cloudflare R2.
+# Objects are named by their SHA-256 digest and size, so identical originals are
+# uploaded only once even when Photos stores them under different names.
+
+set -euo pipefail
+
+rclone_bin="${commands[rclone]-}"
+if [[ -z "$rclone_bin" && -x "$HOME/.local/bin/rclone" ]]; then
+  rclone_bin="$HOME/.local/bin/rclone"
+fi
+
+# Override these defaults when backing up another library, remote, or log file.
+photo_library="${PHOTO_LIBRARY:-$HOME/Pictures/Photos Library.photoslibrary}"
+photo_source="$photo_library/originals"
+r2_destination="${R2_DESTINATION:-cloudflare-photos:photos/originals}"
+backup_log="${PHOTO_BACKUP_LOG:-$HOME/Library/Logs/photo-r2-backup.log}"
+
+if [[ -z "$rclone_bin" ]]; then
+  print -u2 "rclone is not installed or is not on PATH."
+  exit 1
+fi
+
+if [[ ! -d "$photo_source" ]]; then
+  print -u2 "Photos originals directory not found: $photo_source"
+  exit 1
+fi
+
+# Build a temporary tree of symlinks that gives each original a stable,
+# content-addressed object name. The trap removes it on success or failure.
+working_dir="$(mktemp -d -t photo-r2-backup)"
+local_index="$working_dir/local-index.tsv"
+staging_dir="$working_dir/staging"
+mkdir -p "$staging_dir"
+
+cleanup() {
+  if [[ "${working_dir:t}" == photo-r2-backup.* && -d "$working_dir" ]]; then
+    rm -rf -- "$working_dir"
+  fi
+}
+trap cleanup EXIT
+trap 'exit 129' HUP
+trap 'exit 130' INT
+trap 'exit 143' TERM
+
+print "Hashing local originals with SHA-256..."
+"$rclone_bin" lsf "$photo_source" \
+  --recursive \
+  --files-only \
+  --hash SHA-256 \
+  --format hsp \
+  --separator $'\t' \
+  --exclude '.DS_Store' > "$local_index"
+
+scanned=0
+unhashable=0
+typeset -A created_directories
+
+while IFS=$'\t' read -r local_hash local_size local_path; do
+  scanned=$((scanned + 1))
+
+  case "$local_hash" in
+    ""|ERROR|UNSUPPORTED)
+      print -u2 "Could not hash: $local_path"
+      unhashable=$((unhashable + 1))
+      continue
+      ;;
+  esac
+
+  local_hash="${local_hash:l}"
+  local_filename="${local_path:t}"
+  extension=""
+  if [[ "$local_filename" == *.* ]]; then
+    extension=".${local_filename##*.}"
+    extension="${extension:l}"
+  fi
+
+  # Shard objects by the first two digest characters to keep directories small.
+  hash_prefix="${local_hash[1,2]}"
+  staged_directory="$staging_dir/_content/sha256/$hash_prefix"
+  if [[ -z "${created_directories[$hash_prefix]-}" ]]; then
+    mkdir -p "$staged_directory"
+    created_directories["$hash_prefix"]=1
+  fi
+
+  staged_file="$staged_directory/${local_hash}-${local_size}${extension}"
+  if [[ ! -e "$staged_file" ]]; then
+    ln -s "$photo_source/$local_path" "$staged_file"
+  fi
+done < "$local_index"
+
+# A partial index would make a successful run look more complete than it is.
+if (( unhashable > 0 )); then
+  print -u2 "Stopped: $unhashable of $scanned originals could not be hashed."
+  exit 2
+fi
+
+print "Uploading $scanned content-addressed originals..."
+"$rclone_bin" copy "$staging_dir" "$r2_destination" \
+  --copy-links \
+  --ignore-existing \
+  --transfers 8 \
+  --checkers 16 \
+  --fast-list \
+  --stats 30s \
+  --stats-one-line \
+  --progress \
+  --log-file "$backup_log" \
+  --log-level INFO
+
+print "Backup complete. Existing content was skipped; only new SHA-256 objects were uploaded."

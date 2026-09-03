@@ -1,8 +1,10 @@
-theme = Catppuccin Latte
+theme = Gruvbox Dark
 
-background = #e6e9ef
+background = #282828
 background-opacity = 0.9
 background-blur = true
+minimum-contrast = 3
+faint-opacity = 0.85
 
 font-size = 15
 

@@ -1,15 +1,14 @@
 return {
 	{
-		"catppuccin/nvim",
+		"ellisonleao/gruvbox.nvim",
 		opts = {
-			flavour = "latte", -- latte, frappe, macchiato, mocha
-			transparent_background = true,
+			transparent_mode = true,
 		},
 	},
 	{
 		"LazyVim/LazyVim",
 		opts = {
-			colorscheme = "catppuccin-nvim",
+			colorscheme = "gruvbox",
 		},
 	},
 }

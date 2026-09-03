@@ -1,15 +1,8 @@
 onboarding = false
 
 [theme]
-name = "catppuccin-latte"
+name = "gruvbox"
 auto_switch = false
-
-[theme.custom]
-accent = "#7287fd"
-surface_dim = "#acb0be"
-overlay0 = "#8c8fa1"
-overlay1 = "#7c7f93"
-subtext0 = "#5c5f77"
 
 [ui]
 sidebar_width = 42
@@ -23,15 +16,15 @@ agent_panel_sort = "priority"
 
 [ui.sidebar.agents]
 rows = [
-  ["state_icon", { token = "workspace", fg = "#4c4f69", bold = true, dim = false }],
-  [{ token = "agent", fg = "#7287fd", dim = false }, { token = "tab", fg = "#8839ef", dim = false }],
+  ["state_icon", { token = "workspace", fg = "#ebdbb2", bold = true, dim = false }],
+  [{ token = "agent", fg = "#fabd2f", dim = false }, { token = "tab", fg = "#d3869b", dim = false }],
 ]
 row_gap = 1
 
 [ui.sidebar.spaces]
 rows = [
-  ["state_icon", { token = "workspace", fg = "#4c4f69", bold = true, dim = false }],
-  [{ token = "branch", fg = "#8839ef", dim = false }, "git_status"],
+  ["state_icon", { token = "workspace", fg = "#ebdbb2", bold = true, dim = false }],
+  [{ token = "branch", fg = "#d3869b", dim = false }, "git_status"],
 ]
 row_gap = 1
 

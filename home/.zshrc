@@ -290,31 +290,14 @@ alias y="yazi"
 # fzf
 source <(fzf --zsh)
 
-# fzf / ls colors follow the OS appearance (Catppuccin Latte / Mocha)
-if [[ "$OSTYPE" == darwin* ]]; then
-  defaults read -g AppleInterfaceStyle &>/dev/null && APPEARANCE=dark || APPEARANCE=light
-else
-  # freedesktop setting; light if gsettings is missing or the key is unset
-  [[ "$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null)" == *prefer-dark* ]] && APPEARANCE=dark || APPEARANCE=light
-fi
-
-if [[ "$APPEARANCE" == light ]]; then
-  export LS_COLORS="$(vivid generate catppuccin-latte)"
-  export FZF_DEFAULT_OPTS="
-    --color=fg:#4c4f69,bg:-1,hl:#d20f39
-    --color=fg+:#1e1e2e,bg+:-1,hl+:#d20f39
-    --color=info:#8839ef,prompt:#1e66f5,pointer:#fe640b
-    --color=marker:#40a02b,spinner:#04a5e5,header:#7287fd
-  "
-else
-  export LS_COLORS="$(vivid generate catppuccin-mocha)"
-  export FZF_DEFAULT_OPTS="
-    --color=fg:#cdd6f4,bg:-1,hl:#f38ba8
-    --color=fg+:#cdd6f4,bg+:#313244,hl+:#f38ba8
-    --color=info:#cba6f7,prompt:#89b4fa,pointer:#f5e0dc
-    --color=marker:#a6e3a1,spinner:#f5e0dc,header:#94e2d5
-  "
-fi
+# fzf / ls colors use Gruvbox Dark.
+export LS_COLORS="$(vivid generate gruvbox-dark)"
+export FZF_DEFAULT_OPTS="
+  --color=fg:#ebdbb2,bg:-1,hl:#fb4934
+  --color=fg+:#ebdbb2,bg+:#3c3836,hl+:#fb4934
+  --color=info:#d3869b,prompt:#83a598,pointer:#fe8019
+  --color=marker:#b8bb26,spinner:#fe8019,header:#8ec07c
+"
 
 # zoxide
 eval "$(zoxide init zsh)"

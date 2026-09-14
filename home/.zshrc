@@ -1,42 +1,38 @@
 ### --- ZSH Core Configuration ---
 
-setopt autocd
-setopt extendedglob
-
 HISTFILE="${HISTFILE:-$HOME/.zsh_history}"
 HISTSIZE=50000
 SAVEHIST=50000
 
-setopt histignoredups
-setopt histexpiredupsfirst
-setopt histsavenodups
-setopt histverify
-setopt sharehistory
-setopt incappendhistory
-setopt autopushd
-setopt pushdignoredups
-setopt pushdsilent
-setopt interactivecomments
-setopt completeinword
-setopt alwayslastprompt
-setopt globdots
-setopt markdirs
-setopt listpacked
-setopt listrowsfirst
+# Share history across sessions; omit duplicates and commands starting with a space.
+setopt histignoredups histexpiredupsfirst histsavenodups histignorespace histverify sharehistory
+unsetopt incappendhistory
+
+setopt autocd autopushd pushdignoredups pushdsilent
+setopt extendedglob globdots interactivecomments
+setopt completeinword alwayslastprompt markdirs listpacked listrowsfirst
+
+# Keep search paths unique, including when this file is sourced again.
+typeset -U path fpath
+export PNPM_HOME="${PNPM_HOME:-$HOME/.pnpm}"
+path=("$PNPM_HOME" "$HOME/.local/bin" $path)
+if [[ -d /Applications/Postgres.app/Contents/Versions/latest/bin ]]; then
+  path=(/Applications/Postgres.app/Contents/Versions/latest/bin $path)
+fi
 
 # Homebrew on macOS; native distro packages on Linux
 typeset -a zsh_plugin_dirs
-if [[ "$OSTYPE" == darwin* ]] && command -v brew &>/dev/null; then
-  BREW_PREFIX="$(brew --prefix)"
-  fpath=("$BREW_PREFIX/share/zsh/site-functions" "$BREW_PREFIX/share/zsh-completions" $fpath)
-  zsh_plugin_dirs=("$BREW_PREFIX/share")
+if [[ "$OSTYPE" == darwin* ]] && (( $+commands[brew] )); then
+  zsh_brew_prefix="$(brew --prefix)"
+  fpath=("$zsh_brew_prefix/share/zsh/site-functions" "$zsh_brew_prefix/share/zsh-completions" $fpath)
+  zsh_plugin_dirs=("$zsh_brew_prefix/share")
 else
   [[ -d /usr/share/zsh/site-functions ]] && fpath=(/usr/share/zsh/site-functions $fpath)
   zsh_plugin_dirs=(/usr/share/zsh/plugins /usr/share)
 fi
 
 autoload -Uz compinit
-compinit -C
+compinit
 
 zstyle ':completion:*' menu yes select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
@@ -62,7 +58,7 @@ zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*' special-dirs false
 
 # Plugins from Homebrew (macOS) or distro packages (Linux)
-typeset -a missing_zsh_plugins
+typeset -a missing_zsh_plugins=()
 for plugin in zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search; do
   plugin_found=false
   for dir in $zsh_plugin_dirs; do
@@ -79,12 +75,16 @@ if (( $#missing_zsh_plugins )); then
   print -u2 -- "Warning: missing zsh plugins: ${(j:, :)missing_zsh_plugins}"
 fi
 
-unset plugin plugin_found dir missing_zsh_plugins zsh_plugin_dirs
+unset plugin plugin_found dir missing_zsh_plugins zsh_plugin_dirs zsh_brew_prefix
 
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-bindkey '^P' history-substring-search-up
-bindkey '^N' history-substring-search-down
+### --- Key Bindings ---
+
+if (( ${+widgets[history-substring-search-up]} && ${+widgets[history-substring-search-down]} )); then
+  bindkey '^[[A' history-substring-search-up
+  bindkey '^[[B' history-substring-search-down
+  bindkey '^P' history-substring-search-up
+  bindkey '^N' history-substring-search-down
+fi
 
 bindkey '^[[Z' reverse-menu-complete
 bindkey '^I' complete-word
@@ -96,32 +96,36 @@ bindkey '^[[H' beginning-of-line
 bindkey '^[[F' end-of-line
 bindkey '^[[3~' delete-char
 
-export VISUAL=nvim
-export EDITOR=nvim
+### --- Environment ---
 
-path=($HOME/.local/bin $path)
+export EDITOR="${EDITOR:-nvim}"
+export VISUAL="${VISUAL:-$EDITOR}"
+export SUDO_EDITOR="${SUDO_EDITOR:-$EDITOR}"
+export BAT_THEME=ansi
 
-
+# Color man pages with bat.
+if (( $+commands[bat] && $+commands[col] )); then
+  export MANROFFOPT="-c"
+  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+fi
 
 ### --- Utility Functions ---
 
-function ip() {
-  curl -s -4 https://ifconfig.me
+function n() {
+  ${=EDITOR} "$@"
 }
 
-function _zed_cmd() {
-  local zed_cmd=${commands[zed]:-${commands[zeditor]:-${commands[zedit]}}}
-
-  if [[ -z "$zed_cmd" ]]; then
-    echo "Neither zed, zeditor, nor zedit was found in PATH."
-    return 1
-  fi
-
-  echo "$zed_cmd"
+function publicip() {
+  curl -fsS -4 https://ifconfig.me
 }
 
 function c() {
-  local zed_cmd=$(_zed_cmd) || return
+  local zed_cmd=${commands[zed]:-${commands[zeditor]:-${commands[zedit]}}}
+
+  if [[ -z "$zed_cmd" ]]; then
+    print -u2 -- "Neither zed, zeditor, nor zedit was found in PATH."
+    return 1
+  fi
 
   "$zed_cmd" "$PWD"
 }
@@ -139,14 +143,13 @@ function dev() {
   if [[ -x bin/dev ]]; then
     echo "💎 Running \`bin/dev\`."
     bin/dev
-    return
-  fi
-  if [[ -f package.json ]]; then
+  elif [[ -f package.json ]]; then
     echo "🧩 Running \`pnpm dev\`."
     pnpm dev
-    return
+  else
+    print -u2 -- "⚠️ No development environment found."
+    return 1
   fi
-  echo "⚠️ No development environment found."
 }
 
 function rip() {
@@ -156,19 +159,28 @@ function rip() {
 }
 
 function mkcd() {
-  mkdir -p "$@" && cd "$_"
+  if (( $# == 0 )); then
+    print -u2 -- "Usage: mkcd <directory> [directory...]"
+    return 2
+  fi
+
+  mkdir -p -- "$@" && builtin cd -- "$argv[-1]"
 }
 
 function mkt() {
-  local temp_dir=$(mktemp -d)
-  cd "$temp_dir"
+  local temp_dir
+  temp_dir=$(mktemp -d) || return
+  builtin cd -- "$temp_dir"
 }
 
 # Checkout a branch, remote branch, or tag (branches first, then remotes, then tags)
 function co() {
-  local query="$1" kind ref selection r
+  local query="${1:-}" kind ref selection r
 
-  git rev-parse --git-dir >/dev/null 2>&1 || { echo "Not inside a git repository."; return 1; }
+  git rev-parse --git-dir >/dev/null 2>&1 || {
+    print -u2 -- "Not inside a git repository."
+    return 1
+  }
 
   if [[ -n "$query" ]]; then
     local -a remotes matches
@@ -215,9 +227,9 @@ function co() {
         --query="$query" \
         --preview-window='down,45%,border-top' \
         --preview='git log --oneline --graph --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" {2} --'
-    )
+    ) || return
 
-    [[ -z "$selection" ]] && return
+    [[ -n "$selection" ]] || return 1
 
     kind="${selection%%$'\t'*}"
     ref="${selection#*$'\t'}"
@@ -238,18 +250,17 @@ function co() {
 }
 
 function ww() {
-  local feature="$1" agent
+  local feature="${1:-}" agent
 
   if [[ -z "$feature" ]]; then
-    echo "Usage: ww <feature>"
+    print -u2 -- "Usage: ww <feature>"
     return 1
   fi
 
-  agent=$(printf 'codex\nclaude' | fzf --height=4 --layout=reverse --no-info --prompt='agent> ') || return
+  agent=$(printf 'codex\nclaude\n' | fzf --height=4 --layout=reverse --no-info --prompt='agent> ') || return
 
   wt switch -c "$feature" -x "$agent"
 }
-
 
 ### --- Aliases ---
 
@@ -258,76 +269,58 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 
 alias d="dirs -v"
-alias 1="cd -"
-alias 2="cd -2"
-alias 3="cd -3"
-alias 4="cd -4"
-alias 5="cd -5"
-alias 6="cd -6"
-alias 7="cd -7"
-alias 8="cd -8"
-alias 9="cd -9"
+for stack_index in {1..9}; do
+  alias "$stack_index=cd +$stack_index"
+done
+unset stack_index
 
-alias ca="codex app"
-alias cat="bat"
+# Development
 alias ds="kamal deploy -d staging"
 alias dp="kamal deploy -d production"
 alias g="git"
 alias ghi="gh issue view --web"
-alias ls='eza -lh --group-directories-first --icons=auto'
-alias lsa='ls -a'
-alias lt='eza --tree --level=2 --long --icons --git'
-alias lta='lt -a'
 alias lg="lazygit"
-alias n="nvim"
-alias ping="prettyping"
-alias r="bin/rails"
+
+# Files and processes
+(( $+commands[bat] )) && alias cat="bat"
+if (( $+commands[eza] )); then
+  alias ls='eza -lh --group-directories-first --icons=auto'
+  alias lt='eza --tree --level=2 --long --icons --git'
+  alias lta='lt -a'
+fi
 alias top="btop"
-alias y="yazi"
 
 ### --- Tools ---
 
-# fzf
-source <(fzf --zsh)
+# fzf (preserve inherited options and colors).
+if (( $+commands[fzf] )); then
+  source <(fzf --zsh)
+fi
 
-# fzf / ls colors use Gruvbox Dark.
-export LS_COLORS="$(vivid generate gruvbox-dark)"
-export FZF_DEFAULT_OPTS="
-  --color=fg:#ebdbb2,bg:-1,hl:#fb4934
-  --color=fg+:#ebdbb2,bg+:#3c3836,hl+:#fb4934
-  --color=info:#d3869b,prompt:#83a598,pointer:#fe8019
-  --color=marker:#b8bb26,spinner:#fe8019,header:#8ec07c
-"
+if (( $+commands[zoxide] )); then
+  eval "$(zoxide init zsh)"
+fi
 
-# zoxide
-eval "$(zoxide init zsh)"
-
-# mise
-eval "$(mise activate zsh)"
+if (( $+commands[mise] )); then
+  eval "$(mise activate zsh)"
+fi
 
 # OrbStack
-source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+if [[ -r ~/.orbstack/shell/init.zsh ]]; then
+  source ~/.orbstack/shell/init.zsh
+fi
 
 # Pure Prompt
-autoload -U promptinit; promptinit
-prompt pure
+autoload -Uz promptinit
+promptinit
+if (( $+functions[prompt_pure_setup] )); then
+  prompt pure
+fi
 
 # Worktrunk shell integration
-if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
-
-# pnpm
-export PNPM_HOME="$HOME/.pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-
-# Postgres.app
-POSTGRES_BIN="/Applications/Postgres.app/Contents/Versions/latest/bin"
-[[ -d "$POSTGRES_BIN" ]] && case ":$PATH:" in
-  *":$POSTGRES_BIN:"*) ;;
-  *) export PATH="$POSTGRES_BIN:$PATH" ;;
-esac
+if (( $+commands[wt] )); then
+  eval "$(command wt config shell init zsh)"
+fi
 
 # Privacy
 export DO_NOT_TRACK=1
@@ -336,4 +329,6 @@ export VERCEL_TELEMETRY_DISABLED=1
 export WRANGLER_SEND_METRICS=false
 
 ### --- Local overrides ---
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+if [[ -r ~/.zshrc.local ]]; then
+  source ~/.zshrc.local
+fi

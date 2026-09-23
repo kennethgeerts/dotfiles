@@ -103,6 +103,12 @@ export VISUAL="${VISUAL:-$EDITOR}"
 export SUDO_EDITOR="${SUDO_EDITOR:-$EDITOR}"
 export BAT_THEME=ansi
 
+# Privacy
+export DO_NOT_TRACK=1
+export HOMEBREW_NO_ANALYTICS=1
+export VERCEL_TELEMETRY_DISABLED=1
+export WRANGLER_SEND_METRICS=false
+
 # Color man pages with bat.
 if (( $+commands[bat] && $+commands[col] )); then
   export MANROFFOPT="-c"
@@ -171,6 +177,18 @@ function mkt() {
   local temp_dir
   temp_dir=$(mktemp -d) || return
   builtin cd -- "$temp_dir"
+}
+
+# Open files/URLs with the default app (current directory if no args)
+function o() {
+  if [[ "$OSTYPE" == darwin* ]]; then
+    open "${@:-.}"
+  else
+    local target
+    for target in "${@:-.}"; do
+      xdg-open "$target" &>/dev/null &!
+    done
+  fi
 }
 
 # Checkout a branch, remote branch, or tag (branches first, then remotes, then tags)
@@ -288,11 +306,10 @@ if (( $+commands[eza] )); then
   alias lt='eza --tree --level=2 --long --icons --git'
   alias lta='lt -a'
 fi
-alias top="btop"
+(( $+commands[btop] )) && alias top="btop"
 
 ### --- Tools ---
 
-# fzf (preserve inherited options and colors).
 if (( $+commands[fzf] )); then
   source <(fzf --zsh)
 fi
@@ -310,7 +327,7 @@ if [[ -r ~/.orbstack/shell/init.zsh ]]; then
   source ~/.orbstack/shell/init.zsh
 fi
 
-# Pure Prompt
+# Pure prompt
 autoload -Uz promptinit
 promptinit
 if (( $+functions[prompt_pure_setup] )); then
@@ -321,12 +338,6 @@ fi
 if (( $+commands[wt] )); then
   eval "$(command wt config shell init zsh)"
 fi
-
-# Privacy
-export DO_NOT_TRACK=1
-export HOMEBREW_NO_ANALYTICS=1
-export VERCEL_TELEMETRY_DISABLED=1
-export WRANGLER_SEND_METRICS=false
 
 ### --- Local overrides ---
 if [[ -r ~/.zshrc.local ]]; then

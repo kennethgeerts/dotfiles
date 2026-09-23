@@ -1,5 +1,6 @@
 tap "heroku/brew", trusted: true
 tap "modem-dev/tap"
+tap "rjyo/moshi", trusted: true
 
 brew "actionlint"
 brew "awscli"
@@ -34,6 +35,7 @@ brew "modem-dev/tap/hunk", trusted: true
 brew "neovim"
 brew "nnn"
 brew "oath-toolkit"
+brew "opencode"
 brew "p7zip"
 brew "pi-coding-agent"
 brew "pkgconf"
@@ -41,7 +43,10 @@ brew "pnpm"
 brew "poppler"
 brew "prettyping"
 brew "pure"
+brew "rclone"
 brew "ripgrep"
+brew "rjyo/moshi/moshi-hook"
+brew "stockfish"
 brew "supabase"
 brew "temporal"
 brew "tldr"
@@ -63,8 +68,8 @@ mas "Azure VPN Client", id: 1553936137
 mas "Connective Plugin", id: 1428740565
 mas "Hue Menu Bar for Philips Hue", id: 1500678169
 mas "iMovie", id: 408981434
+mas "Infuse", id: 1136220934
 mas "Keynote", id: 361285480
-mas "NextDNS", id: 1464122853
 mas "Numbers", id: 361304891
 mas "Pages", id: 361309726
 mas "Pixelmator Pro", id: 1289583905
@@ -76,12 +81,13 @@ cask "chatgpt"
 cask "claude"
 cask "claude-code@latest"
 cask "codex"
-cask "dropbox"
+cask "filen"
 cask "font-jetbrains-mono"
 cask "font-victor-mono"
 cask "ghostty"
 cask "github"
 cask "google-chrome"
+cask "grok-build"
 cask "iina"
 cask "keepingyouawake"
 cask "localsend"
@@ -91,5 +97,6 @@ cask "openusage"
 cask "orbstack"
 cask "postgres-app"
 cask "signal"
+cask "tailscale-app"
 cask "wispr-flow"
 cask "zed"

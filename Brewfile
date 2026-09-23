@@ -1,7 +1,6 @@
 tap "heroku/brew", trusted: true
 tap "modem-dev/tap"
 
-brew "abcde"
 brew "actionlint"
 brew "awscli"
 brew "bat"

@@ -158,12 +158,6 @@ function dev() {
   fi
 }
 
-function rip() {
-  echo OUTPUTFORMAT=\'${1:-CD}'/${TRACKNUM}.${TRACKFILE}'\' >! ~/.abcde.conf
-  abcde -N -n -x -o mp3
-  drutil eject
-}
-
 function mkcd() {
   if (( $# == 0 )); then
     print -u2 -- "Usage: mkcd <directory> [directory...]"

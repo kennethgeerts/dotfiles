@@ -34,6 +34,10 @@ fi
 autoload -Uz compinit
 compinit
 
+if (( $+commands[vivid] )); then
+  export LS_COLORS="$(vivid generate nord)"
+fi
+
 zstyle ':completion:*' menu yes select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' rehash true
@@ -101,7 +105,7 @@ bindkey '^[[3~' delete-char
 export EDITOR="${EDITOR:-nvim}"
 export VISUAL="${VISUAL:-$EDITOR}"
 export SUDO_EDITOR="${SUDO_EDITOR:-$EDITOR}"
-export BAT_THEME=ansi
+export BAT_THEME=Nord
 
 # Privacy
 export DO_NOT_TRACK=1

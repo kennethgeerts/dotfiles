@@ -1,7 +1,7 @@
 onboarding = false
 
 [theme]
-name = "gruvbox"
+name = "nord"
 auto_switch = false
 
 [ui]
@@ -16,15 +16,15 @@ agent_panel_sort = "priority"
 
 [ui.sidebar.agents]
 rows = [
-  ["state_icon", { token = "workspace", fg = "#ebdbb2", bold = true, dim = false }],
-  [{ token = "agent", fg = "#fabd2f", dim = false }, { token = "tab", fg = "#d3869b", dim = false }],
+  ["state_icon", { token = "workspace", fg = "#d8dee9", bold = true, dim = false }],
+  [{ token = "agent", fg = "#88c0d0", dim = false }, { token = "tab", fg = "#b48ead", dim = false }],
 ]
 row_gap = 1
 
 [ui.sidebar.spaces]
 rows = [
-  ["state_icon", { token = "workspace", fg = "#ebdbb2", bold = true, dim = false }],
-  [{ token = "branch", fg = "#d3869b", dim = false }, "git_status"],
+  ["state_icon", { token = "workspace", fg = "#d8dee9", bold = true, dim = false }],
+  [{ token = "branch", fg = "#b48ead", dim = false }, "git_status"],
 ]
 row_gap = 1
 

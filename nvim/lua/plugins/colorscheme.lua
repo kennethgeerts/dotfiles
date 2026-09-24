@@ -1,14 +1,14 @@
 return {
 	{
-		"ellisonleao/gruvbox.nvim",
+		"gbprod/nord.nvim",
 		opts = {
-			transparent_mode = true,
+			transparent = true,
 		},
 	},
 	{
 		"LazyVim/LazyVim",
 		opts = {
-			colorscheme = "gruvbox",
+			colorscheme = "nord",
 		},
 	},
 }

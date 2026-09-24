@@ -64,6 +64,13 @@ for dir in "$HOME/.dotfiles/config"/*(ND/); do
   fi
 done
 
+if [[ ! -L "$HOME/.config/zed" ]]; then
+  mkdir -p "$HOME/.config/zed/themes"
+  for file in "$HOME/.dotfiles/config/zed/themes"/*.json(ND.); do
+    link_into "$file" "$HOME/.config/zed/themes"
+  done
+fi
+
 echo "🧹 Pruning dead symlinks..."
 for link in "$HOME"/.*(N@) "$HOME/.config"/**/*(ND@) "$HOME/.local/bin"/*(N@); do
   if [[ "$(readlink "$link")" == "$HOME/.dotfiles/"* && ! -e "$link" ]]; then

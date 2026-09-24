@@ -57,3 +57,5 @@
 
 [alias]
 	lines = diff HEAD --shortstat
+[credential "https://git.heroku.com"]
+	helper = !heroku git:credentials

@@ -2,9 +2,16 @@
 
 ## Install
 
+On a fresh Mac, sign in to the App Store first so `brew bundle` can install
+the App Store apps. Then run:
+
 ```zsh
-curl -fsSL https://raw.githubusercontent.com/kennethgeerts/dotfiles/HEAD/install | zsh
+zsh -c "$(curl -fsSL https://raw.githubusercontent.com/kennethgeerts/dotfiles/HEAD/install)"
 ```
+
+Click Install when macOS asks for the command line tools; the installer waits
+for them. Afterwards, restore the secrets (see below) and sign in to
+1Password, Filen and Tailscale.
 
 ## Secrets backup
 
@@ -17,7 +24,8 @@ encrypted archive. It prompts for a password twice and writes to
 backup-secrets [archive.zip]
 ```
 
-Restore on a new machine with `cd ~ && 7z x /path/to/secrets.zip`.
+Restore on a new machine, after the installer, with
+`cd ~ && 7z x /path/to/secrets.zip`.
 
 ## Photo backup
 

@@ -5,6 +5,10 @@ set -e
 echo "🔐 Please enter your password:"
 sudo -v
 
+# Keep sudo alive until the installer exits: waiting for the Xcode tools and
+# brew bundle both outlast sudo's 5-minute timeout.
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
 echo "🖥️  Setting up system hostname..."
 HOSTNAME="sofuto"
 sudo scutil --set ComputerName "$HOSTNAME"

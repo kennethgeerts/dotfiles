@@ -1,0 +1,44 @@
+[[track]]
+path = "http://icecast.vrtcdn.be/radio1-high.mp3"
+title = "Radio 1"
+bookmark = true
+
+[[track]]
+path = "http://icecast.vrtcdn.be/radio1_classics-high.mp3"
+title = "Radio 1 Classics"
+
+[[track]]
+path = "http://icecast.vrtcdn.be/klara-high.mp3"
+title = "Klara"
+
+[[track]]
+path = "http://icecast.vrtcdn.be/klaracontinuo-high.mp3"
+title = "Klara Continuo"
+
+[[track]]
+path = "http://icecast.vrtcdn.be/stubru-high.mp3"
+title = "Studio Brussel"
+
+[[track]]
+path = "http://icecast.vrtcdn.be/stubru_tijdloze-high.mp3"
+title = "De Tijdloze"
+
+[[track]]
+path = "https://streams.radio.dpgmedia.cloud/redirect/joe_fm/mp3"
+title = "JOE"
+
+[[track]]
+path = "https://streams.radio.dpgmedia.cloud/redirect/joe_80s_90s/mp3"
+title = "JOE 80s & 90s"
+
+[[track]]
+path = "https://streams.radio.dpgmedia.cloud/redirect/top2000/mp3"
+title = "JOE Top 2000"
+
+[[track]]
+path = "http://radio.cliamp.stream/lofi/stream"
+title = "Lofi"
+
+[[track]]
+path = "http://radio.cliamp.stream/synthwave/stream"
+title = "Synthwave"

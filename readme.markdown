@@ -6,10 +6,6 @@
 curl -fsSL https://raw.githubusercontent.com/kennethgeerts/dotfiles/HEAD/install | zsh
 ```
 
-## Linux
-
-These dotfiles are for macOS. For Linux, see [arch.markdown](arch.markdown).
-
 ## Secrets backup
 
 `backup-secrets` zips the credentials that stay out of this repo (`~/.ssh`,

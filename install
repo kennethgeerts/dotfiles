@@ -55,21 +55,23 @@ link_into() {
 for file in "$HOME/.dotfiles/home"/*(ND.); do link_into "$file" "$HOME"; done
 for bin in "$HOME/.dotfiles/bin"/*(ND.); do link_into "$bin" "$HOME/.local/bin"; done
 
+# Apps write logs, sockets and state next to their config, so ~/.config/<app>
+# is always a real directory: files are linked one by one, subdirectories
+# (e.g. cliamp playlists, which cliamp saves by replacing the file) as a whole.
 for dir in "$HOME/.dotfiles/config"/*(ND/); do
   target="$HOME/.config/$(basename "$dir")"
-  if [[ -d "$target" && ! -L "$target" ]]; then
-    for file in "$dir"/*(ND.); do link_into "$file" "$target"; done
-  else
-    ln -sfn "$dir" "$target"
-  fi
-done
-
-if [[ ! -L "$HOME/.config/zed" ]]; then
-  mkdir -p "$HOME/.config/zed/themes"
-  for file in "$HOME/.dotfiles/config/zed/themes"/*.json(ND.); do
-    link_into "$file" "$HOME/.config/zed/themes"
+  [[ -L "$target" && "$(readlink "$target")" == "$HOME/.dotfiles/"* ]] && rm "$target"
+  mkdir -p "$target"
+  for file in "$dir"/*(ND.); do link_into "$file" "$target"; done
+  for subdir in "$dir"/*(ND/); do
+    subtarget="$target/$(basename "$subdir")"
+    if [[ -d "$subtarget" && ! -L "$subtarget" ]]; then
+      for file in "$subdir"/*(ND.); do link_into "$file" "$subtarget"; done
+    else
+      link_into "$subdir" "$target"
+    fi
   done
-fi
+done
 
 echo "🧹 Pruning dead symlinks..."
 for link in "$HOME"/.*(N@) "$HOME/.config"/**/*(ND@) "$HOME/.local/bin"/*(N@); do

@@ -10,6 +10,19 @@ curl -fsSL https://raw.githubusercontent.com/kennethgeerts/dotfiles/HEAD/install
 
 These dotfiles are for macOS. For Linux, see [arch.markdown](arch.markdown).
 
+## Secrets backup
+
+`backup-secrets` zips the credentials that stay out of this repo (`~/.ssh`,
+`~/.aws`, `~/.netrc`, the rclone config and `~/.zshrc.local`) into an AES-256
+encrypted archive. It prompts for a password twice and writes to
+`~/Desktop/secrets-<timestamp>.zip` unless given a path:
+
+```zsh
+backup-secrets [archive.zip]
+```
+
+Restore on a new machine with `cd ~ && 7z x /path/to/secrets.zip`.
+
 ## Photo backup
 
 `backup-photos-to-r2` backs up the originals in an Apple Photos library with

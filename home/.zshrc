@@ -273,7 +273,7 @@ function ww() {
     return 1
   fi
 
-  agent=$(printf 'codex\nclaude\n' | fzf --height=4 --layout=reverse --no-info --prompt='agent> ') || return
+  agent=$(printf 'claude\ncodex\nopencode\ngrok\n' | fzf --height=5 --layout=reverse --no-info --prompt='agent> ') || return
 
   wt switch -c "$feature" -x "$agent"
 }

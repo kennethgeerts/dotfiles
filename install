@@ -92,11 +92,8 @@ rm -rf "$HOME/.config/nvim/lua/plugins"
 ln -s "$HOME/.dotfiles/nvim/lua/plugins" "$HOME/.config/nvim/lua/plugins"
 nvim --headless "+Lazy! sync" +qa || true
 
-echo "💎 Setting up Mise..."
-mise use -g ruby || true
-mise use -g node || true
-mise settings add idiomatic_version_file_enable_tools ruby || true
-mise settings add idiomatic_version_file_enable_tools node || true
+echo "💎 Installing languages and dev CLIs with mise..."
+mise install
 
 echo ""
 echo "🎉 Installation complete!"

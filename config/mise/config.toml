@@ -1,0 +1,35 @@
+[tools]
+# Languages
+bun = "latest"
+node = "latest"
+ruby = "latest"
+
+# Dev CLIs
+"aqua:temporalio/cli" = "latest" # the registry's `temporal` is the server
+"npm:heroku" = "latest"
+actionlint = "latest"
+aws-cli = "latest"
+pnpm = "latest"
+shellcheck = "latest" # actionlint lints run: steps with it
+supabase = "latest"
+
+# Coding agents
+claude = "latest"
+codex = "latest"
+opencode = "latest"
+pi = "latest"
+
+# Agent workflow
+herdr = "latest"
+hunk = "latest"
+worktrunk = "latest"
+
+[env]
+# Claude Code can't update itself inside a mise install dir; `mise up` does it.
+DISABLE_AUTOUPDATER = "1"
+
+[settings]
+idiomatic_version_file_enable_tools = ["ruby", "node"]
+
+[settings.ruby]
+compile = false

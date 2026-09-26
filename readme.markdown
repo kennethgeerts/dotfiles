@@ -12,7 +12,7 @@ name, email and computer name, and nothing personal is hard-coded. See
 
 | Path                               | What it is                                                          | Installed to                 |
 | ---------------------------------- | ------------------------------------------------------------------- | ---------------------------- |
-| [`install`](install)               | The bootstrap script                                                | —                          |
+| [`install`](install)               | The bootstrap script                                                | —                            |
 | [`Brewfile`](Brewfile)             | CLI tools, apps, fonts and App Store apps                           | `brew bundle`                |
 | [`config/mise`](config/mise)       | Languages (Node, Ruby, Bun), dev CLIs and coding agents             | `mise install`               |
 | [`home/`](home)                    | `.zshrc`, `.gitconfig`, global `.gitignore`, `.gemrc`, `.railsrc`   | `~/`                         |

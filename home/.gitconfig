@@ -1,7 +1,3 @@
-[user]
-	name = Kenneth Geerts
-	email = kenneth@sofuto.be
-
 [core]
 	excludesfile = ~/.gitignore
 	pager = hunk pager
@@ -59,3 +55,7 @@
 	lines = diff HEAD --shortstat
 [credential "https://git.heroku.com"]
 	helper = !heroku git:credentials
+
+# Identity ([user] name and email) and other per-machine settings, kept out of the repo.
+[include]
+	path = ~/.gitconfig.local

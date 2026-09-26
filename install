@@ -9,12 +9,25 @@ sudo -v
 # brew bundle both outlast sudo's 5-minute timeout.
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+# Ask everything up front, so the rest of the install can run unattended.
+# The git identity lives in ~/.gitconfig.local, outside the repo.
+if [[ ! -f "$HOME/.gitconfig.local" ]]; then
+  echo "👤 Who are you? (for git commits)"
+  read "git_name?   Name: "
+  read "git_email?   Email: "
+fi
+
+current_name="$(scutil --get ComputerName)"
+read "computer_name?🖥️  Computer name [$current_name]: "
+computer_name="${computer_name:-$current_name}"
+
 echo "🖥️  Setting up system hostname..."
-HOSTNAME="sofuto"
-sudo scutil --set ComputerName "$HOSTNAME"
-sudo scutil --set HostName "$HOSTNAME"
-sudo scutil --set LocalHostName "$HOSTNAME"
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$HOSTNAME"
+# LocalHostName and HostName only allow letters, digits and hyphens.
+host_name="${${computer_name// /-}//[^A-Za-z0-9-]/}"
+sudo scutil --set ComputerName "$computer_name"
+sudo scutil --set HostName "$host_name"
+sudo scutil --set LocalHostName "$host_name"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$host_name"
 
 echo "⌨️  Configuring keyboard settings..."
 defaults write -g InitialKeyRepeat -int 10
@@ -30,6 +43,12 @@ if ! xcode-select -p &>/dev/null; then
   echo "✅ Xcode command line tools installation complete!"
 else
   echo "✅ Xcode command line tools already installed"
+fi
+
+if [[ -n "$git_name$git_email" ]]; then
+  echo "👤 Saving git identity to ~/.gitconfig.local..."
+  git config --file "$HOME/.gitconfig.local" user.name "$git_name"
+  git config --file "$HOME/.gitconfig.local" user.email "$git_email"
 fi
 
 echo "📦 Cloning dotfiles repository..."

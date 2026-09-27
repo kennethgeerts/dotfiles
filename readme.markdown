@@ -96,20 +96,30 @@ A few things in [`.zshrc`](home/.zshrc) worth knowing about:
 
 ## Secrets backup
 
-`backup-secrets` zips the credentials that stay out of this repo (`~/.ssh`,
-`~/.aws`, `~/.netrc`, the rclone config, `~/.zshrc.local` and
-`~/.gitconfig.local`) into an AES-256 encrypted archive. It prompts for a
-password twice and writes to `~/Desktop/secrets-<timestamp>.zip` unless given
-a path:
+`backup-secrets` backs up the secrets that stay out of git into two AES-256
+encrypted archives, with the same password:
+
+- `secrets-<timestamp>.zip`: `~/.ssh`, `~/.aws`, `~/.netrc`, the rclone
+  config, `~/.zshrc.local` and `~/.gitconfig.local`
+- `work-secrets-<timestamp>.zip`: the files git doesn't track in the repos
+  under `~/Work`: `.env*` files, Rails `master.key` and credential keys, and
+  Kamal `.kamal/secrets*` files
+
+It prompts for a password twice and writes to `~/Desktop` unless given a
+directory:
 
 ```zsh
-backup-secrets [archive.zip]
+backup-secrets [directory]
 ```
 
-Restore on a new machine, after the installer, with:
+Restore on a new machine, after the installer. The first archive brings back
+your SSH keys, so you can clone your repos into `~/Work`; then restore the
+second (git won't clone into a directory that already holds files):
 
 ```zsh
-cd ~ && 7z x /path/to/secrets.zip
+cd ~ && 7z x /path/to/secrets-<timestamp>.zip
+# clone your repos into ~/Work, then:
+cd ~ && 7z x /path/to/work-secrets-<timestamp>.zip
 ```
 
 ## Photo backup

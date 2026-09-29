@@ -153,6 +153,9 @@ function dev() {
   if [[ -x bin/dev ]]; then
     echo "💎 Running \`bin/dev\`."
     bin/dev
+  elif [[ -f package.json && -f package-lock.json ]]; then
+    echo "📦 Running \`npm run dev\`."
+    npm run dev
   elif [[ -f package.json ]]; then
     echo "🧩 Running \`pnpm dev\`."
     pnpm dev

@@ -1,5 +1,3 @@
-tap "rjyo/moshi", trusted: true
-
 brew "bat"
 brew "btop"
 brew "cd-discid"
@@ -35,7 +33,6 @@ brew "prettyping"
 brew "pure"
 brew "rclone"
 brew "ripgrep"
-brew "rjyo/moshi/moshi-hook"
 brew "stockfish"
 brew "tldr"
 brew "unar"

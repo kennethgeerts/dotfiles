@@ -23,7 +23,7 @@ fi
 # Homebrew on macOS; native distro packages on Linux
 typeset -a zsh_plugin_dirs
 if [[ "$OSTYPE" == darwin* ]] && (( $+commands[brew] )); then
-  zsh_brew_prefix="$(brew --prefix)"
+  zsh_brew_prefix="${HOMEBREW_PREFIX:-$(brew --prefix)}"
   fpath=("$zsh_brew_prefix/share/zsh/site-functions" "$zsh_brew_prefix/share/zsh-completions" $fpath)
   zsh_plugin_dirs=("$zsh_brew_prefix/share")
 else

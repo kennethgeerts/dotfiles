@@ -79,6 +79,12 @@ fi
 echo "⏳ Installing packages (this may take a while)..."
 brew bundle --verbose
 
+# compinit refuses group-writable completion dirs (e.g. Homebrew's share/) and
+# prompts on every new shell, so tighten whatever compaudit flags.
+autoload -Uz compaudit
+insecure_dirs=(${(f)"$(compaudit 2>/dev/null || true)"})
+(( ${#insecure_dirs} )) && chmod go-w "${insecure_dirs[@]}"
+
 echo "🔗 Creating symlinks..."
 mkdir -p "$HOME/.config" "$HOME/.local/bin" "$HOME/.zsh/cache"
 

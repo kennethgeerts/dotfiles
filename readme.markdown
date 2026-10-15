@@ -10,15 +10,15 @@ name, email and computer name, and nothing personal is hard-coded. See
 
 ## What's inside
 
-| Path                               | What it is                                                          | Installed to                 |
-| ---------------------------------- | ------------------------------------------------------------------- | ---------------------------- |
-| [`install`](install)               | The bootstrap script                                                | —                            |
-| [`Brewfile`](Brewfile)             | CLI tools, apps, fonts and App Store apps                           | `brew bundle`                |
-| [`config/mise`](config/mise)       | Languages (Node, Ruby, Bun), dev CLIs and coding agents             | `mise install`               |
-| [`home/`](home)                    | `.zshrc`, `.gitconfig`, global `.gitignore`, `.gemrc`, `.railsrc`   | `~/`                         |
-| [`config/`](config)                | Ghostty, Zed, bat, herdr, hunk, cliamp                              | `~/.config/<app>/`           |
-| [`nvim/`](nvim)                    | Plugin overrides on top of the [LazyVim starter][lazyvim]           | `~/.config/nvim/lua/plugins` |
-| [`bin/`](bin)                      | Small scripts                                                       | `~/.local/bin`               |
+| Path                               | What it is                                                                        | Installed to                 |
+| ---------------------------------- | --------------------------------------------------------------------------------- | ---------------------------- |
+| [`install`](install)               | The bootstrap script                                                              | —                            |
+| [`Brewfile`](Brewfile)             | CLI tools, apps, fonts and App Store apps                                         | `brew bundle`                |
+| [`config/mise`](config/mise)       | Languages (Node, Ruby, Bun), dev CLIs and coding agents                           | `mise install`               |
+| [`home/`](home)                    | `.zshrc`, `.gitconfig`, global `.gitignore`, `.gemrc`, `.railsrc`, `.hushlogin`   | `~/`                         |
+| [`config/`](config)                | Ghostty, Zed, bat, herdr, hunk, cliamp                                            | `~/.config/<app>/`           |
+| [`nvim/`](nvim)                    | Plugin overrides on top of the [LazyVim starter][lazyvim]                         | `~/.config/nvim/lua/plugins` |
+| [`bin/`](bin)                      | Small scripts                                                                     | `~/.local/bin`               |
 
 Everything is symlinked, so editing a file in `~/.config` edits the repo.
 
@@ -38,8 +38,9 @@ command line tools; the installer waits for them. It then:
 1. sets the computer name and a fast key repeat,
 2. saves your git identity to `~/.gitconfig.local`, outside the repo,
 3. clones this repo to `~/.dotfiles`,
-4. installs Homebrew, adds its environment setup to `~/.zprofile`, and installs
-   everything in the `Brewfile`,
+4. installs Homebrew, adds its environment setup to `~/.zprofile`, installs
+   everything in the `Brewfile`, and removes group write access from
+   completion directories so `compinit` doesn't prompt,
 5. symlinks `home/`, `config/` and `bin/` into place and prunes dead links,
 6. sets up Neovim from the LazyVim starter with the plugins in `nvim/`,
 7. installs languages and CLIs with `mise`.

@@ -1,3 +1,33 @@
+# Herdr and SSH can start non-login shells in the C/POSIX locale.
+# Fix character handling before completion, plugins, and Pure initialize.
+() {
+  local character_locale=${LC_ALL:-${LC_CTYPE:-${LANG:-C}}}
+  [[ $character_locale == (C|POSIX) ]] || return 0
+
+  local utf8_locale
+  utf8_locale=$(
+    unset LC_ALL LC_CTYPE
+    [[ -r /etc/locale.conf ]] && source /etc/locale.conf
+    character_locale=${LC_CTYPE:-${LANG:-}}
+    if [[ ${character_locale:l} == *utf*8 ]]; then
+      print -r -- "$character_locale"
+    else
+      locale -a 2>/dev/null | awk 'tolower($0) ~ /utf-?8$/ { print; exit }'
+    fi
+  )
+  [[ -n $utf8_locale ]] || return 0
+
+  # LC_ALL overrides LC_CTYPE; preserve its other effective categories first.
+  if [[ -n ${LC_ALL:-} ]]; then
+    local category
+    for category in LC_{NUMERIC,TIME,COLLATE,MONETARY,MESSAGES,PAPER,NAME,ADDRESS,TELEPHONE,MEASUREMENT,IDENTIFICATION}; do
+      export "$category=$LC_ALL"
+    done
+    unset LC_ALL
+  fi
+  export LC_CTYPE=$utf8_locale
+}
+
 ### --- ZSH Core Configuration ---
 
 HISTFILE="${HISTFILE:-$HOME/.zsh_history}"
@@ -63,11 +93,16 @@ zstyle ':completion:*' special-dirs false
 
 # Plugins from Homebrew (macOS) or distro packages (Linux)
 typeset -a missing_zsh_plugins=()
+typeset zsh_highlight_file=''
 for plugin in zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search; do
   plugin_found=false
   for dir in $zsh_plugin_dirs; do
     if [[ -f "$dir/$plugin/$plugin.zsh" ]]; then
-      source "$dir/$plugin/$plugin.zsh"
+      if [[ $plugin == zsh-syntax-highlighting ]]; then
+        zsh_highlight_file="$dir/$plugin/$plugin.zsh"
+      else
+        source "$dir/$plugin/$plugin.zsh"
+      fi
       plugin_found=true
       break
     fi
@@ -344,3 +379,7 @@ fi
 if [[ -r ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
+
+# Register syntax highlighting after all other ZLE integrations and overrides.
+[[ -n $zsh_highlight_file ]] && source "$zsh_highlight_file"
+unset zsh_highlight_file

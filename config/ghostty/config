@@ -27,12 +27,10 @@ window-padding-balance = true
 
 macos-icon = custom
 macos-option-as-alt = true
-macos-window-buttons = hidden
-macos-titlebar-style = tabs
 
 quick-terminal-position = top
 quick-terminal-size = 45%
 quick-terminal-animation-duration = 0.12
 
-shell-integration-features = no-cursor,ssh-terminfo
+shell-integration-features = no-cursor,ssh-env,ssh-terminfo
 keybind = global:cmd+escape=toggle_quick_terminal

@@ -10,15 +10,15 @@ name, email and computer name, and nothing personal is hard-coded. See
 
 ## What's inside
 
-| Path                               | What it is                                                                        | Installed to                 |
-| ---------------------------------- | --------------------------------------------------------------------------------- | ---------------------------- |
-| [`install`](install)               | The bootstrap script                                                              | —                            |
-| [`Brewfile`](Brewfile)             | CLI tools, apps, fonts and App Store apps                                         | `brew bundle`                |
-| [`config/mise`](config/mise)       | Languages (Node, Ruby, Bun), dev CLIs and coding agents                           | `mise install`               |
-| [`home/`](home)                    | `.zshrc`, `.gitconfig`, global `.gitignore`, `.gemrc`, `.railsrc`, `.hushlogin`   | `~/`                         |
-| [`config/`](config)                | Ghostty, Zed, bat, herdr, hunk, cliamp                                            | `~/.config/<app>/`           |
-| [`nvim/`](nvim)                    | Plugin overrides on top of the [LazyVim starter][lazyvim]                         | `~/.config/nvim/lua/plugins` |
-| [`bin/`](bin)                      | Small scripts                                                                     | `~/.local/bin`               |
+| Path                         | What it is                                                                                 | Installed to                 |
+| ---------------------------- | ------------------------------------------------------------------------------------------ | ---------------------------- |
+| [`install`](install)         | The bootstrap script                                                                       | —                            |
+| [`Brewfile`](Brewfile)       | CLI tools, apps, fonts and App Store apps                                                  | `brew bundle`                |
+| [`config/mise`](config/mise) | Languages (Node, Ruby, Bun), dev CLIs and coding agents                                    | `mise install`               |
+| [`home/`](home)              | `.zshrc`, `.zshenv`, `.gitconfig`, global `.gitignore`, `.gemrc`, `.railsrc`, `.hushlogin` | `~/`                         |
+| [`config/`](config)          | Ghostty, Zed, bat, herdr, hunk, cliamp                                                     | `~/.config/<app>/`           |
+| [`nvim/`](nvim)              | Plugin overrides on top of the [LazyVim starter][lazyvim]                                  | `~/.config/nvim/lua/plugins` |
+| [`bin/`](bin)                | Small scripts                                                                              | `~/.local/bin`               |
 
 Everything is symlinked, so editing a file in `~/.config` edits the repo.
 
@@ -72,6 +72,8 @@ find (`eza`, `bat`, `zoxide`, `fzf`, `mise`, …).
 
 Anything machine-specific or secret goes in files that stay out of the repo:
 
+- `~/.zprofile`, read by login shells and the desktop session; holds environment
+  every app needs, like Homebrew's setup or tokens
 - `~/.zshrc.local`, sourced at the end of `.zshrc`
 - `~/.gitconfig.local`, included at the end of `.gitconfig`; holds your git
   name and email
@@ -102,7 +104,7 @@ A few things in [`.zshrc`](home/.zshrc) worth knowing about:
 encrypted archives, with the same password:
 
 - `secrets-<timestamp>.zip`: `~/.ssh`, `~/.aws`, `~/.netrc`, the rclone
-  config, `~/.zshrc.local` and `~/.gitconfig.local`
+  config, `~/.zprofile`, `~/.zshrc.local` and `~/.gitconfig.local`
 - `work-secrets-<timestamp>.zip`: the files git doesn't track in the repos
   under `~/Work`: `.env*` files, Rails `master.key` and credential keys, and
   Kamal `.kamal/secrets*` files

@@ -86,7 +86,7 @@ A few things in [`.zshrc`](home/.zshrc) worth knowing about:
 | ------------ | ----------------------------------------------------------------------------- |
 | `co [ref]`   | Check out a branch, remote branch or tag, with an fzf picker and log preview  |
 | `ww <name>`  | Create a [worktrunk][worktrunk] worktree and start a coding agent in it       |
-| `dev`        | Run `bin/dev` or `pnpm dev`, whichever the project has                        |
+| `dev`        | Run `bin/dev`, `npx wrangler dev`, `npm run dev`, or `pnpm dev` for the project |
 | `mkcd <dir>` | Make a directory and `cd` into it                                             |
 | `mkt`        | `cd` into a fresh temp directory                                              |
 | `o [path]`   | Open a file, URL or the current directory with the default app                |

@@ -188,6 +188,9 @@ function dev() {
   if [[ -x bin/dev ]]; then
     echo "💎 Running \`bin/dev\`."
     bin/dev
+  elif [[ -f wrangler.toml || -f wrangler.json || -f wrangler.jsonc ]]; then
+    echo "☁️ Running \`npx wrangler dev\`."
+    npx wrangler dev
   elif [[ -f package.json && -f package-lock.json ]]; then
     echo "📦 Running \`npm run dev\`."
     npm run dev

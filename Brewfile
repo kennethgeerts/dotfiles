@@ -48,7 +48,6 @@ brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
 
 mas "1Password for Safari", id: 1569813296
-mas "Azure VPN Client", id: 1553936137
 mas "Connective Plugin", id: 1428740565
 mas "Hue Menu Bar for Philips Hue", id: 1500678169
 mas "iMovie", id: 408981434
@@ -68,16 +67,13 @@ cask "font-jetbrains-mono"
 cask "font-victor-mono"
 cask "ghostty"
 cask "google-chrome"
-cask "grok-build"
 cask "iina"
 cask "keepingyouawake"
 cask "localsend"
 cask "mac-mouse-fix"
 cask "mullvad-vpn"
-cask "openusage"
 cask "orbstack"
 cask "postgres-app"
 cask "signal"
 cask "tailscale-app"
-cask "wispr-flow"
 cask "zed"
